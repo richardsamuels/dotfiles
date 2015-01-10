@@ -17,3 +17,4 @@ source ~/.antigen-hs/antigen-hs/init.zsh
 antigen-hs-compile
 
 echo "Dotbombed! Restart your shell"
+
