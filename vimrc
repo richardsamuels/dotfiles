@@ -61,3 +61,15 @@ python powerline_setup()
 python del powerline_setup
 
 set laststatus=2
+
+"Disable arrow keys because I love pain
+" Vim. Live it. ------------------------------------------------------- {{{
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+inoremap <up> <nop>
+" }}}
