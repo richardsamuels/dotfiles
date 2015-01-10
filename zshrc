@@ -1,5 +1,14 @@
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$PATH"
+#Source distribution specific location for powerline 
 
-source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+#Arch linux
+if [ -f "/etc/arch-release" ]; 
+then
+  source /usr/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+
+#Mac OS X
+elif [ `uname` = "Darwin" ];
+then 
+  source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+fi
 
 source $HOME/.antigen-hs/antigen-hs/init.zsh

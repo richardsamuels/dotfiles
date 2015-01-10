@@ -1,0 +1,39 @@
+#!/bin/sh
+
+MD5_GIT="7a22ba6dc3270b52ef9599b0bbff23ec"
+MD5_MUX="e044a06c638b3a02b26d03126f044cba"
+MD5_VIM="7309f5b074b9d764a90be8037031d914"
+MD5_ZSH="0b285f2c13da2d7d0740eb574c05c1f5"
+
+LOCKFILE="/tmp/dotfiles-commit"
+
+if [ ! -f $LOCKFILE ]; then
+	MOD=false
+
+	if [ $MD5_GIT != "$(cat ~/.gitconfig | openssl md5)" ]; then 
+		MOD=true
+		echo ".gitconfig modified\n"
+	fi
+	if [ $MD5_MUX != "$(cat ~/.tmux.conf | openssl md5)" ]; then 
+		MOD=true
+		echo ".tmux.conf modified\n"
+	fi
+	if [ $MD5_VIM != "$(cat ~/.vimrc | openssl md5)" ]; then 
+		MOD=true
+		echo ".vimrc modified\n"
+	fi
+	if [ $MD5_ZSH != "$(cat ~/.zshrc | openssl md5)" ]; then 
+		MOD=true
+		echo ".zshrc modified\n"
+	fi 
+
+	if [ "$MOD" = true ]; then
+		echo "WARNING!! The dotbombed configuration files have been modified.\n"
+		echo "Confirm that you do not wish to commit these changes.\n"
+		echo "Then rerun the commit operation\n\n"
+		touch /tmp/dotfiles-commit
+		exit 1;	
+	fi
+fi
+
+rm -f $LOCKFILE
