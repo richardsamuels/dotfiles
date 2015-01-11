@@ -8,6 +8,7 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 git clone git://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized
 
 ln -s ~/dotfiles/MyAntigen.hs ~/.antigen-hs/MyAntigen.hs
+ln -s ~/dotfiles/ssh/config ~/.ssh/config
 
 vim +PluginInstall +qall
 

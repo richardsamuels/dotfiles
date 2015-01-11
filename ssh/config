@@ -1,0 +1,9 @@
+Host	raia
+    HostName    raia
+    User        raia
+Host    raia.local
+    HostName        raia.local
+    User            raia
+Host    aselia
+    HostName    aselia.aninakuna.com
+    User        rsamuels
