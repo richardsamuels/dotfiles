@@ -4,3 +4,5 @@
 [user]
 	name = Richard Samuels
 	email = aninakuna@gmail.com
+[push]
+	default = simple
