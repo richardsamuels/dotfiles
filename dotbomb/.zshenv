@@ -48,4 +48,4 @@
 
 
 
-source $HOME/dotfiles/zsh/zshrc
+source $HOME/dotfiles/zsh/zshenv
