@@ -8,8 +8,9 @@ then
 #Mac OS X
 elif [ `uname` = "Darwin" ];
 then 
-  source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+	source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
+
 
 #Antigen-hs support (Plugin manager for ZSH)
 source $HOME/.antigen-hs/antigen-hs/init.zsh
@@ -18,4 +19,4 @@ autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
 #Enable Superior Key bindings
-set -o vi
+#set -o vi
