@@ -15,6 +15,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'bitc/vim-hdevtools'
 
 "Plugin 'L9'
 "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -41,7 +43,6 @@ filetype plugin indent on    " required
 "Colorisation Settings
 
 set t_Co=256
-syntax enable
 set background=dark
 colorscheme solarized
 
@@ -55,14 +56,14 @@ noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
 
 "=================================================================
-"Powerline
+" Powerline
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
 
 set laststatus=2
 
-"Disable arrow keys because I love pain
+" Disable arrow keys because I love pain
 " Vim. Live it. ------------------------------------------------------- {{{
 noremap <up> <nop>
 noremap <down> <nop>
@@ -79,6 +80,9 @@ cmap w!! w !sudo tee > /dev/null %
 
 " Enable line numbers
 set relativenumber
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+
 
 " Tab
 set tabstop=8                   "A tab is 8 spaces
@@ -92,4 +96,60 @@ noremap <expr> <enter> getline('.') =~ '^\s*//' ? '<enter><esc>S' : '<ente    r>
 
 " Fixes auto comment with O keys
 nnoremap <expr> O getline('.') =~ '^\s*//' ? 'O<esc>S' : 'O'
-nnoremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
+noremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
+
+" Intuitive backspacing in insert mode
+set backspace=indent,eol,start
+ 
+" File-type highlighting and configuration.
+" Run :filetype (without args) to see what you may have
+" to turn on yourself, or just set them all to be sure.
+syntax on
+filetype on
+filetype plugin on
+filetype indent on
+ 
+" Highlight search terms...
+set hlsearch
+set incsearch " ...dynamically as they are typed.
+
+" Multiple buffer support
+set hidden
+
+" Longer history
+set history=1000
+
+" Enhanced % matching
+runtime macros/matchit.vim
+
+" Enhanced file/command completion
+set wildmenu
+set wildmode=list:longest
+
+" Case insensitive search, except when using *
+set ignorecase
+set smartcase
+
+" Show title in terminals
+set title
+
+" But get rid of the "thanks for flying vim" bs:
+set titleold=""
+
+" Shortmess, see :help shortmess
+set shortmess=filnxtToOs
+
+" Map backtick to escape for comfort
+imap ` <Esc>
+
+" Pretty line wrap
+set showbreak=↪
+
+" Fuck :X
+:cmap X x
+
+" Sanity Preservation
+:cmap WQ wq
+:cmap Wq wq
+:cmap W w
+:cmap Q q
