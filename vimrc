@@ -13,7 +13,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'bitc/vim-hdevtools'
@@ -47,13 +46,20 @@ set background=dark
 colorscheme solarized
 
 
-" Yank text to the OS X clipboard
-noremap <leader>y "*y
-noremap <leader>yy "*Y
+"=================================================================
+" OS X specific settings
 
-" Preserve indentation while pasting text from the OS X clipboard
-noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
-
+if (system('uname') =~ "darwin")
+    " OS X clipboard
+    set clipboard=unnamed
+    
+    " Yank text to the OS X clipboard
+    noremap <leader>y "*y
+    noremap <leader>yy "*Y
+    
+    " Preserve indentation while pasting text from the OS X clipboard
+    noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+endif
 
 "=================================================================
 " Powerline
@@ -63,7 +69,9 @@ python del powerline_setup
 
 set laststatus=2
 
-" Disable arrow keys because I love pain
+
+"=================================================================
+" Because our lord demands it:
 " Vim. Live it. ------------------------------------------------------- {{{
 noremap <up> <nop>
 noremap <down> <nop>
@@ -84,7 +92,7 @@ autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 
 
-" Tab
+" Tab settings. Taken from Haskell docs, but it prefer them
 set tabstop=8                   "A tab is 8 spaces
 set expandtab                   "Always uses spaces instead of tabs
 set softtabstop=4               "Insert 4 spaces when tab is pressed
@@ -133,10 +141,11 @@ set smartcase
 " Show title in terminals
 set title
 
-" But get rid of the "thanks for flying vim" bs:
+" But get rid of the "thanks for flying vim" bs
 set titleold=""
 
 " Shortmess, see :help shortmess
+" Gets rid of annoying "please hit enter" stuff
 set shortmess=filnxtToOs
 
 " Map backtick to escape for comfort
@@ -148,8 +157,11 @@ set showbreak=↪
 " Fuck :X
 :cmap X x
 
-" Sanity Preservation
+" Sanity Preservation measures
 :cmap WQ wq
 :cmap Wq wq
 :cmap W w
 :cmap Q q
+
+" Auto reload file if modified
+set autoread
