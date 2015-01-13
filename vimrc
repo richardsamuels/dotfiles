@@ -153,7 +153,7 @@ imap ` <Esc>
 set showbreak=↪
 
 " Fuck :X
-:cmap X x
+cnoremap <expr> X (getcmdtype() is# ':' && empty(getcmdline())) ? 'x' : 'X'
 
 " Sanity Preservation measures
 :cmap WQ wq
