@@ -88,9 +88,7 @@ cmap w!! w !sudo tee > /dev/null %
 
 " Enable line numbers
 set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
-
+set number
 
 " Tab settings. Taken from Haskell docs, but it prefer them
 set tabstop=8                   "A tab is 8 spaces
