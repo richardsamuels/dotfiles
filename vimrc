@@ -49,7 +49,7 @@ colorscheme solarized
 "=================================================================
 " OS X specific settings
 
-if (system('uname') =~ "darwin")
+if (system('uname') =~ "Darwin\n")
     " OS X clipboard
     set clipboard=unnamed
     
