@@ -25,7 +25,13 @@ export CLICOLOR=1
 #trypass n
 #where n is the number of bits, try and generate a password of n bits. Not guaranteed to return a password
 trypass() {
-    cat /dev/random | head -c "$@" | tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' | grep -i '[!@#$%^&*()_+{}|:<>?=]'
+    
+    TEMP=`cat /dev/random | head -c "$@" | LC_CTYPE=C tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' | LC_CTYPE=C grep -i '[!@#$%^&*()_+{}|:<>?=]';`
+    while [[ $TEMP ==  "" ]]; 
+    do 
+        TEMP=`cat /dev/random | head -c "$@" | LC_CTYPE=C tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' | LC_CTYPE=C grep -i '[!@#$%^&*()_+{}|:<>?=]';`
+    done
+    echo $TEMP
 }
 
 #Enable tab completion
