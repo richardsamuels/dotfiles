@@ -163,3 +163,7 @@ cnoremap <expr> X (getcmdtype() is# ':' && empty(getcmdline())) ? 'x' : 'X'
 
 " Auto reload file if modified
 set autoread
+
+" Backup and swap directories
+set backupdir=/var/tmp,/tmp
+set directory=/var/tmp,/tmp
