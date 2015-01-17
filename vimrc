@@ -167,3 +167,8 @@ set autoread
 " Backup and swap directories
 set backupdir=/var/tmp,/tmp
 set directory=/var/tmp,/tmp
+
+" Enable C++11 Support for Syntastic
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = '-Wall -std=c++11 -stdlib=libc++'
+let g:ycm_global_ycm_extra_conf = '~/dotfiles/ycm/.ycm_extra_conf.py'
