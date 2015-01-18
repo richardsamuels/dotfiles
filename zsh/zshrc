@@ -50,3 +50,6 @@ compinit
 # Set Editor
 export EDITOR="vim"
 export VISUAL="vim"
+
+# Set auto pushd
+setopt AUTO_PUSHD
