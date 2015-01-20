@@ -12,9 +12,25 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+
+" Solarised Color Scheme
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/syntastic'
+
+
+" Syntastic code competion, replaced by YCM
+" Plugin 'scrooloose/syntastic'
+
+" Automatic tabbing
+Plugin 'godlygeek/tabular'
+
+" YCM for Fuzzy Code Completion
 Plugin 'Valloric/YouCompleteMe'
+
+" Markdown Plugins
+Plugin 'plasticboy/vim-markdown'
+Plugin 'jtratner/vim-flavored-markdown'
+
+" Haskell
 Plugin 'bitc/vim-hdevtools'
 
 "Plugin 'L9'
@@ -71,6 +87,8 @@ set laststatus=2
 
 
 "=================================================================
+" Custom command mappings
+
 " Because our lord demands it:
 " Vim. Live it. ------------------------------------------------------- {{{
 noremap <up> <nop>
@@ -86,6 +104,29 @@ inoremap <up> <nop>
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
+" Sanity Preservation measures
+:cmap WQ wq
+:cmap Wq wq
+:cmap W w
+:cmap Q q
+
+" Fuck :X
+cnoremap <expr> X (getcmdtype() is# ':' && empty(getcmdline())) ? 'x' : 'X'
+
+" Disable auto-comment
+noremap <expr> <enter> getline('.') =~ '^\s*//' ? '<enter><esc>S' : '<ente    r>'
+
+" Fixes auto comment with O keys
+nnoremap <expr> O getline('.') =~ '^\s*//' ? 'O<esc>S' : 'O'
+noremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
+
+" Map backtick to escape for comfort
+imap ` <Esc>
+
+
+"=================================================================
+" Editing settings, including tabs, and spaces, and line numbers
+
 " Enable line numbers
 set relativenumber
 set number
@@ -97,23 +138,8 @@ set softtabstop=4               "Insert 4 spaces when tab is pressed
 set shiftwidth=4                "An indent is 4 spaces
 set shiftround                  "Round indent to nearest shiftwidth multiple
 
-" Disable auto-comment
-noremap <expr> <enter> getline('.') =~ '^\s*//' ? '<enter><esc>S' : '<ente    r>'
-
-" Fixes auto comment with O keys
-nnoremap <expr> O getline('.') =~ '^\s*//' ? 'O<esc>S' : 'O'
-noremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
-
 " Intuitive backspacing in insert mode
 set backspace=indent,eol,start
- 
-" File-type highlighting and configuration.
-" Run :filetype (without args) to see what you may have
-" to turn on yourself, or just set them all to be sure.
-syntax on
-filetype on
-filetype plugin on
-filetype indent on
  
 " Highlight search terms...
 set hlsearch
@@ -146,20 +172,8 @@ set titleold=""
 " Gets rid of annoying "please hit enter" stuff
 set shortmess=filnxtToOs
 
-" Map backtick to escape for comfort
-imap ` <Esc>
-
 " Pretty line wrap
 set showbreak=↪
-
-" Fuck :X
-cnoremap <expr> X (getcmdtype() is# ':' && empty(getcmdline())) ? 'x' : 'X'
-
-" Sanity Preservation measures
-:cmap WQ wq
-:cmap Wq wq
-:cmap W w
-:cmap Q q
 
 " Auto reload file if modified
 set autoread
@@ -167,6 +181,17 @@ set autoread
 " Backup and swap directories
 set backupdir=/var/tmp,/tmp
 set directory=/var/tmp,/tmp
+
+"=================================================================
+" Coding helpers (syntax, filetype plugins)
+
+" File-type highlighting and configuration.
+" Run :filetype (without args) to see what you may have
+" to turn on yourself, or just set them all to be sure.
+syntax on
+filetype on
+filetype plugin on
+filetype indent on
 
 " Enable C++11 Support for Syntastic
 let g:syntastic_cpp_compiler = 'clang++'
