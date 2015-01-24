@@ -121,7 +121,7 @@ nnoremap <expr> O getline('.') =~ '^\s*//' ? 'O<esc>S' : 'O'
 noremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
 
 " Map backtick to escape for comfort
-imap ` <Esc>
+" imap ` <Esc>
 
 
 "=================================================================
