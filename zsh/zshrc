@@ -8,7 +8,9 @@ then
 #Mac OS X
 elif [ `uname` = "Darwin" ];
 then 
-	source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+    source ~/dotfiles/zsh/prompt
+    export LC_ALL=en_US.UTF-8
+    export LANG=en_US.UTF-8
 fi
 
 #Enable Antigen

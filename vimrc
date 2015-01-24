@@ -33,6 +33,14 @@ Plugin 'jtratner/vim-flavored-markdown'
 " Haskell
 Plugin 'bitc/vim-hdevtools'
 
+" Airline
+Plugin 'bling/vim-airline'
+"Plugin 'edkolev/promptline.vim'
+"Plugin 'edkolev/tmuxline.vim'
+
+" Git
+Plugin 'tpope/vim-fugitive'
+
 "Plugin 'L9'
 "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Plugin 'git://git.wincent.com/command-t.git'
@@ -75,14 +83,37 @@ if (system('uname') =~? "Darwin")
     
     " Preserve indentation while pasting text from the OS X clipboard
     noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+
+    " Enables double-width characters (this is an iTerm Compatability thing)
+    " set ambiwidth=double
 endif
 
 "=================================================================
-" Powerline
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+" Airline
 
+" Powerline Symbols
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+
+let g:Powerline_symbols = 'fancy'
+let g:airline_powerline_fonts = 1
+set guifont=Anonymice\ Powerline:h14
+
+let g:airline_theme = 'solarized'
+
+" don't count trailing whitespace since it lags in huge files
+let g:airline#extensions#whitespace#enabled = 0
+
+" disable to improve fugitive performance
+let g:airline#extensions#branch#enabled = 1
+
+" put a buffer list at the top
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Make the Statusbar always visible
 set laststatus=2
 
 
@@ -91,15 +122,15 @@ set laststatus=2
 
 " Because our lord demands it:
 " Vim. Live it. ------------------------------------------------------- {{{
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-noremap <right> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
 inoremap <up> <nop>
-" }}}
+noremap <up> <nop>
+inoremap <down> <nop>
+noremap <down> <nop>
+inoremap <left> <nop>
+noremap <right> <nop>
+inoremap <left> <nop>
+noremap <right> <nop>
+" B-A-<start> }}}
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
