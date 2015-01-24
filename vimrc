@@ -119,7 +119,7 @@ set laststatus=2
 " Promptline
 let g:promptline_theme = 'airline'
 let g:promptline_preset = {
-        \'a' : [ '$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi fi )' ],
+        \'a' : [ '$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
         \'b' : [ '$USER'],
         \'c' : [ promptline#slices#cwd() ],
         \'y' : [ promptline#slices#vcs_branch() ],
