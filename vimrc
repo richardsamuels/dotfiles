@@ -164,11 +164,15 @@ nnoremap <expr> O getline('.') =~ '^\s*//' ? 'O<esc>S' : 'O'
 noremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
 
 " Map backtick to escape for comfort
-imap ` <Esc>
+:inoremap jk <Esc>
 
 
 "=================================================================
 " Editing settings, including tabs, and spaces, and line numbers
+
+" Mouse mode
+set mouse=a
+set ttymouse=xterm2
 
 " Enable line numbers
 set relativenumber
