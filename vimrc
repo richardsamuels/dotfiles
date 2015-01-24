@@ -36,7 +36,7 @@ Plugin 'bitc/vim-hdevtools'
 " Airline
 Plugin 'bling/vim-airline'
 Plugin 'edkolev/promptline.vim'
-"Plugin 'edkolev/tmuxline.vim'
+Plugin 'edkolev/tmuxline.vim'
 
 " Git
 Plugin 'tpope/vim-fugitive'
@@ -124,6 +124,10 @@ let g:promptline_preset = {
         \'c' : [ promptline#slices#cwd() ],
         \'y' : [ promptline#slices#vcs_branch() ],
         \'warn' : [ promptline#slices#last_exit_code() ]}
+
+" Tmuxline
+let g:tmuxline_preset = 'full'
+let g:tmuxline_theme = 'airline'
 
 "=================================================================
 " Custom command mappings
