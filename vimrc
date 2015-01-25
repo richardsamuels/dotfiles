@@ -229,6 +229,12 @@ set autoread
 set backupdir=/var/tmp,/tmp
 set directory=/var/tmp,/tmp
 
+" Line at 80 chars
+set colorcolumn=80
+
+" Use a confirmation dialogue when saving
+set confirm
+
 "=================================================================
 " Coding helpers (syntax, filetype plugins)
 
