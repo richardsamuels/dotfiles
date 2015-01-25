@@ -32,6 +32,7 @@ Plugin 'jtratner/vim-flavored-markdown'
 
 " Haskell
 Plugin 'bitc/vim-hdevtools'
+Plugin 'dag/vim2hs'
 
 " Airline
 Plugin 'bling/vim-airline'
@@ -250,3 +251,7 @@ filetype indent on
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-Wall -std=c++11 -stdlib=libc++'
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/ycm/.ycm_extra_conf.py'
+
+" Haskell
+" fuck code folding
+autocmd BufNewFile,BufRead *.hs set nofoldenable

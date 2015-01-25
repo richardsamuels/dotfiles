@@ -13,6 +13,8 @@ then
     export LANG=en_US.UTF-8
 fi
 
+export PATH=~/.cabal/bin:$PATH
+
 #Enable Antigen
 source ~/.antigen-hs/antigen-hs/init.zsh
 
