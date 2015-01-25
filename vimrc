@@ -140,8 +140,8 @@ noremap <up> <nop>
 inoremap <down> <nop>
 noremap <down> <nop>
 inoremap <left> <nop>
-noremap <right> <nop>
-inoremap <left> <nop>
+inoremap <right> <nop>
+noremap <left> <nop>
 noremap <right> <nop>
 " B-A-<start> }}}
 
@@ -179,6 +179,7 @@ set ttymouse=xterm2
 set relativenumber
 set number
 
+set smartindent
 " Tab settings. Taken from Haskell docs, but it prefer them
 set tabstop=8                   "A tab is 8 spaces
 set expandtab                   "Always uses spaces instead of tabs
