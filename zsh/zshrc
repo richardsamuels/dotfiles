@@ -57,3 +57,6 @@ export VISUAL="vim"
 
 # Set auto pushd
 setopt AUTO_PUSHD
+
+# Get rid of that extra space on the rgiht
+ZLE_RPROMPT_INDENT=0
