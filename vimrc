@@ -92,6 +92,8 @@ endif
 "=================================================================
 " Airline
 
+set noshowmode
+
 " Powerline Symbols
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
