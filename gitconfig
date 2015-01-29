@@ -6,3 +6,10 @@
 	email = aninakuna@gmail.com
 [push]
 	default = simple
+[diff]
+        tool = vimdiff
+[difftool]
+        prompt = false
+[alias]
+        d = difftool
+
