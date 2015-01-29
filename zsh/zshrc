@@ -8,8 +8,12 @@ then
 #Mac OS X
 elif [ `uname` = "Darwin" ];
 then 
-	source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+    source ~/dotfiles/zsh/prompt
+    export LC_ALL=en_US.UTF-8
+    export LANG=en_US.UTF-8
 fi
+
+export PATH=~/.cabal/bin:$PATH
 
 #Enable Antigen
 source ~/.antigen-hs/antigen-hs/init.zsh
@@ -48,3 +52,6 @@ export VISUAL="vim"
 
 # Set auto pushd
 setopt AUTO_PUSHD
+
+# Get rid of that extra space on the rgiht
+ZLE_RPROMPT_INDENT=0

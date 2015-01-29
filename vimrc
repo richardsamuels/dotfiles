@@ -32,6 +32,15 @@ Plugin 'jtratner/vim-flavored-markdown'
 
 " Haskell
 Plugin 'bitc/vim-hdevtools'
+Plugin 'dag/vim2hs'
+
+" Airline
+Plugin 'bling/vim-airline'
+Plugin 'edkolev/promptline.vim'
+Plugin 'edkolev/tmuxline.vim'
+
+" Git
+Plugin 'tpope/vim-fugitive'
 
 "Plugin 'L9'
 "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -75,31 +84,68 @@ if (system('uname') =~? "Darwin")
     
     " Preserve indentation while pasting text from the OS X clipboard
     noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+
+    " Enables double-width characters (this is an iTerm Compatability thing)
+    " set ambiwidth=double
 endif
 
 "=================================================================
-" Powerline
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+" Airline
 
+set noshowmode
+
+" Powerline Symbols
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+
+let g:Powerline_symbols = 'fancy'
+let g:airline_powerline_fonts = 1
+set guifont=Anonymice\ Powerline:h14
+
+let g:airline_theme = 'solarized'
+
+" don't count trailing whitespace since it lags in huge files
+let g:airline#extensions#whitespace#enabled = 0
+
+" disable to improve fugitive performance
+let g:airline#extensions#branch#enabled = 1
+
+" put a buffer list at the top
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Make the Statusbar always visible
 set laststatus=2
 
+" Promptline
+let g:promptline_theme = 'airline'
+let g:promptline_preset = {
+        \'a' : [ '$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
+        \'b' : [ '$USER'],
+        \'c' : [ promptline#slices#cwd() ],
+        \'y' : [ promptline#slices#vcs_branch() ],
+        \'warn' : [ promptline#slices#last_exit_code() ]}
+
+" Tmuxline
+let g:tmuxline_preset = 'full'
+let g:tmuxline_theme = 'airline'
 
 "=================================================================
 " Custom command mappings
 
 " Because our lord demands it:
 " Vim. Live it. ------------------------------------------------------- {{{
+inoremap <up> <nop>
 noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-noremap <right> <nop>
 inoremap <down> <nop>
+noremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-inoremap <up> <nop>
-" }}}
+noremap <left> <nop>
+noremap <right> <nop>
+" B-A-<start> }}}
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
@@ -120,17 +166,22 @@ noremap <expr> <enter> getline('.') =~ '^\s*//' ? '<enter><esc>S' : '<ente    r>
 nnoremap <expr> O getline('.') =~ '^\s*//' ? 'O<esc>S' : 'O'
 noremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
 
-" Map backtick to escape for comfort
-" imap ` <Esc>
+" Map jk to leave insert mode for comfort 
+:inoremap jk <Esc>
 
 
 "=================================================================
 " Editing settings, including tabs, and spaces, and line numbers
 
+" Mouse mode
+set mouse=a
+set ttymouse=xterm2
+
 " Enable line numbers
 set relativenumber
 set number
 
+set smartindent
 " Tab settings. Taken from Haskell docs, but it prefer them
 set tabstop=8                   "A tab is 8 spaces
 set expandtab                   "Always uses spaces instead of tabs
@@ -182,6 +233,12 @@ set autoread
 set backupdir=/var/tmp,/tmp
 set directory=/var/tmp,/tmp
 
+" Line at 80 chars
+set colorcolumn=80
+
+" Use a confirmation dialogue when saving
+set confirm
+
 "=================================================================
 " Coding helpers (syntax, filetype plugins)
 
@@ -197,3 +254,7 @@ filetype indent on
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-Wall -std=c++11 -stdlib=libc++'
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/ycm/.ycm_extra_conf.py'
+
+" Haskell
+" fuck code folding
+autocmd BufNewFile,BufRead *.hs set nofoldenable
