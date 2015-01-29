@@ -258,3 +258,9 @@ let g:ycm_global_ycm_extra_conf = '~/dotfiles/ycm/.ycm_extra_conf.py'
 " Haskell
 " fuck code folding
 autocmd BufNewFile,BufRead *.hs set nofoldenable
+
+
+" Spellcheck
+set spell
+set spelllang=en_gb
+set spellfile=~/dotfiles/vimspellfile.utf-8.add
