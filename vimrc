@@ -234,7 +234,7 @@ set backupdir=/var/tmp,/tmp
 set directory=/var/tmp,/tmp
 
 " Line at 80 chars
-set colorcolumn=80
+set colorcolumn=100
 
 " Use a confirmation dialogue when saving
 set confirm
