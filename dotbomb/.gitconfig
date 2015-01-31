@@ -49,4 +49,4 @@
 
 
 [include]
-    path = ~/dotfiles/gitconfig 
+    path = ~/dotfiles/git/gitconfig 
