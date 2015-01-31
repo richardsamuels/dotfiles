@@ -53,13 +53,17 @@ ZLE_RPROMPT_INDENT=0
 
 # Lighthouse function
 it2_rot() {
-    if [[ $IT2_C != "L" ]]; then
-        export IT2_C=L
-        source ~/dotfiles/zsh/prompt-light
-    else
-        export IT2_C=D
-        source ~/dotfiles/zsh/prompt-dark
+    if [[ $ITERM_PROFILE == "Solarized Dark" ]]; then
+        source ~/dotfiles/zsh/solar-dark
+    elif [[ $ITERM_PROFILE == "Solarized Light" ]]; then
+        source ~/dotfiles/zsh/solar-light
     fi;
 }
 
-source ~/dotfiles/zsh/solar-light.zsh
+if [[ -z $ITERM_PROFILE ]]; then
+    source ~/dotfiles/zsh/solar-dark
+elif [[ $ITERM_PROFILE == "Solarized Dark" ]]; then
+    source ~/dotfiles/zsh/solar-dark
+elif [[ $ITERM_PROFILE == "Solarized Light" ]]; then
+    source ~/dotfiles/zsh/solar-light
+fi;
