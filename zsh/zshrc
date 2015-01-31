@@ -1,15 +1,3 @@
-# Arch linux
-if [ -f "/etc/arch-release" ]; 
-then
-    true
-# Mac OS X
-elif [ `uname` = "Darwin" ];
-then 
-    export LC_ALL=en_US.UTF-8
-    export LANG=en_US.UTF-8
-    export PATH="$(brew --prefix coreutils)/libexec/gnubin:~/.cabal/bin:$PATH"
-fi
-
 # Enable Antigen
 source ~/.antigen-hs/antigen-hs/init.zsh
 
@@ -39,22 +27,10 @@ genpass() {
 autoload -U compinit
 compinit
 
-# Set Editor
-export EDITOR="vim"
-export VISUAL="vim"
-
 # Set auto pushd
 setopt AUTO_PUSHD
 
-# Lighthouse function
-it2_rot() {
-    if [[ $ITERM_PROFILE == "Solarized Dark" ]]; then
-        source ~/dotfiles/zsh/solar-dark
-    elif [[ $ITERM_PROFILE == "Solarized Light" ]]; then
-        source ~/dotfiles/zsh/solar-light
-    fi;
-}
-
+# Load the appropriate Prompt and LS COLORS
 if [[ -z $ITERM_PROFILE ]]; then
     source ~/dotfiles/zsh/airline-dark
 elif [[ $ITERM_PROFILE == "Solarized Dark" ]]; then
@@ -69,7 +45,14 @@ autoload -Uz compinit
 compinit
 
 # LS Aliases
-LS_DEFAULT="ls --color=auto"
+if ls --color -d . >/dev/null 2>&1; then
+#GNU LS
+    LS_DEFAULT="ls --color=auto"
+elif ls -G -d . >/dev/null 2>&1; then
+#BSD LS
+    LS_DEFAULT="ls -G"
+fi;
+
 alias ls=$LS_DEFAULT
 alias ll="$LS_DEFAULT -l"
 alias la="$LS_DEFAULT -al"

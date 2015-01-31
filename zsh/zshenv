@@ -1,3 +1,26 @@
+# Editor
+export EDITOR="vim"
+export VISUAL="vim"
+
+# Language & Locale Settings
+if [[ -z "$LANG" ]]; then
+  export LANG='en_US.UTF-8'
+fi
+
+if [[ -z "$LC_ALL" ]]; then
+  export LC_ALL='en_US.UTF-8'
+fi
+
+# Arch linux
+if [ -f "/etc/arch-release" ]; 
+then
+    true
+# Mac OS X
+elif [ `uname` = "Darwin" ];
+then 
+    export PATH="$(brew --prefix coreutils)/libexec/gnubin:~/.cabal/bin:$PATH"
+fi
+
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
