@@ -108,7 +108,7 @@ colorscheme solarized
 " Spellcheck
 set spell
 set spelllang=en_gb
-set spellfile=~/dotfiles/vimspellfile.utf-8.add
+set spellfile=~/dotfiles/vim/vimspellfile.utf-8.add
 
 " Line at 100 chars
 set colorcolumn=100
