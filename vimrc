@@ -21,11 +21,11 @@ Plugin 'altercation/vim-colors-solarized'
 " Syntastic code competion, replaced by YCM
 " Plugin 'scrooloose/syntastic'
 
-" Automatic tabbing
-Plugin 'godlygeek/tabular'
-
 " YCM for Fuzzy Code Completion
 Plugin 'Valloric/YouCompleteMe'
+
+" Automatic tabbing
+Plugin 'godlygeek/tabular'
 
 " Markdown Plugins
 Plugin 'plasticboy/vim-markdown'
@@ -70,6 +70,7 @@ filetype plugin indent on    " required
 " =============================================================================
 " 2 moving around, searching and patterns
 " =============================================================================
+
 set incsearch "highlight dynamically as they are typed.
 
 " Case insensitive search, except when using *
@@ -82,8 +83,10 @@ set smartcase
 " =============================================================================
 " 4 displaying text
 " =============================================================================
+
 set relativenumber
 set number
+
 " =============================================================================
 " 5 syntax, highlighting and spelling
 " =============================================================================
@@ -302,9 +305,9 @@ endif
 " -----------------------------------------------------------------------------
 
 " Powerline Symbols
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
+" if !exists('g:airline_symbols')
+"     let g:airline_symbols = {}
+" endif
 
 let g:Powerline_symbols = 'fancy'
 let g:airline_powerline_fonts = 1
