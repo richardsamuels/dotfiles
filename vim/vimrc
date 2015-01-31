@@ -258,6 +258,9 @@ set directory=/var/tmp,/tmp
 " =============================================================================
 
 set undofile
+set undodir=~/.vim/undodir
+set undolevels=1000
+set undoreload=10000
 
 " =============================================================================
 " 22 executing external commands
