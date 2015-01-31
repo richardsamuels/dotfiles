@@ -48,4 +48,4 @@
 
 
 
-source ~/dotfiles/vimrc
+source ~/dotfiles/vim/vimrc
