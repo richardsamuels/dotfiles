@@ -65,3 +65,9 @@ elif [[ $ITERM_PROFILE == "Solarized Dark" ]]; then
 elif [[ $ITERM_PROFILE == "Solarized Light" ]]; then
     source ~/dotfiles/zsh/airline-light
 fi;
+
+# LS Aliases
+LS_DEFAULT="ls --color=auto"
+alias ls=$LS_DEFAULT
+alias ll="$LS_DEFAULT -l"
+alias la="$LS_DEFAULT -al"
