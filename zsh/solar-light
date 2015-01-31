@@ -1,0 +1,4 @@
+export IT2_C=L
+
+source ~/dotfiles/zsh/prompt-light
+

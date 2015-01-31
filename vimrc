@@ -96,10 +96,10 @@ filetype on
 filetype plugin on
 filetype indent on
 
-"Colorisation Settings
+" Colourisation Settings
 
 set t_Co=256
-set background=dark
+" set background=dark
 colorscheme solarized
 
 " Spellcheck
