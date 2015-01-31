@@ -5,6 +5,7 @@ cp -f hooks/* ./.git/hooks
 
 git clone git@github.com:Tarrasch/antigen-hs.git ~/.antigen-hs/antigen-hs
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+mkdir -p ~/.vim/undodir
 git clone git://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized
 
 ln -s ~/dotfiles/zsh/MyAntigen.hs ~/.antigen-hs/MyAntigen.hs
