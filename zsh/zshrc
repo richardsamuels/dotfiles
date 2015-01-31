@@ -63,6 +63,11 @@ elif [[ $ITERM_PROFILE == "Solarized Light" ]]; then
     source ~/dotfiles/zsh/airline-light
 fi;
 
+#ZSH Tab Completion Colors
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+autoload -Uz compinit
+compinit
+
 # LS Aliases
 LS_DEFAULT="ls --color=auto"
 alias ls=$LS_DEFAULT
