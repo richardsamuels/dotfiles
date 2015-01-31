@@ -14,8 +14,12 @@ vim +PluginInstall +qall
 
 source ~/.antigen-hs/antigen-hs/init.zsh
 
-
 antigen-hs-compile
 
+cd $ANTIGEN_HS_OUT/repos/https-COLON--SLASH--SLASH-github.com-SLASH-jimeh-SLASH-tmuxifier/
+
+curl https://gist.githubusercontent.com/richardsamuels/a0f0d29e1d3c4d2ec5b0/raw/9c3355cdd2632f11ac3da8863eca4fef4272da97/tmuxifier.plugin.zsh > tmuxifier.plugin.zsh
+
+antigen-hs-compile
 echo "Dotbombed! Restart your shell"
 
