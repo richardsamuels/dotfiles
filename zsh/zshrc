@@ -1,6 +1,9 @@
 # Enable Antigen
 source ~/.antigen-hs/antigen-hs/init.zsh
 
+# Tmuxifier Layouts
+export TMUXIFIER_LAYOUT_PATH=~/dotfiles/tmux/layouts
+
 autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
