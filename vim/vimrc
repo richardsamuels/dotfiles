@@ -77,6 +77,9 @@ set incsearch "highlight dynamically as they are typed.
 set ignorecase
 set smartcase
 
+" Enhanced % matching
+runtime macros/matchit.vim
+
 " =============================================================================
 " 3 tags
 " =============================================================================
@@ -198,6 +201,10 @@ set smartindent
 " =============================================================================
 " 16 folding 
 " =============================================================================
+
+" fuck code folding
+set nofoldenable
+
 " =============================================================================
 " 17 diff mode
 " =============================================================================
@@ -358,10 +365,5 @@ let g:ycm_global_ycm_extra_conf = '~/dotfiles/ycm/.ycm_extra_conf.py'
 " 29 Language Specific Fun-ness
 " =============================================================================
 
-" Haskell
-" fuck code folding
-autocmd BufNewFile,BufRead *.hs set nofoldenable
 
-" Enhanced % matching
-runtime macros/matchit.vim
 
