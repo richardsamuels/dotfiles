@@ -105,7 +105,14 @@ filetype indent on
 " Colourisation Settings
 
 set t_Co=256
-" set background=dark
+
+" Set background based on iTerm theme
+if $ITERM_PROFILE == "Solarized Light"
+    set background=light
+else
+    set background=dark
+endif
+
 colorscheme solarized
 
 " Spellcheck
@@ -336,7 +343,6 @@ let g:airline#extensions#branch#enabled = 1
 " put a buffer list at the top
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-
 
 " Promptline
 let g:promptline_theme = 'airline'

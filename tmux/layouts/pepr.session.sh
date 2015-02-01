@@ -14,9 +14,9 @@ if initialize_session "pepr"; then
 
     if [[ `system_profiler SPDisplaysDataType | grep Resolution` == *"Retina"* ]]; then
         # Load a defined window layout.
-        load_window "std-retina"
+        load_window "std-retina-pepr"
     else
-        load_window "std-retina"
+        load_window "std-retina-pepr"
     fi
 fi
 
