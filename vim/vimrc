@@ -256,6 +256,9 @@ noremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
 " Map jk to leave insert mode for comfort 
 inoremap jk <Esc>
 
+" Disable EX mode
+:map Q <Nop>
+
 " =============================================================================
 " 19 reading and writing files
 " =============================================================================
