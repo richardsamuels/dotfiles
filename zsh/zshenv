@@ -1,6 +1,8 @@
 # Editor
 export EDITOR="vim"
 export VISUAL="vim"
+export PAGER="col -b | vim -c 'set ft=man ts=8 nomod nolist nonu' -c 'nnoremap i <nop>' -"
+export MANPAGER="col -b | vim -c 'set ft=man ts=8 nomod nolist nonu' -c 'nnoremap i <nop>' -"
 
 # Language & Locale Settings
 if [[ -z "$LANG" ]]; then
