@@ -47,6 +47,9 @@ Plugin 'tpope/vim-fugitive'
 "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Plugin 'git://git.wincent.com/command-t.git'
 
+" Startup Page
+Plugin 'mhinz/vim-startify'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -366,6 +369,19 @@ let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-Wall -std=c++11 -stdlib=libc++'
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/ycm/.ycm_extra_conf.py'
 
+" -----------------------------------------------------------------------------
+" 28.3 Startify
+" -----------------------------------------------------------------------------
+
+let g:startify_bookmarks = [ '~/dotfiles/vim/vimrc', '~/dotfiles/zsh/zshrc', '~/dotfiles/zsh/zshenv', '~/dotfiles/zsh/MyAntigen.hs', '~/dotfiles/tmux/tmux.conf']
+
+function s:center_header(lines) abort
+    let longest_line   = max(map(copy(a:lines), 'len(v:val)'))
+    let centered_lines = map(copy(a:lines), 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+    return centered_lines
+endfunction
+
+let g:startify_custom_header = s:center_header(split(system('sort -R ~/dotfiles/vim/cow | head -n 1  | cowthink'), '\n'))
 
 " =============================================================================
 " 29 Language Specific Fun-ness
