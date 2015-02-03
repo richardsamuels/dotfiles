@@ -384,11 +384,15 @@ function s:center_header(lines) abort
     return centered_lines
 endfunction
 
-let g:startify_custom_header = s:center_header(split(system('sort -R ~/dotfiles/vim/cow | head -n 1  | cowthink'), '\n'))
+let g:startify_custom_header = s:center_header(split(system('shuf -n 1 ~/dotfiles/vim/cow | cowthink'), '\n'))
 
 " =============================================================================
 " 29 Language Specific Fun-ness
 " =============================================================================
 
+" =============================================================================
+" 30 Autocmds 
+" =============================================================================
 
-
+" Save buffers on lost focus
+:au FocusLost * :wa
