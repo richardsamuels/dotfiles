@@ -1,8 +1,7 @@
 # Editor
 export EDITOR="vim"
 export VISUAL="vim"
-export PAGER="col -b | vim -c 'set ft=man ts=8 nomod nolist nonu' -c 'nnoremap i <nop>' -"
-export MANPAGER="col -b | vim -c 'set ft=man ts=8 nomod nolist nonu' -c 'nnoremap i <nop>' -"
+export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
 
 # Language & Locale Settings
 if [[ -z "$LANG" ]]; then
@@ -20,7 +19,15 @@ then
 # Mac OS X
 elif [ `uname` = "Darwin" ];
 then 
-    export PATH="$(brew --prefix coreutils)/libexec/gnubin:~/.cabal/bin:$PATH"
+    if [ -d $(brew --prefix coreutils) ]; then
+        PATH=$(brew --prefix coreutils):$PATH
+    fi
+
+    if [ -d ~/.cabal/bin ]; then
+        PATH=~/.cabal/bin:$PATH
+    fi
+
+    export PATH
 fi
 
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
