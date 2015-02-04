@@ -313,14 +313,14 @@ set wildmode=list:longest
 " 27.1 OS X
 " ----------------------------------------------------------------------------
 
-if (system('uname') =~? "Darwin")
+" if (system('uname') =~? "Darwin")
     " OS X clipboard. Only fixes macvim, not the standard vim build
     set clipboard=unnamed
 
     " Enables double-width characters (this is an iTerm Compatibility thing
     " for when double-width characters are enabled)
     " set ambiwidth=double
-endif
+" endif
 
 " =============================================================================
 " 28 Plugin Settings 
@@ -395,4 +395,4 @@ let g:startify_custom_header = s:center_header(split(system('shuf -n 1 ~/dotfile
 " =============================================================================
 
 " Save buffers on lost focus
-:au FocusLost * :wa
+" :au FocusLost * :wa
