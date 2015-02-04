@@ -17,8 +17,7 @@ if [ -f "/etc/arch-release" ];
 then
     true
 # Mac OS X
-elif [ `uname` = "Darwin" ];
-then 
+elif [ `uname` = "Darwin" ]; then 
     if [ -d $(brew --prefix coreutils) ]; then
         PATH=$(brew --prefix coreutils):$PATH
     fi
@@ -28,6 +27,12 @@ then
     fi
 
     export PATH
+
+    if [ -x "$(which pyenv)" ]; then  
+        export PYENV_ROOT=/usr/local/opt/python
+        eval "$(pyenv init -)"
+    fi
+
 fi
 
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
