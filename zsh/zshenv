@@ -1,4 +1,4 @@
-# Editor
+#Editor
 export EDITOR="vim"
 export VISUAL="vim"
 export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
@@ -18,8 +18,17 @@ then
     true
 # Mac OS X
 elif [ `uname` = "Darwin" ]; then 
+    # /etc/profile
+    ## system-wide environment settings for zsh(1)
+    if [ -x /usr/libexec/path_helper ]; then
+            PATH=""
+            export MANPATH=""
+            eval `/usr/libexec/path_helper -s`
+    fi
+
     if [ -d $(brew --prefix coreutils) ]; then
-        PATH=$(brew --prefix coreutils):$PATH
+        PATH=/usr/local/opt/coreutils/libexec/gnubin:$(brew --prefix coreutils):$PATH
+        export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
     fi
 
     if [ -d ~/.cabal/bin ]; then

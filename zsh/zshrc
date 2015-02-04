@@ -59,3 +59,4 @@ fi;
 alias ls=$LS_DEFAULT
 alias ll="$LS_DEFAULT -l"
 alias la="$LS_DEFAULT -al"
+alias l=$LS_DEFAULT
