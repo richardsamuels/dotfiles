@@ -1,71 +1,84 @@
 " =============================================================================
-" 0 Vundle Setup 
+" 0 Neobundle Setup 
 " =============================================================================
+if !1 | finish | endif
+if has('vim_starting')
+    if &compatible
+        set nocompatible               " Be iMproved
+    endif
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+    " Required:
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+
+" Add or remove your Bundles here:
+"NeoBundle 'Shougo/neosnippet.vim'
+"NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+"NeoBundle 'ctrlpvim/ctrlp.vim'
+"NeoBundle 'flazz/vim-colorschemes'
+
+" You can specify revision/branch/tag.
+"NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+
 
 " Solarised Color Scheme
-Plugin 'altercation/vim-colors-solarized'
+NeoBundle 'altercation/vim-colors-solarized'
 
 
 " Syntastic code competion, replaced by YCM
-" Plugin 'scrooloose/syntastic'
+"NeoBundle 'scrooloose/syntastic'
 
 " YCM for Fuzzy Code Completion
-Plugin 'Valloric/YouCompleteMe'
+NeoBundle 'Valloric/YouCompleteMe', {
+\ 'build' : {
+\     'mac' : './install.sh --clang-completer',
+\     'linux' : './install.sh --clang-completer',
+\     'unix' : './install.sh --clang-completer',
+\    },
+\ }
 
 " Automatic tabbing
-Plugin 'godlygeek/tabular'
+NeoBundle 'godlygeek/tabular'
 
 " Markdown Plugins
-Plugin 'plasticboy/vim-markdown'
-Plugin 'jtratner/vim-flavored-markdown'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'jtratner/vim-flavored-markdown'
 
 " Haskell
-Plugin 'bitc/vim-hdevtools'
-Plugin 'dag/vim2hs'
+NeoBundle 'bitc/vim-hdevtools'
+NeoBundle 'dag/vim2hs'
 
 " Airline
-Plugin 'bling/vim-airline'
-Plugin 'edkolev/promptline.vim'
-Plugin 'edkolev/tmuxline.vim'
-
-" Git
-Plugin 'tpope/vim-fugitive'
-
-"Plugin 'L9'
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-"Plugin 'git://git.wincent.com/command-t.git'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'edkolev/promptline.vim'
+NeoBundle 'edkolev/tmuxline.vim'
 
 " Startup Page
-Plugin 'mhinz/vim-startify'
+NeoBundle 'mhinz/vim-startify'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" Required:
+call neobundle#end()
+
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
 
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
+NeoBundleCheck
 
 " =============================================================================
 " 1 important
@@ -352,12 +365,12 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Promptline
 let g:promptline_theme = 'airline'
-let g:promptline_preset = {
-        \'a' : [ '$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
-        \'b' : [ '$USER'],
-        \'c' : [ promptline#slices#cwd() ],
-        \'y' : [ promptline#slices#vcs_branch() ],
-        \'warn' : [ promptline#slices#last_exit_code() ]}
+" let g:promptline_preset = {
+"         \'a' : [ '$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
+"         \'b' : [ '$USER'],
+"         \'c' : [ promptline#slices#cwd() ],
+"         \'y' : [ promptline#slices#vcs_branch() ],
+"         \'warn' : [ promptline#slices#last_exit_code() ]}
 
 " Tmuxline
 let g:tmuxline_preset = 'full'
