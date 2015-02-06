@@ -37,10 +37,8 @@ NeoBundle 'tpope/vim-fugitive'
 " You can specify revision/branch/tag.
 "NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 
-
 " Solarised Color Scheme
 NeoBundle 'altercation/vim-colors-solarized'
-
 
 " Syntastic code competion, replaced by YCM
 "NeoBundle 'scrooloose/syntastic'
@@ -62,13 +60,26 @@ NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'jtratner/vim-flavored-markdown'
 
 " Haskell
-NeoBundle 'bitc/vim-hdevtools'
-NeoBundle 'dag/vim2hs'
+NeoBundleLazy 'bitc/vim-hdevtools', {
+\ 'autoload': {
+\   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
+\ }}
+
+NeoBundleLazy 'dag/vim2hs', {
+\ 'autoload': {
+\   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
+\ }}
 
 " Airline
 NeoBundle 'bling/vim-airline'
-NeoBundle 'edkolev/promptline.vim'
-NeoBundle 'edkolev/tmuxline.vim'
+NeoBundleLazy 'edkolev/promptline.vim', {
+            \ 'depends': 'bling/vim-airline',
+            \ 'commands': [{'name': ['PromptlineSnapshot']}],
+            \ }
+NeoBundleLazy 'edkolev/tmuxline.vim', {
+            \ 'depends': 'bling/vim-airline',
+            \ 'commands': [{'name': ['TmuxlineSnapshot', 'Tmuxline']}],
+            \ }
 
 " Startup Page
 NeoBundle 'mhinz/vim-startify'
