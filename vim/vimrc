@@ -376,12 +376,12 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Promptline
 let g:promptline_theme = 'airline'
-" let g:promptline_preset = {
-"         \'a' : [ '$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
-"         \'b' : [ '$USER'],
-"         \'c' : [ promptline#slices#cwd() ],
-"         \'y' : [ promptline#slices#vcs_branch() ],
-"         \'warn' : [ promptline#slices#last_exit_code() ]}
+let g:promptline_preset = {
+        \'a' : [ '$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
+        \'b' : [ '$USER'],
+        \'c' : [ promptline#slices#cwd() ],
+        \'y' : [ promptline#slices#vcs_branch() ],
+        \'warn' : [ promptline#slices#last_exit_code() ]}
 
 " Tmuxline
 let g:tmuxline_preset = 'full'
