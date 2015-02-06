@@ -7,3 +7,6 @@ Host    raia.local
 Host    aselia
     HostName    aselia.aninakuna.com
     User        rsamuels
+Host    pdc
+    HostName    pdc-amd01.poly.edu
+    User        rms521
