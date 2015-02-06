@@ -26,20 +26,19 @@ genpass() {
     fi
 }
 
-# Enable tab completion
-autoload -U compinit
-compinit
-
 # Set auto pushd
 setopt AUTO_PUSHD
 
 # Load the appropriate Prompt and LS COLORS
 if [[ -z $ITERM_PROFILE ]]; then
     source ~/dotfiles/zsh/airline-dark
+    eval `dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-dark`
 elif [[ $ITERM_PROFILE == "Solarized Dark" ]]; then
     source ~/dotfiles/zsh/airline-dark
+    eval `dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-dark`
 elif [[ $ITERM_PROFILE == "Solarized Light" ]]; then
     source ~/dotfiles/zsh/airline-light
+    eval `dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-light`
 fi;
 
 #ZSH Tab Completion Colors
@@ -60,3 +59,16 @@ alias ls=$LS_DEFAULT
 alias ll="$LS_DEFAULT -l"
 alias la="$LS_DEFAULT -al"
 alias l=$LS_DEFAULT
+
+# History searching magic
+# bind P and N for EMACS mode
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+
+# bind k and j for VI mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# bind UP and DOWN arrow keys
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
