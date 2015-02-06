@@ -43,14 +43,16 @@ NeoBundle 'altercation/vim-colors-solarized'
 " Syntastic code competion, replaced by YCM
 "NeoBundle 'scrooloose/syntastic'
 
-" YCM for Fuzzy Code Completion
-NeoBundle 'Valloric/YouCompleteMe', {
-\ 'build' : {
-\     'mac' : './install.sh --clang-completer',
-\     'linux' : './install.sh --clang-completer',
-\     'unix' : './install.sh --clang-completer',
-\    },
-\ }
+if (system('uname') =~? "Darwin")
+    " YCM for Fuzzy Code Completion
+    NeoBundle 'Valloric/YouCompleteMe', {
+    \ 'build' : {
+    \     'mac' : './install.sh --clang-completer',
+    \     'linux' : './install.sh --clang-completer',
+    \     'unix' : './install.sh --clang-completer',
+    \    },
+    \ }
+endif
 
 " Automatic tabbing
 NeoBundle 'godlygeek/tabular'
@@ -84,6 +86,10 @@ NeoBundleLazy 'edkolev/tmuxline.vim', {
 " Startup Page
 NeoBundle 'mhinz/vim-startify'
 
+" Rust
+NeoBundle 'wting/rust.vim'
+
+" }}}
 " Required:
 call neobundle#end()
 
