@@ -4,9 +4,14 @@ Host	raia
 Host    raia.local
     HostName        raia.local
     User            raia
+Host    aselia.aninakuna.com
+    HostName    aselia.aninakuna.com
+    User        rsamuels
+    SendEnv     ITERM_PROFILE
 Host    aselia
     HostName    aselia.aninakuna.com
     User        rsamuels
+    SendEnv     ITERM_PROFILE
 Host    pdc
     HostName    pdc-amd01.poly.edu
     User        rms521
