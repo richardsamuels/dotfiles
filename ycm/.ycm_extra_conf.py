@@ -6,7 +6,7 @@ import ycm_core
 # compilation database set (by default, one is not set).
 # CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
 flags = [
-    # '-Wall',
+     '-Wall',
     # '-Wextra',
     # '-Werror',
     # '-Wc++98-compat',
@@ -30,7 +30,9 @@ flags = [
     '-isystem', '/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/2.7/include/python2.7',
     '-isystem', '/usr/local/include',
     '-isystem', '/usr/local/include/eigen3',
-    '-I', 'include'
+    '-Isystem', '/usr/include/c++/4.2.1/tr1/',
+    '-isystem', '/usr/include/c++/4.2.1/',
+    '-I', 'include',
     '-I.'
 ]
 
