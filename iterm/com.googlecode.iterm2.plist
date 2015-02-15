@@ -467,6 +467,93 @@
 	<false/>
 	<key>FsTabDelay</key>
 	<real>1</real>
+	<key>GlobalKeyMap</key>
+	<dict>
+		<key>0xf700-0x300000</key>
+		<dict>
+			<key>Action</key>
+			<integer>7</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf701-0x300000</key>
+		<dict>
+			<key>Action</key>
+			<integer>6</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf702-0x300000</key>
+		<dict>
+			<key>Action</key>
+			<integer>2</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf702-0x320000</key>
+		<dict>
+			<key>Action</key>
+			<integer>33</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf703-0x300000</key>
+		<dict>
+			<key>Action</key>
+			<integer>0</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf703-0x320000</key>
+		<dict>
+			<key>Action</key>
+			<integer>34</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf729-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>5</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf72b-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>4</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf72c-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>9</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf72c-0x20000</key>
+		<dict>
+			<key>Action</key>
+			<integer>9</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf72d-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>8</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf72d-0x20000</key>
+		<dict>
+			<key>Action</key>
+			<integer>8</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+	</dict>
 	<key>HiddenAFRStrokeThickness</key>
 	<real>0.0</real>
 	<key>HiddenAdvancedFontRendering</key>
@@ -535,13 +622,13 @@
 	<key>NSScrollAnimationEnabled</key>
 	<false/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>1158 33 445 77 0 0 1680 1027 </string>
+	<string>1158 33 445 82 0 0 1680 1027 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>486 55 924 485 0 0 1680 1027 </string>
+	<string>486 57 924 485 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>212 160 953 791 0 0 1680 1027 </string>
+	<string>17 11 1601 1016 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>111 292 825 401 0 0 1680 1027 </string>
+	<string>28 26 1601 1001 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
 	<string>439 461 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
@@ -551,7 +638,7 @@
 	<key>NSWindow Frame iTerm Window 13</key>
 	<string>492 78 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>404 166 825 401 0 0 1680 1027 </string>
+	<string>242 515 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>422 401 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
@@ -2095,7 +2182,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-01-30T15:35:22Z</date>
+	<date>2015-02-14T20:30:34Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
