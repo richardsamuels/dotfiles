@@ -61,23 +61,36 @@ NeoBundle 'godlygeek/tabular'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'jtratner/vim-flavored-markdown'
 
+NeoBundleLazy 'vim-ruby/vim-ruby', {
+            \ 'autoload': {
+            \   'filetypes': ['ruby'],
+            \ }}
+
 " Haskell
 NeoBundleLazy 'bitc/vim-hdevtools', {
-\ 'autoload': {
-\   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
-\ }}
+            \ 'autoload': {
+            \   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
+            \ }}
 
 NeoBundleLazy 'dag/vim2hs', {
-\ 'autoload': {
-\   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
-\ }}
+            \ 'autoload': {
+            \   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
+            \ }}
+
+" HTML/CSS
+NeoBundleLazy 'mattn/emmet-vim', {
+            \ 'autoload' : {
+            \   'filetypes': ['html', 'css'],
+            \ }}
 
 " Airline
 NeoBundle 'bling/vim-airline'
+
 NeoBundleLazy 'edkolev/promptline.vim', {
             \ 'depends': 'bling/vim-airline',
             \ 'commands': [{'name': ['PromptlineSnapshot']}],
             \ }
+
 NeoBundleLazy 'edkolev/tmuxline.vim', {
             \ 'depends': 'bling/vim-airline',
             \ 'commands': [{'name': ['TmuxlineSnapshot', 'Tmuxline']}],
@@ -86,8 +99,17 @@ NeoBundleLazy 'edkolev/tmuxline.vim', {
 " Startup Page
 NeoBundle 'mhinz/vim-startify'
 
+" toml
+NeoBundleLazy 'cespare/vim-toml', {
+            \ 'autoload' : {
+            \   'filetypes' : ['toml'],
+            \ }}
+
 " Rust
-NeoBundle 'wting/rust.vim'
+NeoBundleLazy 'wting/rust.vim', {
+            \ 'autoload' : {
+            \   'filetypes' : ['rust'],
+            \ }}
 
 " }}}
 " Required:
@@ -425,4 +447,5 @@ let g:startify_custom_header = s:center_header(split(system('shuf -n 1 ~/dotfile
 " =============================================================================
 
 " Save buffers on lost focus
-" :au FocusLost * :wa
+au FocusLost * :wa
+autocmd FileType html,css EmmetInstall
