@@ -1,7 +1,7 @@
 #Editor
 export EDITOR="vim"
 export VISUAL="vim"
-export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -c 'nnoremap q <Nop>' -c 'nnoremap q :q!<Enter>' -\""
+export MANPAGER="export VIM_TINY=1; /bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -c 'nnoremap q <Nop>' -c 'nnoremap q :q!<Enter>' -\""
 
 # Language & Locale Settings
 if [[ -z "$LANG" ]]; then
