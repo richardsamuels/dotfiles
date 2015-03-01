@@ -32,13 +32,13 @@ setopt AUTO_PUSHD
 # Load the appropriate Prompt and LS COLORS
 if [[ -z $ITERM_PROFILE ]]; then
     source ~/dotfiles/zsh/airline-dark
-    eval `dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-dark`
+    eval $(TERM=xterm-256color dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-dark)
 elif [[ $ITERM_PROFILE == "Solarized Dark" ]]; then
     source ~/dotfiles/zsh/airline-dark
-    eval `dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-dark`
+    eval $(TERM=xterm-256color dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-dark)
 elif [[ $ITERM_PROFILE == "Solarized Light" ]]; then
     source ~/dotfiles/zsh/airline-light
-    eval `dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-light`
+    eval $(TERM=xterm-256color dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-light)
 fi;
 
 #ZSH Tab Completion Colors
