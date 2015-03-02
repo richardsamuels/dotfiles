@@ -15,3 +15,6 @@ Host    aselia
 Host    pdc
     HostName    pdc-amd01.poly.edu
     User        rms521
+Host    prog
+    HostName    kimota.net
+    User        rms521
