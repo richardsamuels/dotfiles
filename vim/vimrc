@@ -57,6 +57,9 @@ endif
 " Automatic tabbing
 NeoBundle 'godlygeek/tabular'
 
+" Surround
+NeoBundle 'tpope/vim-surround'
+
 " Markdown Plugins
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'jtratner/vim-flavored-markdown'
