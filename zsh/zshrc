@@ -43,6 +43,7 @@ fi;
 
 #ZSH Tab Completion Colors
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+zstyle ':completion:*' matcher-list 'r:[[:ascii:]]||[[:ascii:]]=** r:|=* m:{a-z\-}={A-Z\_}'
 autoload -Uz compinit
 compinit
 
