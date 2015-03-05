@@ -149,8 +149,11 @@ set relativenumber
 set number
 
 " =============================================================================
-" 5 syntax, highlighting and spelling
+" 5 syntax, highlighting and spell>ng
 " =============================================================================
+
+colorscheme solarized
+call togglebg#map("<F5>")
 
 " File-type highlighting and configuration.
 " Run :filetype (without args) to see what you may have
@@ -161,7 +164,6 @@ filetype plugin on
 filetype indent on
 
 " Colourisation Settings
-
 set t_Co=256
 
 " Set background based on iTerm theme
@@ -171,12 +173,12 @@ else
     set background=dark
 endif
 
-colorscheme solarized
-
 " Spellcheck
 set spell
 set spelllang=en_gb
 set spellfile=~/dotfiles/vim/vimspellfile.utf-8.add
+hi clear SpellBad
+hi SpellBad cterm=underline gui=underline
 
 " Line at 100 chars
 set colorcolumn=100
@@ -368,14 +370,14 @@ set wildmode=list:longest
 " 27.1 OS X
 " ----------------------------------------------------------------------------
 
-" if (system('uname') =~? "Darwin")
+if (system('uname') =~? "Darwin")
     " OS X clipboard. Only fixes macvim, not the standard vim build
     set clipboard=unnamed
 
     " Enables double-width characters (this is an iTerm Compatibility thing
     " for when double-width characters are enabled)
     " set ambiwidth=double
-" endif
+endif
 
 " =============================================================================
 " 28 Plugin Settings 
@@ -419,13 +421,13 @@ let g:tmuxline_preset = 'full'
 let g:tmuxline_theme = 'airline'
 
 " -----------------------------------------------------------------------------
-" 28.2 Syntastic and YouCompleteMe i
+" 28.2 Syntastic and YouCompleteMe
 " -----------------------------------------------------------------------------
 
 " Enable C++11 Support for Syntastic
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-Wall -std=c++11 -stdlib=libc++'
-let g:ycm_global_ycm_extra_conf = '~/dotfiles/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 " -----------------------------------------------------------------------------
 " 28.3 Startify
