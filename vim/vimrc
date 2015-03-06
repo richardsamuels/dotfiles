@@ -47,7 +47,7 @@ if (system('uname') =~? "Darwin")
     " YCM for Fuzzy Code Completion
     NeoBundle 'Valloric/YouCompleteMe', {
     \ 'build' : {
-    \     'mac' : './install.sh --clang-completer',
+    \     'mac' : 'git submodule update --init --recursive && ./install.sh --clang-completer --system-libclang' ,
     \     'linux' : './install.sh --clang-completer',
     \     'unix' : './install.sh --clang-completer',
     \    },
