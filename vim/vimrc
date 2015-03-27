@@ -427,7 +427,7 @@ let g:tmuxline_theme = 'airline'
 " Enable C++11 Support for Syntastic
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-Wall -std=c++11 -stdlib=libc++'
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/ycm_cpp11.py'
 
 " -----------------------------------------------------------------------------
 " 28.3 Startify
