@@ -45,14 +45,26 @@ NeoBundle 'altercation/vim-colors-solarized'
 "NeoBundle 'scrooloose/syntastic'
 
 if (system('uname') =~? "Darwin")
-    " YCM for Fuzzy Code Completion
+    " YCM for Code Completion
     NeoBundle 'Valloric/YouCompleteMe', {
-    \ 'build' : {
-    \     'mac' : 'git submodule update --init --recursive && ./install.sh --clang-completer --system-libclang' ,
-    \     'linux' : './install.sh --clang-completer',
-    \     'unix' : './install.sh --clang-completer',
-    \    },
-    \ }
+                \ 'build' : {
+                \     'mac' : './install.sh --clang-completer --system-libclang' ,
+                \     'linux' : './install.sh --clang-completer',
+                \     'unix' : './install.sh --clang-completer'
+                \    }
+                \ }
+
+    " Enhanced colouring for C family of languages
+    NeoBundleLazy 'jeaye/color_coded', {
+                \ 'build' : {
+                \     'unix' : 'cmake . && make && make install'
+                \ },
+                \ 'autoload' : { 
+                \       'filetypes' : ['c', 'cpp', 'objc', 'objcpp'] 
+                \ },
+                \ 'build_commands' : ['cmake', 'make']
+                \}   
+       
 endif
 
 " Automatic tabbing
@@ -65,6 +77,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'jtratner/vim-flavored-markdown'
 
+" Ruby
 NeoBundleLazy 'vim-ruby/vim-ruby', {
             \ 'autoload': {
             \   'filetypes': ['ruby'],
@@ -311,10 +324,10 @@ noremap <right> <nop>
 cmap w!! w !sudo tee > /dev/null %
 
 " Sanity Preservation measures
-:cmap WQ wq
-:cmap Wq wq
-:cmap W w
-:cmap Q q
+cmap WQ wq
+cmap Wq wq
+cmap W w
+cmap Q q
 
 " Fuck :X
 cnoremap <expr> X (getcmdtype() is# ':' && empty(getcmdline())) ? 'x' : 'X'
@@ -444,12 +457,20 @@ let g:tmuxline_theme = 'airline'
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-Wall -std=c++11 -stdlib=libc++'
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/ycm_cpp11.py'
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " -----------------------------------------------------------------------------
 " 28.3 Startify
 " -----------------------------------------------------------------------------
 
-let g:startify_bookmarks = [ '~/dotfiles/vim/vimrc', '~/dotfiles/zsh/zshrc', '~/dotfiles/zsh/zshenv', '~/dotfiles/zsh/MyAntigen.hs', '~/dotfiles/tmux/tmux.conf']
+let g:startify_bookmarks = [ 
+            \   '~/dotfiles/vim/vimrc', 
+            \   '~/dotfiles/zsh/zshrc', 
+            \   '~/dotfiles/zsh/zshenv', 
+            \   '~/dotfiles/zsh/MyAntigen.hs', 
+            \   '~/dotfiles/tmux/tmux.conf'
+            \ ]
 
 function s:center_header(lines) abort
     let longest_line   = max(map(copy(a:lines), 'len(v:val)'))
