@@ -18,7 +18,7 @@ bundles =
   [ 
   --bundle "Tarrasch/zsh-functional"
     bundle "Tarrasch/zsh-bd"
-  , bundle "zsh-users/zsh-history-substring-search"
+ -- , bundle "zsh-users/zsh-history-substring-search"
   , bundle "zsh-users/zsh-syntax-highlighting"
   , (bundle "jimeh/tmuxifier") { sourcingStrategy = antigenSourcingStrategy }
   , (bundle "robbyrussell/oh-my-zsh")
