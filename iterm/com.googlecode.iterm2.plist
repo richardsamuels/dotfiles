@@ -456,7 +456,7 @@
 	<key>DimBackgroundWindows</key>
 	<false/>
 	<key>DimInactiveSplitPanes</key>
-	<true/>
+	<false/>
 	<key>DimOnlyText</key>
 	<false/>
 	<key>DisableFullscreenTransparency</key>
@@ -537,11 +537,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1158 33 445 82 0 0 1680 1027 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>544 144 924 485 0 0 1680 1050 </string>
+	<string>544 138 924 485 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>14 615 825 401 0 0 1680 1027 </string>
+	<string>354 444 1105 506 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>90 449 1585 566 0 0 1680 1027 </string>
+	<string>527 491 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
 	<string>439 461 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
@@ -551,15 +551,15 @@
 	<key>NSWindow Frame iTerm Window 13</key>
 	<string>492 78 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>242 515 825 401 0 0 1680 1027 </string>
+	<string>518 43 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>157 56 1521 971 0 0 1680 1027 </string>
+	<string>153 626 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>379 497 825 401 0 0 1680 1027 </string>
+	<string>750 626 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
 	<string>282 165 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
-	<string>334 444 937 566 0 0 1680 1027 </string>
+	<string>334 609 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
 	<string>342 36 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 8</key>
@@ -2095,10 +2095,12 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-02-25T18:58:27Z</date>
+	<date>2015-04-16T15:23:05Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
+	<false/>
+	<key>ShowFullScreenTabBar</key>
 	<false/>
 	<key>ShowPaneTitles</key>
 	<true/>
@@ -2137,6 +2139,6 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>2.0.0.20141103</string>
+	<string>2.0.0.20150412</string>
 </dict>
 </plist>
