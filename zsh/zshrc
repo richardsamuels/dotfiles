@@ -28,6 +28,15 @@ genpass() {
     fi
 }
 
+# Given author name, calculate contributions
+gitcalc() {
+    if [ -n "$1" ]; then
+        git log --shortstat --author "$1" | grep "files\? changed" | awk '{files+=$1; inserted+=$4; deleted+=$6} END {print "files changed", files, "lines inserted:", inserted, "lines deleted:", deleted}'
+    else
+        echo "need author name"
+    fi
+}
+
 
 
 # Set auto pushd
