@@ -20,11 +20,15 @@ export CLICOLOR=1
 # genpass n
 # where n is the number of bytes, try and generate a password up to n bytes
 genpass() {
-    if [ $@ != "" ]; then
-        TEMP=`LC_ALL=C tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' < /dev/random | head -c "$@"`
+    if [ -n "$1" ]; then
+        TEMP=`LC_ALL=C tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' < /dev/random | head -c "$1"`
         echo $TEMP
+    else
+        echo "need number of bytes"
     fi
 }
+
+
 
 # Set auto pushd
 setopt AUTO_PUSHD
