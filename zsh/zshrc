@@ -22,7 +22,7 @@ export CLICOLOR=1
 genpass() {
     if [ $@ != "" ]; then
         TEMP=`LC_ALL=C tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' < /dev/random | head -c "$@"`
-        echo $TEM
+        echo $TEMP
     fi
 }
 
@@ -77,4 +77,13 @@ alias l=$LS_DEFAULT
 which thefuck &>/dev/null
 if [ $? != 0 ]; then
     alias fuck='sudo $(fc -ln -1)'
+fi
+
+setopt SHARE_HISTORY
+
+SAVEHIST=1000
+if (( ! EUID )); then
+  export HISTFILE=~/.history_root
+else
+  export HISTFILE=~/.history
 fi
