@@ -537,11 +537,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1158 33 445 82 0 0 1680 1027 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>544 138 924 485 0 0 1680 1027 </string>
+	<string>1177 237 924 485 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>354 444 1105 506 0 0 1680 1027 </string>
+	<string>165 1016 825 401 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>527 491 825 401 0 0 1680 1027 </string>
+	<string>112 604 825 423 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
 	<string>439 461 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
@@ -551,7 +551,7 @@
 	<key>NSWindow Frame iTerm Window 13</key>
 	<string>492 78 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>518 43 825 401 0 0 1680 1027 </string>
+	<string>680 119 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>153 626 825 401 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
@@ -798,7 +798,7 @@
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
-			<string>No</string>
+			<string>Recycle</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Disable Printing</key>
@@ -2095,7 +2095,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-04-16T15:23:05Z</date>
+	<date>2015-05-12T01:11:08Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -2139,6 +2139,6 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>2.0.0.20150412</string>
+	<string>2.1</string>
 </dict>
 </plist>
