@@ -74,7 +74,7 @@ NeoBundle 'godlygeek/tabular'
 NeoBundle 'tpope/vim-surround'
 
 " Markdown Plugins
-NeoBundle 'plasticboy/vim-markdown'
+" NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'jtratner/vim-flavored-markdown'
 
 " Ruby
@@ -254,6 +254,9 @@ set ttymouse=xterm2
 
 set guifont=Anonymice\ Powerline:h14
 
+" Dialogs show up in the console
+set guioptions+=c
+
 " =============================================================================
 " 11 printing
 " =============================================================================
@@ -344,6 +347,9 @@ inoremap jk <Esc>
 
 " Disable EX mode
 :map Q <Nop>
+
+" Disable search highlights when exiting search
+nnoremap <esc> :let @/ = ""<return><esc>
 
 " =============================================================================
 " 19 reading and writing files
