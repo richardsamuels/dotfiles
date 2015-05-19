@@ -10,19 +10,19 @@ LOCKFILE="/tmp/dotfiles-commit"
 if [ ! -f $LOCKFILE ]; then
 	MOD=false
 
-        if [ $(cat $GIT_DIR/../dotbomb/.gitconfig | openssl md5) != "$(cat ~/.gitconfig | openssl md5)" ]; then 
+        if [ "$(cat $GIT_DIR/../dotbomb/.gitconfig | openssl md5)" != "$(cat ~/.gitconfig | openssl md5)" ]; then 
 		MOD=true
 		echo ".gitconfig modified\n"
 	fi
-        if [ $(cat $GIT_DIR/../dotbomb/.tmux.conf | openssl md5) != "$(cat ~/.tmux.conf | openssl md5)" ]; then 
+        if [ "$(cat $GIT_DIR/../dotbomb/.tmux.conf | openssl md5)" != "$(cat ~/.tmux.conf | openssl md5)" ]; then 
 		MOD=true
 		echo ".tmux.conf modified\n"
 	fi
-        if [ $(cat $GIT_DIR/../dotbomb/.vimrc | openssl md5) != "$(cat ~/.vimrc | openssl md5)" ]; then 
+        if [ "$(cat $GIT_DIR/../dotbomb/.vimrc | openssl md5)" != "$(cat ~/.vimrc | openssl md5)" ]; then 
 		MOD=true
 		echo ".vimrc modified\n"
 	fi
-        if [ $(cat $GIT_DIR/../dotbomb/.zshrc | openssl md5) != "$(cat ~/.zshrc | openssl md5)" ]; then 
+        if [ "$(cat $GIT_DIR/../dotbomb/.zshrc | openssl md5)" != "$(cat ~/.zshrc | openssl md5)" ]; then 
 		MOD=true
 		echo ".zshrc modified\n"
 	fi 
