@@ -4,12 +4,12 @@ Host	raia
 Host    raia.local
     HostName        raia.local
     User            raia
-Host    aselia.aninakuna.com
-    HostName    aselia.aninakuna.com
+Host    appledore.aselia.me
+    HostName    appledore.aselia.me
     User        rsamuels
     SendEnv     ITERM_PROFILE
 Host    aselia
-    HostName    aselia.aninakuna.com
+    HostName    appledore.aselia.me
     User        rsamuels
     SendEnv     ITERM_PROFILE
 Host    pdc
