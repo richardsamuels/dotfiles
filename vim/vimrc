@@ -1,6 +1,8 @@
 " =============================================================================
-" 0 Neobundle Setup 
+" 0 Neobundle Setup
 " =============================================================================
+" {{{
+" Neobundle Initialisation Cruft {{{
 if !1 | finish | endif
 if has('vim_starting')
     if &compatible
@@ -15,7 +17,7 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
-" Required:
+" Neobundle Fetch:
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc.vim', {
 \ 'build' : {
@@ -30,21 +32,27 @@ NeoBundle 'Shougo/vimproc.vim', {
 " Add or remove your Bundles here:
 "NeoBundle 'Shougo/neosnippet.vim'
 "NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-commentary'
 "NeoBundle 'ctrlpvim/ctrlp.vim'
 "NeoBundle 'flazz/vim-colorschemes'
 
 " You can specify revision/branch/tag.
 "NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+" }}}
+
+" Git Plugin
+NeoBundle 'tpope/vim-fugitive'
+
+" Commenting Plugins {{{
+NeoBundle 'tpope/vim-commentary'
+NeoBundle 'vim-scripts/comments.vim'
+" }}}
 
 " Solarised Color Scheme
 NeoBundle 'altercation/vim-colors-solarized'
 
-" Syntastic code competion, replaced by YCM
-"NeoBundle 'scrooloose/syntastic'
 
-if (system('uname') =~? "Darwin")
+" Development Specific Plugins (Darwin or when $RS_DEV==true) {{{
+if (system('uname') =~? "Darwin" || $RS_DEV == "true")
     " YCM for Code Completion
     NeoBundle 'Valloric/YouCompleteMe', {
                 \ 'build' : {
@@ -53,6 +61,8 @@ if (system('uname') =~? "Darwin")
                 \     'unix' : './install.sh --clang-completer'
                 \    }
                 \ }
+    " Syntastic code competion, replaced by YCM
+    NeoBundle 'scrooloose/syntastic'
 
     " Enhanced colouring for C family of languages
     NeoBundleLazy 'jeaye/color_coded', {
@@ -64,42 +74,24 @@ if (system('uname') =~? "Darwin")
                 \ },
                 \ 'build_commands' : ['cmake', 'make']
                 \}   
-       
-endif
 
-" Automatic tabbing
+    NeoBundle 'Quramy/tsuquyomi'
+endif
+" }}}
+
+" Indentation Guidelines
+NeoBundle 'Yggdroot/indentLine'
+
+" Magical tabularisation
 NeoBundle 'godlygeek/tabular'
 
 " Surround
 NeoBundle 'tpope/vim-surround'
 
-" Markdown Plugins
-" NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'jtratner/vim-flavored-markdown'
+" Startup Page
+NeoBundle 'mhinz/vim-startify'
 
-" Ruby
-NeoBundleLazy 'vim-ruby/vim-ruby', {
-            \ 'autoload': {
-            \   'filetypes': ['ruby'],
-            \ }}
-
-" Haskell
-NeoBundleLazy 'bitc/vim-hdevtools', {
-            \ 'autoload': {
-            \   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
-            \ }}
-
-NeoBundleLazy 'dag/vim2hs', {
-            \ 'autoload': {
-            \   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
-            \ }}
-
-" HTML/CSS
-NeoBundleLazy 'mattn/emmet-vim', {
-            \ 'autoload' : {
-            \   'filetypes': ['html', 'css'],
-            \ }}
-
+" Airline {{{
 " Airline
 NeoBundle 'bling/vim-airline'
 
@@ -112,17 +104,56 @@ NeoBundleLazy 'edkolev/tmuxline.vim', {
             \ 'depends': 'bling/vim-airline',
             \ 'commands': [{'name': ['TmuxlineSnapshot', 'Tmuxline']}],
             \ }
+" }}}
 
-" Startup Page
-NeoBundle 'mhinz/vim-startify'
+" Language Specific Plugins {{{
 
-" toml
+" Typescript {{{
+NeoBundle 'leafgarland/typescript-vim'
+" }}}
+
+" toml {{{
 NeoBundleLazy 'cespare/vim-toml', {
             \ 'autoload' : {
             \   'filetypes' : ['toml'],
             \ }}
+" }}}
 
-" Rust
+" Markdown Plugins {{{
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'jtratner/vim-flavored-markdown'
+" }}}
+
+" Ruby {{{
+NeoBundleLazy 'vim-ruby/vim-ruby', {
+            \ 'autoload': {
+            \   'filetypes': ['ruby'],
+            \ }}
+" }}}
+
+" Haskell {{{
+if executable("hdevtools")
+    " Haskell
+    NeoBundleLazy 'bitc/vim-hdevtools', {
+                \ 'autoload': {
+                \   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
+                \ }}
+
+    NeoBundleLazy 'dag/vim2hs', {
+                \ 'autoload': {
+                \   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
+                \ }}
+endif
+" }}}
+
+" HTML/CSS {{{
+NeoBundleLazy 'mattn/emmet-vim', {
+            \ 'autoload' : {
+            \   'filetypes': ['html', 'css'],
+            \ }}
+" }}}
+
+" Rust {{{
 " NeoBundleLazy 'phildawes/racer', {
 "             \ 'build': {
 "             \   'mac': 'cargo build --release',
@@ -137,12 +168,14 @@ NeoBundleLazy 'wting/rust.vim', {
             \ 'autoload' : {
             \   'filetypes' : ['rust'],
             \ }}
+"}}}
 
-" YAML
+" YAML {{{
 NeoBundleLazy 'avakhov/vim-yaml', {
             \ 'autoload' : {
             \   'filetypes' : ['yaml'],
             \ }}
+" }}}
 " }}}
 " Required:
 call neobundle#end()
@@ -150,15 +183,15 @@ call neobundle#end()
 filetype plugin indent on    " required
 
 NeoBundleCheck
-
+" }}}
 " =============================================================================
 " 1 important
 " =============================================================================
 " =============================================================================
 " 2 moving around, searching and patterns
 " =============================================================================
-
-set incsearch "highlight dynamically as they are typed.
+" {{{
+set incsearch " highlight dynamically as they are typed.
 
 " Case insensitive search, except when using *
 set ignorecase
@@ -166,7 +199,7 @@ set smartcase
 
 " Enhanced % matching
 runtime macros/matchit.vim
-
+" }}}
 " =============================================================================
 " 3 tags
 " =============================================================================
@@ -178,9 +211,9 @@ set relativenumber
 set number
 
 " =============================================================================
-" 5 syntax, highlighting and spell>ng
+" 5 syntax, highlighting and spelling
 " =============================================================================
-
+" {{{
 colorscheme solarized
 call togglebg#map("<F5>")
 
@@ -217,7 +250,7 @@ set showbreak=↪
 
 " Highlight search matches
 set hlsearch
-
+"}}}
 " =============================================================================
 " 6 multiple windows
 " =============================================================================
@@ -310,7 +343,7 @@ set nofoldenable
 " =============================================================================
 " 18 mapping
 " =============================================================================
-
+" {{{
 " Because our lord demands it:
 " Vim. Live it. ------------------------------------------------------- {{{
 inoremap <up> <nop>
@@ -338,16 +371,17 @@ cnoremap <expr> X (getcmdtype() is# ':' && empty(getcmdline())) ? 'x' : 'X'
 " Disable auto-comment
 noremap <expr> <enter> getline('.') =~ '^\s*//' ? '<enter><esc>S' : '<ente    r>'
 
-" Fixes auto comment with O keys
+" Fixes auto comment with O keys {{{
 nnoremap <expr> O getline('.') =~ '^\s*//' ? 'O<esc>S' : 'O'
 noremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
+" }}}
 
 " Disable EX mode
 :map Q <Nop>
 
 " Disable search highlights when exiting search
-nnoremap <esc> :let @/ = ""<return><esc>
-
+" nnoremap <esc> :let @/ = ""<return><esc>
+"}}}
 " =============================================================================
 " 19 reading and writing files
 " =============================================================================
@@ -359,8 +393,8 @@ nnoremap <esc> :let @/ = ""<return><esc>
 set autoread
 
 " Backup and swap directories
-set backupdir=/var/tmp,/tmp
-set directory=/var/tmp,/tmp
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
 
 " =============================================================================
 " 21 command line editing
@@ -419,11 +453,7 @@ endif
 " 28.1 Airline, Promptline, Tmuxline
 " -----------------------------------------------------------------------------
 
-" Powerline Symbols
-" if !exists('g:airline_symbols')
-"     let g:airline_symbols = {}
-" endif
-
+" Airline {{{
 let g:Powerline_symbols = 'fancy'
 let g:airline_powerline_fonts = 1
 
@@ -438,8 +468,9 @@ let g:airline#extensions#branch#enabled = 1
 " put a buffer list at the top
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+" }}}
 
-" Promptline
+" Promptline {{{
 let g:promptline_theme = 'airline'
 let g:promptline_preset = {
         \'a' : [ '$(if [ -z "$TMUX" ] && [ -n "$SSH_CLIENT" ] || [ -z "$TMUX" ] && [ -n "$SSH_TTY" ]; then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
@@ -447,10 +478,12 @@ let g:promptline_preset = {
         \'c' : [ promptline#slices#cwd() ],
         \'y' : [ promptline#slices#vcs_branch() ],
         \'warn' : [ promptline#slices#last_exit_code() ]}
+" }}}
 
-" Tmuxline
+" Tmuxline {{{
 let g:tmuxline_preset = 'full'
 let g:tmuxline_theme = 'airline'
+" }}}
 
 " -----------------------------------------------------------------------------
 " 28.2 Syntastic and YouCompleteMe
@@ -466,7 +499,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " -----------------------------------------------------------------------------
 " 28.3 Startify
 " -----------------------------------------------------------------------------
-
+" {{{
 let g:startify_bookmarks = [ 
             \   '~/dotfiles/vim/vimrc', 
             \   '~/dotfiles/zsh/zshrc', 
@@ -475,14 +508,15 @@ let g:startify_bookmarks = [
             \   '~/dotfiles/tmux/tmux.conf'
             \ ]
 
-function s:center_header(lines) abort
+function s:center_header(lines) abort " {{{
     let longest_line   = max(map(copy(a:lines), 'len(v:val)'))
     let centered_lines = map(copy(a:lines), 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
     return centered_lines
 endfunction
+" }}}
 
 let g:startify_custom_header = s:center_header(split(system('shuf -n 1 ~/dotfiles/vim/cow | cowthink'), '\n'))
-
+" }}}
 " =============================================================================
 " 29 Language Specific Fun-ness
 " =============================================================================
@@ -494,3 +528,17 @@ let g:startify_custom_header = s:center_header(split(system('shuf -n 1 ~/dotfile
 " Save buffers on lost focus
 au FocusLost * silent! wa
 autocmd FileType html,css EmmetInstall
+
+" From http://vim.wikia.com/wiki/Modeline_magic
+"
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+    let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+                \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+    let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+    call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+" vim: set foldmethod=marker ts=8 sw=4 tw=78 et :
