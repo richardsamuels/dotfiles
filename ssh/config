@@ -8,7 +8,7 @@ Host    appledore.aselia.me
     HostName    appledore.aselia.me
     User        rsamuels
     SendEnv     ITERM_PROFILE
-Host    aselia
+Host    appledore
     HostName    appledore.aselia.me
     User        rsamuels
     SendEnv     ITERM_PROFILE
