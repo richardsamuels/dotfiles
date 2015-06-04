@@ -301,7 +301,7 @@ set laststatus=2
 set title
 
 " But get rid of the "thanks for flying vim" bs
-set titleold=""
+set titleold="Really, this is better than Emacs. We Promise"
 
 " =============================================================================
 " 9 using the mouse
