@@ -39,17 +39,22 @@ NeoBundle 'Shougo/vimproc.vim', {
 "NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 " }}}
 
+" Misc Plugins {{{
 " Git Plugin
 NeoBundle 'tpope/vim-fugitive'
+
+" Startup Page
+NeoBundle 'mhinz/vim-startify'
+
+" Solarised Color Scheme
+NeoBundle 'altercation/vim-colors-solarized'
+
+" }}}
 
 " Commenting Plugins {{{
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'vim-scripts/comments.vim'
 " }}}
-
-" Solarised Color Scheme
-NeoBundle 'altercation/vim-colors-solarized'
-
 
 " Development Specific Plugins (Darwin or when $RS_DEV==true) {{{
 if (system('uname') =~? "Darwin" || $RS_DEV == "true")
@@ -75,21 +80,20 @@ if (system('uname') =~? "Darwin" || $RS_DEV == "true")
                 \ 'build_commands' : ['cmake', 'make']
                 \}   
 
-    NeoBundle 'Quramy/tsuquyomi'
+    " NeoBundle 'Quramy/tsuquyomi'
 endif
 " }}}
 
-" Indentation Guidelines
-NeoBundle 'Yggdroot/indentLine'
-
+" Helpful Commands {{{
 " Magical tabularisation
 NeoBundle 'godlygeek/tabular'
 
 " Surround
 NeoBundle 'tpope/vim-surround'
 
-" Startup Page
-NeoBundle 'mhinz/vim-startify'
+" Automatic sublime-style delimiters
+NeoBundle 'Raimondi/delimitMate'
+" }}}
 
 " Airline {{{
 " Airline
@@ -108,8 +112,24 @@ NeoBundleLazy 'edkolev/tmuxline.vim', {
 
 " Language Specific Plugins {{{
 
+" Javascript {{{
+
+" Indentation and Syntax support
+NeoBundle 'pangloss/vim-javascript'
+
+" JSON highlighting support
+NeoBundle 'elzr/vim-json'
+
+" Tern (auto-completion for JS)
+NeoBundleLazy 'marijnh/tern_for_vim', {
+            \ 'autoload' : {
+            \   'filetypes' : ['js'],
+            \ }}
+" }}}
+
 " Typescript {{{
 NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'clausreinke/typescript-tools.vim'
 " }}}
 
 " toml {{{
@@ -164,7 +184,7 @@ NeoBundleLazy 'mattn/emmet-vim', {
 "             \  }
 "             \  }
 
-NeoBundleLazy 'wting/rust.vim', {
+NeoBundleLazy 'rust-lang/rust.vim', {
             \ 'autoload' : {
             \   'filetypes' : ['rust'],
             \ }}
@@ -177,6 +197,15 @@ NeoBundleLazy 'avakhov/vim-yaml', {
             \ }}
 " }}}
 " }}}
+
+" Visual Helpers {{{
+" Indentation Guidelines
+NeoBundle 'Yggdroot/indentLine'
+
+" Rainbow Parens
+NeoBundle 'luochen1990/rainbow'
+" }}}
+
 " Required:
 call neobundle#end()
 
@@ -428,6 +457,7 @@ set wildmode=list:longest
 " =============================================================================
 " 26 various
 " =============================================================================
+set gdefault
 " =============================================================================
 " 27 Operating System Specific Settings 
 " =============================================================================
@@ -497,7 +527,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " -----------------------------------------------------------------------------
-" 28.3 Startify
+" 28.3 mhinz/vim-startify
 " -----------------------------------------------------------------------------
 " {{{
 let g:startify_bookmarks = [ 
@@ -517,6 +547,16 @@ endfunction
 
 let g:startify_custom_header = s:center_header(split(system('shuf -n 1 ~/dotfiles/vim/cow | cowthink'), '\n'))
 " }}}
+" -----------------------------------------------------------------------------
+" 28.4 elzr/vim-json
+" -----------------------------------------------------------------------------
+let g:vim_json_syntax_conceal = 0
+" -----------------------------------------------------------------------------
+" 28.5 luochen1990/rainbow
+" -----------------------------------------------------------------------------
+let g:rainbow_active = 1
+
+let g:typescript_indent_disable = 1
 " =============================================================================
 " 29 Language Specific Fun-ness
 " =============================================================================
