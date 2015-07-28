@@ -196,6 +196,27 @@ NeoBundleLazy 'avakhov/vim-yaml', {
             \   'filetypes' : ['yaml'],
             \ }}
 " }}}
+
+" Clojure {{{
+    " Syntax highlighting and indentation
+    NeoBundleLazy 'guns/vim-clojure-static', {
+                \ 'autoload' : {
+                \   'filetype' : ['clojure'],
+                \}}
+
+    " Leiningen
+    NeoBundleLazy 'tpope/vim-salve', {
+                \ 'autoload' : {
+                \   'filetype' : ['clojure'],
+                \}}
+
+    " REPL in vim
+    NeoBundleLazy 'tpope/vim-fireplace', {
+                \ 'autoload' : {
+                \   'filetype' : ['clojure'],
+                \}}
+" }}}
+
 " }}}
 
 " Visual Helpers {{{
