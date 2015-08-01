@@ -220,11 +220,22 @@ NeoBundleLazy 'avakhov/vim-yaml', {
 " }}}
 
 " Visual Helpers {{{
+
+" Split manager
+NeoBundle 'zhaocai/GoldenView.Vim'
+
 " Indentation Guidelines
 NeoBundle 'Yggdroot/indentLine'
 
 " Rainbow Parens
 NeoBundle 'luochen1990/rainbow'
+" }}}
+
+" NerdTREE {{{
+NeoBundle 'scrooloose/nerdtree'
+
+" git markers in nerdtree
+NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 " }}}
 
 " Required:
@@ -434,6 +445,28 @@ noremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
 
 " Disable search highlights when exiting search
 " nnoremap <esc> :let @/ = ""<return><esc>
+
+" GoldenView {{{
+" 1. split to tiled windows
+nmap <silent> <C-L>  <Plug>GoldenViewSplit
+
+" 2. quickly switch current window with the main pane
+" and toggle back
+nmap <silent> <F8>   <Plug>GoldenViewSwitchMain
+nmap <silent> <S-F8> <Plug>GoldenViewSwitchToggle
+
+" 3. jump to next and previous window
+nmap <silent> <C-N>  <Plug>GoldenViewNext
+nmap <silent> <C-P>  <Plug>GoldenViewPrevious
+" }}}
+
+" Split Navigation {{{
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+" }}}
+
 "}}}
 " =============================================================================
 " 19 reading and writing files
@@ -608,5 +641,6 @@ function! AppendModeline()
     let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
     call append(line("$"), l:modeline)
 endfunction
+
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " vim: set foldmethod=marker ts=8 sw=4 tw=78 et :
