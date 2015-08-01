@@ -43,6 +43,8 @@ elif [ `uname` = "Darwin" ]; then
     fi
 
     if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+    export SSH_AUTH_SOCK=$(launchctl getenv SSH_AUTH_SOCK)
 fi
 
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
