@@ -99,12 +99,12 @@ NeoBundle 'Raimondi/delimitMate'
 " Airline
 NeoBundle 'bling/vim-airline'
 
-NeoBundleLazy 'edkolev/promptline.vim', {
+NeoBundle 'edkolev/promptline.vim', {
             \ 'depends': 'bling/vim-airline',
             \ 'commands': [{'name': ['PromptlineSnapshot']}],
             \ }
 
-NeoBundleLazy 'edkolev/tmuxline.vim', {
+NeoBundle 'edkolev/tmuxline.vim', {
             \ 'depends': 'bling/vim-airline',
             \ 'commands': [{'name': ['TmuxlineSnapshot', 'Tmuxline']}],
             \ }
@@ -212,6 +212,12 @@ NeoBundleLazy 'avakhov/vim-yaml', {
 
     " REPL in vim
     NeoBundleLazy 'tpope/vim-fireplace', {
+                \ 'autoload' : {
+                \   'filetype' : ['clojure'],
+                \}}
+
+    " Better Clojure highlighting
+    NeoBundleLazy 'guns/vim-clojure-highlight', {
                 \ 'autoload' : {
                 \   'filetype' : ['clojure'],
                 \}}
@@ -447,8 +453,10 @@ noremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
 " nnoremap <esc> :let @/ = ""<return><esc>
 
 " GoldenView {{{
+let g:goldenview__enable_default_mapping = 0
+
 " 1. split to tiled windows
-nmap <silent> <C-L>  <Plug>GoldenViewSplit
+nmap <silent> <S-L>  <Plug>GoldenViewSplit
 
 " 2. quickly switch current window with the main pane
 " and toggle back
