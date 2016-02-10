@@ -4,9 +4,9 @@
 scriptencoding utf-8
 
 " =============================================================================
-" 0 Neobundle Setup
+" 0 Vim-Plug Setup
 " =============================================================================
-
+" {{{
 call plug#begin('~/.vim/plugged')
 
 " Misc Plugins {{{
@@ -19,6 +19,8 @@ Plug 'mhinz/vim-startify'
 " Solarised Color Scheme
 Plug 'altercation/vim-colors-solarized'
 
+" Makes vim respond well as a pager Test
+Plug 'rkitover/vimpager'
 " }}}
 
 " Commenting Plugins {{{
@@ -27,21 +29,26 @@ Plug 'vim-scripts/comments.vim'
 " }}}
 
 " Development Specific Plugins (Darwin or when $RS_DEV==true) {{{
-if (system('uname') =~? "Darwin" || $RS_DEV == "true")
-    " YCM for Code Completion
-    Plug 'Valloric/YouCompleteMe', { 
-                \ 'do' : './install.py --clang-completer --tern-completer --racer-completer --gocode-completer'
-                \ }
-    " Syntastic code competion, replaced by YCM
-    Plug 'scrooloose/syntastic'
+if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
+    if ( $WORK_MODE == "true")
+        Plug 'Shougo/neocomplete.vim'
 
-    " Enhanced colouring for C family of languages
-    Plug 'jeaye/color_coded', {
-                \ 'do' : 'cmake . && make && make install',
-                \ 'for' : ['c', 'cpp', 'objc', 'objcpp']
-                \ }
+    else
+        " YCM for Code Completion
+        Plug 'Valloric/YouCompleteMe', {
+                    \ 'do' : './install.py --clang-completer --tern-completer --racer-completer --gocode-completer'
+                    \ }
+        " Syntastic code competion, replaced by YCM
+        Plug 'scrooloose/syntastic'
 
-    " Plug 'Quramy/tsuquyomi'
+        " Enhanced colouring for C family of languages
+        Plug 'jeaye/color_coded', {
+                    \ 'do' : 'cmake . && make && make install',
+                    \ 'for' : ['c', 'cpp', 'objc', 'objcpp']
+                    \ }
+
+        "Plug 'Quramy/tsuquyomi'
+    endif
 endif
 " }}}
 
@@ -58,7 +65,8 @@ Plug 'Raimondi/delimitMate'
 
 " Airline {{{
 " Airline
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
 
 "Plug 'edkolev/promptline.vim', {
 "            \ 'on': 'PromptlineSnapshot'
@@ -72,7 +80,6 @@ Plug 'bling/vim-airline'
 " Language Specific Plugins {{{
 
 " Javascript {{{
-
 " Indentation and Syntax support
 Plug 'pangloss/vim-javascript'
 
@@ -80,10 +87,14 @@ Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
 
 " Tern (auto-completion for JS)
-Plug 'marijnh/tern_for_vim', {
-            \ 'for' : 'js'
-            \ }
+if ( executable("tern") )
+    Plug 'marijnh/tern_for_vim', {
+                \ 'for' : ['js']
+                \ }
+endif
 " }}}
+
+if ( $WORK_MODE != "true" )
 
 " Typescript {{{
 Plug 'leafgarland/typescript-vim'
@@ -92,7 +103,7 @@ Plug 'clausreinke/typescript-tools.vim'
 
 " toml {{{
 Plug 'cespare/vim-toml', {
-            \ 'for' : 'toml',
+            \ 'for' : ['toml']
             \ }
 " }}}
 
@@ -101,14 +112,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
 " }}}
 
-" Ruby {{{
-Plug 'vim-ruby/vim-ruby', {
-            \ 'for': 'ruby',
-            \ }
-" }}}
-
 " Haskell {{{
-if executable("hdevtools")
+if ( executable("hdevtools") )
     " Haskell
     Plug 'bitc/vim-hdevtools', {
                 \ 'for': ['haskell', 'lhaskell', 'chaskell'],
@@ -137,37 +142,53 @@ Plug 'mattn/emmet-vim', {
 "             \  }
 "             \  }
 
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', {
+            \ 'for': ['rust'],
+            \ }
+}
 "}}}
 
-" YAML {{{
-Plug 'avakhov/vim-yaml', {
-            \ 'for' : 'yaml',
+" Clojure {{{
+" Syntax highlighting and indentation
+Plug 'guns/vim-clojure-static', {
+            \ 'for' : 'clojure',
+            \ }
+
+" Leiningen
+Plug 'tpope/vim-salve', {
+            \ 'for' : 'clojure',
+            \ }
+
+" REPL in vim
+Plug 'tpope/vim-fireplace', {
+            \ 'for' : 'clojure',
+            \ }
+
+" Better Clojure highlighting
+Plug 'guns/vim-clojure-highlight', {
+            \ 'for' : 'clojure',
             \ }
 " }}}
 
-" Clojure {{{
-    " Syntax highlighting and indentation
-    Plug 'guns/vim-clojure-static', {
-                \ 'for' : 'clojure',
-                \ }
+endif
 
-    " Leiningen
-    Plug 'tpope/vim-salve', {
-                \ 'for' : 'clojure',
-                \ }
-
-    " REPL in vim
-    Plug 'tpope/vim-fireplace', {
-                \ 'for' : 'clojure',
-                \ }
-
-    " Better Clojure highlighting
-    Plug 'guns/vim-clojure-highlight', {
-                \ 'for' : 'clojure',
-                \ }
+" YAML {{{
+Plug 'avakhov/vim-yaml', {
+            \ 'for' : ['yaml'],
+            \ }
 " }}}
 
+" Ruby {{{
+Plug 'vim-ruby/vim-ruby', {
+            \ 'for': ['ruby']
+            \ }
+" }}}
+
+" Perl 5 {{{
+Plug 'vim-perl/vim-perl', {
+            \ 'for' : ['perl']
+            \ }
+" }}}
 " }}}
 
 " Visual Helpers {{{
@@ -177,6 +198,9 @@ Plug 'zhaocai/GoldenView.Vim'
 
 " Indentation Guidelines
 Plug 'Yggdroot/indentLine'
+
+" Reveals trailing whitespace
+Plug 'ntpeters/vim-better-whitespace'
 
 " Rainbow Parens
 Plug 'luochen1990/rainbow'
@@ -189,7 +213,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 " }}}
 
-" Required:
 call plug#end()
 
 filetype plugin indent on    " required
@@ -198,6 +221,7 @@ filetype plugin indent on    " required
 " =============================================================================
 " 1 important
 " =============================================================================
+
 " =============================================================================
 " 2 moving around, searching and patterns
 " =============================================================================
@@ -211,14 +235,18 @@ set smartcase
 " Enhanced % matching
 runtime macros/matchit.vim
 " }}}
+
 " =============================================================================
 " 3 tags
 " =============================================================================
+
 " =============================================================================
 " 4 displaying text
 " =============================================================================
 
-set relativenumber
+if v:version > 702
+    set relativenumber
+endif
 set number
 
 " =============================================================================
@@ -226,7 +254,7 @@ set number
 " =============================================================================
 " {{{
 colorscheme solarized
-"call togglebg#map("<F5>")
+call togglebg#map("<F5>")
 
 " File-type highlighting and configuration.
 " Run :filetype (without args) to see what you may have
@@ -257,11 +285,12 @@ hi SpellBad cterm=underline gui=underline
 set colorcolumn=100
 
 " Pretty line wrap
-set showbreak=â†ª
+set showbreak=¿
 
 " Highlight search matches
 set hlsearch
 "}}}
+
 " =============================================================================
 " 6 multiple windows
 " =============================================================================
@@ -275,6 +304,7 @@ set laststatus=2
 " =============================================================================
 " 7 multiple tab pages
 " =============================================================================
+
 " =============================================================================
 " 8 terminal
 " =============================================================================
@@ -298,15 +328,20 @@ endif
 " =============================================================================
 " 10 GUI
 " =============================================================================
+if ( has("gui_running") )
+    " set guifont=Anonymice\ Powerline:h14
+    set guifont=Anonymice\ Powerline\ 12
+    "set guifont=Anonymous\ Pro\ 12
 
-set guifont=Anonymice\ Powerline:h14
+    " Dialogs show up in the console
+    set guioptions+=c
 
-" Dialogs show up in the console
-set guioptions+=c
+endif
 
 " =============================================================================
 " 11 printing
 " =============================================================================
+
 " =============================================================================
 " 12 messages and info
 " =============================================================================
@@ -324,6 +359,7 @@ set noshowmode
 " =============================================================================
 " 13 selecting text
 " =============================================================================
+
 " =============================================================================
 " 14 editing text
 " =============================================================================
@@ -334,7 +370,6 @@ set backspace=indent,eol,start
 " =============================================================================
 " 15 tabs and indenting
 " =============================================================================
-
 " Taken from Haskell docs
 set tabstop=8                   "A tab is 8 spaces
 set expandtab                   "Always uses spaces instead of tabs
@@ -345,15 +380,17 @@ set shiftround                  "Round indent to nearest shiftwidth multiple
 set smartindent
 
 " =============================================================================
-" 16 folding 
+" 16 folding
 " =============================================================================
 
 " less annoying defaults for codefolding
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+set foldmethod=indent
 
 " =============================================================================
 " 17 diff mode
 " =============================================================================
+
 " =============================================================================
 " 18 mapping
 " =============================================================================
@@ -374,10 +411,21 @@ noremap <right> <nop>
 cmap w!! w !sudo tee > /dev/null %
 
 " Sanity Preservation measures
-cmap WQ wq
-cmap Wq wq
-cmap W w
-cmap Q q
+" Old:
+" cmap WQ wq
+" cmap Wq wq
+" cmap W w
+" cmap Q q
+" new, possibly better
+command! -bang -nargs=? -complete=file E e<bang> <args>
+command! -bang -nargs=? -complete=file W w<bang> <args>
+command! -bang -nargs=? -complete=file Wq wq<bang> <args>
+command! -bang -nargs=? -complete=file WQ wq<bang> <args>
+command! -bang Wa wa<bang>
+command! -bang WA wa<bang>
+command! -bang Q q<bang>
+command! -bang QA qa<bang>
+command! -bang Qa qa<bang>
 
 " Fuck :X
 cnoremap <expr> X (getcmdtype() is# ':' && empty(getcmdline())) ? 'x' : 'X'
@@ -390,11 +438,21 @@ nnoremap <expr> O getline('.') =~ '^\s*//' ? 'O<esc>S' : 'O'
 noremap <expr> o getline('.') =~ '^\s*//' ? 'o<esc>S' : 'o'
 " }}}
 
+" Press F6 to delete trailing whitespace
+nnoremap <silent> <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
 " Disable EX mode
 :map Q <Nop>
 
 " Disable search highlights when exiting search
 " nnoremap <esc> :let @/ = ""<return><esc>
+
+" When in (g)vimdiff, q will close all
+if &diff
+    " Doesn't work as intended; it prevents you from typing q
+    " cnoremap q :qall
+endif
+
 
 " GoldenView {{{
 let g:goldenview__enable_default_mapping = 0
@@ -420,9 +478,11 @@ nnoremap <C-H> <C-W><C-H>
 " }}}
 
 "}}}
+
 " =============================================================================
 " 19 reading and writing files
 " =============================================================================
+
 " =============================================================================
 " 20 the swap file
 " =============================================================================
@@ -431,17 +491,21 @@ nnoremap <C-H> <C-W><C-H>
 set autoread
 
 " Backup and swap directories
-set backupdir=~/.vim/backup
-set directory=~/.vim/swap
+" Deliberate double slash: it makes the backup/swap take into account the full
+" path
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
 
 " =============================================================================
 " 21 command line editing
 " =============================================================================
 
-set undofile
-set undodir=~/.vim/undodir
+if v:version > 703
+    set undofile
+    set undodir=~/.vim/undodir//
+    set undoreload=10000
+endif
 set undolevels=1000
-set undoreload=10000
 
 " =============================================================================
 " 22 executing external commands
@@ -457,18 +521,22 @@ set wildmode=list:longest
 " =============================================================================
 " 23 running make and jumping to errors
 " =============================================================================
+
 " =============================================================================
 " 24 language specific
 " =============================================================================
+
 " =============================================================================
 " 25 multi-byte characters
 " =============================================================================
+
 " =============================================================================
 " 26 various
 " =============================================================================
 set gdefault
+
 " =============================================================================
-" 27 Operating System Specific Settings 
+" 27 Operating System Specific Settings
 " =============================================================================
 
 " ----------------------------------------------------------------------------
@@ -484,8 +552,22 @@ if (system('uname') =~? "Darwin")
     " set ambiwidth=double
 endif
 
+" ----------------------------------------------------------------------------
+" 27.2 Linux
+" ----------------------------------------------------------------------------
+
+if (system('uname') =~? "Linux")
+    " Assumes X11, should make yanking work
+    if v:version >= 703
+        set clipboard=unnamedplus
+    else
+        set clipboard=unnamed
+    endif
+
+endif
+
 " =============================================================================
-" 28 Plugin Settings 
+" 28 Plugin Settings
 " =============================================================================
 
 " -----------------------------------------------------------------------------
@@ -525,29 +607,50 @@ let g:tmuxline_theme = 'airline'
 " }}}
 
 " -----------------------------------------------------------------------------
-" 28.2 Syntastic and YouCompleteMe
+" 28.2 Syntastic, YouCompleteMe, and NeoComplete
 " -----------------------------------------------------------------------------
 
+" Left over Syntastic stuff
 " Enable C++11 Support for Syntastic
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-Wall -std=c++11 -stdlib=libc++'
 
+" YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/ycm_cpp11.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_register_as_syntastic_checker = 1
 " let g:Show_diagnostics_ui = 1 "default 1
 let g:ycm_confirm_extra_conf = 0
+"let g:ycm_server_keep_logfiles = 1
+"let g:ycm_server_log_level = 'debug'
+"let g:ycm_warning_symbol = '.'
+"let g:ycm_error_symbol = '..'
+"let g:ycm_server_use_vim_stdout = 1
+
+
+" NeoComplete
+let g:acp_enableAtStartup = 1
+
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " -----------------------------------------------------------------------------
 " 28.3 mhinz/vim-startify
 " -----------------------------------------------------------------------------
 " {{{
-let g:startify_bookmarks = [ 
-            \   '~/dotfiles/vim/vimrc', 
-            \   '~/dotfiles/zsh/zshrc', 
-            \   '~/dotfiles/zsh/zshenv', 
-            \   '~/dotfiles/zsh/MyAntigen.hs', 
+let g:startify_bookmarks = [
+            \   '~/dotfiles/vim/vimrc',
+            \   '~/dotfiles/zsh/zshrc',
+            \   '~/dotfiles/zsh/zshenv',
+            \   '~/dotfiles/zsh/MyAntigen.hs',
             \   '~/dotfiles/tmux/tmux.conf'
             \ ]
 
@@ -560,22 +663,38 @@ endfunction
 
 let g:startify_custom_header = s:center_header(split(system('shuf -n 1 ~/dotfiles/vim/cow | cowthink'), '\n'))
 " }}}
+
 " -----------------------------------------------------------------------------
 " 28.4 elzr/vim-json
 " -----------------------------------------------------------------------------
 let g:vim_json_syntax_conceal = 0
+
 " -----------------------------------------------------------------------------
 " 28.5 luochen1990/rainbow
 " -----------------------------------------------------------------------------
 let g:rainbow_active = 1
 
 let g:typescript_indent_disable = 1
+
+" -----------------------------------------------------------------------------
+" 28.6 rkitover/vimpager
+" -----------------------------------------------------------------------------
+let g:vimpager = {}
+let g:less = {}
+
+let g:less.enabled = 0
+
+" -----------------------------------------------------------------------------
+" 28.7 Raimondi/delimitMate
+" -----------------------------------------------------------------------------
+let delimitMate_expand_cr = 1
+
 " =============================================================================
 " 29 Language Specific Fun-ness
 " =============================================================================
 
 " =============================================================================
-" 30 Autocmds 
+" 30 Autocmds
 " =============================================================================
 
 " Save buffers on lost focus
@@ -595,4 +714,15 @@ function! AppendModeline()
 endfunction
 
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+" =============================================================================
+" 31 Environment Specific Configurations
+" =============================================================================
+
+" Factset stuff
+if filereadable("/var/cfengine/classes/nextgen")
+    source ~/dotfiles/vim/fds.vimrc
+endif
+
+" Modeline, nothing after this line:
 " vim: set foldmethod=marker ts=8 sw=4 tw=78 et :
