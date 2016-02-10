@@ -6,113 +6,67 @@ scriptencoding utf-8
 " =============================================================================
 " 0 Neobundle Setup
 " =============================================================================
-" {{{
-" Neobundle Initialisation Cruft {{{
-if !1 | finish | endif
-if has('vim_starting')
-    if &compatible
-        set nocompatible               " Be iMproved
-    endif
 
-    " Required:
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-" Neobundle Fetch:
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
-
-" Add or remove your Bundles here:
-"NeoBundle 'Shougo/neosnippet.vim'
-"NeoBundle 'Shougo/neosnippet-snippets'
-"NeoBundle 'ctrlpvim/ctrlp.vim'
-"NeoBundle 'flazz/vim-colorschemes'
-
-" You can specify revision/branch/tag.
-"NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-" }}}
+call plug#begin('~/.vim/plugged')
 
 " Misc Plugins {{{
 " Git Plugin
-NeoBundle 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Startup Page
-NeoBundle 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 
 " Solarised Color Scheme
-NeoBundle 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 
 " }}}
 
 " Commenting Plugins {{{
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'vim-scripts/comments.vim'
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/comments.vim'
 " }}}
 
 " Development Specific Plugins (Darwin or when $RS_DEV==true) {{{
 if (system('uname') =~? "Darwin" || $RS_DEV == "true")
     " YCM for Code Completion
-    NeoBundle 'Valloric/YouCompleteMe', {
-                \ 'build' : {
-                \     'mac' : './install.sh --clang-completer --system-libclang' ,
-                \     'linux' : './install.sh --clang-completer',
-                \     'unix' : './install.sh --clang-completer'
-                \    }
+    Plug 'Valloric/YouCompleteMe', { 
+                \ 'do' : './install.py --clang-completer --tern-completer --racer-completer --gocode-completer'
                 \ }
     " Syntastic code competion, replaced by YCM
-    NeoBundle 'scrooloose/syntastic'
+    Plug 'scrooloose/syntastic'
 
     " Enhanced colouring for C family of languages
-    NeoBundleLazy 'jeaye/color_coded', {
-                \ 'build' : {
-                \     'unix' : 'cmake . && make && make install'
-                \ },
-                \ 'autoload' : { 
-                \       'filetypes' : ['c', 'cpp', 'objc', 'objcpp'] 
-                \ },
-                \ 'build_commands' : ['cmake', 'make']
-                \}   
+    Plug 'jeaye/color_coded', {
+                \ 'do' : 'cmake . && make && make install',
+                \ 'for' : ['c', 'cpp', 'objc', 'objcpp']
+                \ }
 
-    " NeoBundle 'Quramy/tsuquyomi'
+    " Plug 'Quramy/tsuquyomi'
 endif
 " }}}
 
 " Helpful Commands {{{
 " Magical tabularisation
-NeoBundle 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 
 " Surround
-NeoBundle 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " Automatic sublime-style delimiters
-NeoBundle 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 " }}}
 
 " Airline {{{
 " Airline
-NeoBundle 'bling/vim-airline'
+Plug 'bling/vim-airline'
 
-NeoBundle 'edkolev/promptline.vim', {
-            \ 'depends': 'bling/vim-airline',
-            \ 'commands': [{'name': ['PromptlineSnapshot']}],
-            \ }
-
-NeoBundle 'edkolev/tmuxline.vim', {
-            \ 'depends': 'bling/vim-airline',
-            \ 'commands': [{'name': ['TmuxlineSnapshot', 'Tmuxline']}],
-            \ }
+"Plug 'edkolev/promptline.vim', {
+"            \ 'on': 'PromptlineSnapshot'
+"            \ }
+"
+"Plug 'edkolev/tmuxline.vim', {
+"            \ 'on': 'TmuxlineSnapshot'
+"            \ }
 " }}}
 
 " Language Specific Plugins {{{
@@ -120,62 +74,56 @@ NeoBundle 'edkolev/tmuxline.vim', {
 " Javascript {{{
 
 " Indentation and Syntax support
-NeoBundle 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 
 " JSON highlighting support
-NeoBundle 'elzr/vim-json'
+Plug 'elzr/vim-json'
 
 " Tern (auto-completion for JS)
-NeoBundleLazy 'marijnh/tern_for_vim', {
-            \ 'autoload' : {
-            \   'filetypes' : ['js'],
-            \ }}
+Plug 'marijnh/tern_for_vim', {
+            \ 'for' : 'js'
+            \ }
 " }}}
 
 " Typescript {{{
-NeoBundle 'leafgarland/typescript-vim'
-NeoBundle 'clausreinke/typescript-tools.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'clausreinke/typescript-tools.vim'
 " }}}
 
 " toml {{{
-NeoBundleLazy 'cespare/vim-toml', {
-            \ 'autoload' : {
-            \   'filetypes' : ['toml'],
-            \ }}
+Plug 'cespare/vim-toml', {
+            \ 'for' : 'toml',
+            \ }
 " }}}
 
 " Markdown Plugins {{{
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'jtratner/vim-flavored-markdown'
+Plug 'plasticboy/vim-markdown'
+Plug 'jtratner/vim-flavored-markdown'
 " }}}
 
 " Ruby {{{
-NeoBundleLazy 'vim-ruby/vim-ruby', {
-            \ 'autoload': {
-            \   'filetypes': ['ruby'],
-            \ }}
+Plug 'vim-ruby/vim-ruby', {
+            \ 'for': 'ruby',
+            \ }
 " }}}
 
 " Haskell {{{
 if executable("hdevtools")
     " Haskell
-    NeoBundleLazy 'bitc/vim-hdevtools', {
-                \ 'autoload': {
-                \   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
-                \ }}
+    Plug 'bitc/vim-hdevtools', {
+                \ 'for': ['haskell', 'lhaskell', 'chaskell'],
+                \ }
 
-    NeoBundleLazy 'dag/vim2hs', {
-                \ 'autoload': {
-                \   'filetypes': ['haskell', 'lhaskell', 'chaskell'],
-                \ }}
+    Plug 'dag/vim2hs', {
+                \ 'for': ['haskell', 'lhaskell', 'chaskell'],
+                \ }
 endif
 " }}}
 
 " HTML/CSS {{{
-NeoBundleLazy 'mattn/emmet-vim', {
-            \ 'autoload' : {
-            \   'filetypes': ['html', 'css'],
-            \ }}
+Plug 'mattn/emmet-vim', {
+            \ 'for': ['html', 'css'],
+            \ }
 " }}}
 
 " Rust {{{
@@ -189,43 +137,35 @@ NeoBundleLazy 'mattn/emmet-vim', {
 "             \  }
 "             \  }
 
-NeoBundleLazy 'rust-lang/rust.vim', {
-            \ 'autoload' : {
-            \   'filetypes' : ['rust'],
-            \ }}
+Plug 'rust-lang/rust.vim'
 "}}}
 
 " YAML {{{
-NeoBundleLazy 'avakhov/vim-yaml', {
-            \ 'autoload' : {
-            \   'filetypes' : ['yaml'],
-            \ }}
+Plug 'avakhov/vim-yaml', {
+            \ 'for' : 'yaml',
+            \ }
 " }}}
 
 " Clojure {{{
     " Syntax highlighting and indentation
-    NeoBundleLazy 'guns/vim-clojure-static', {
-                \ 'autoload' : {
-                \   'filetype' : ['clojure'],
-                \}}
+    Plug 'guns/vim-clojure-static', {
+                \ 'for' : 'clojure',
+                \ }
 
     " Leiningen
-    NeoBundleLazy 'tpope/vim-salve', {
-                \ 'autoload' : {
-                \   'filetype' : ['clojure'],
-                \}}
+    Plug 'tpope/vim-salve', {
+                \ 'for' : 'clojure',
+                \ }
 
     " REPL in vim
-    NeoBundleLazy 'tpope/vim-fireplace', {
-                \ 'autoload' : {
-                \   'filetype' : ['clojure'],
-                \}}
+    Plug 'tpope/vim-fireplace', {
+                \ 'for' : 'clojure',
+                \ }
 
     " Better Clojure highlighting
-    NeoBundleLazy 'guns/vim-clojure-highlight', {
-                \ 'autoload' : {
-                \   'filetype' : ['clojure'],
-                \}}
+    Plug 'guns/vim-clojure-highlight', {
+                \ 'for' : 'clojure',
+                \ }
 " }}}
 
 " }}}
@@ -233,28 +173,27 @@ NeoBundleLazy 'avakhov/vim-yaml', {
 " Visual Helpers {{{
 
 " Split manager
-NeoBundle 'zhaocai/GoldenView.Vim'
+Plug 'zhaocai/GoldenView.Vim'
 
 " Indentation Guidelines
-NeoBundle 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 
 " Rainbow Parens
-NeoBundle 'luochen1990/rainbow'
+Plug 'luochen1990/rainbow'
 " }}}
 
 " NerdTREE {{{
-NeoBundle 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " git markers in nerdtree
-NeoBundle 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " }}}
 
 " Required:
-call neobundle#end()
+call plug#end()
 
 filetype plugin indent on    " required
 
-NeoBundleCheck
 " }}}
 " =============================================================================
 " 1 important
@@ -287,7 +226,7 @@ set number
 " =============================================================================
 " {{{
 colorscheme solarized
-call togglebg#map("<F5>")
+"call togglebg#map("<F5>")
 
 " File-type highlighting and configuration.
 " Run :filetype (without args) to see what you may have
@@ -572,12 +511,12 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Promptline {{{
 let g:promptline_theme = 'airline'
-let g:promptline_preset = {
-        \'a' : [ '$(if [ -z "$TMUX" ] && [ -n "$SSH_CLIENT" ] || [ -z "$TMUX" ] && [ -n "$SSH_TTY" ]; then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
-        \'b' : [ '$USER'],
-        \'c' : [ promptline#slices#cwd() ],
-        \'y' : [ promptline#slices#vcs_branch() ],
-        \'warn' : [ promptline#slices#last_exit_code() ]}
+"let g:promptline_preset = {
+"        \'a' : [ '$(if [ -z "$TMUX" ] && [ -n "$SSH_CLIENT" ] || [ -z "$TMUX" ] && [ -n "$SSH_TTY" ]; then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
+"        \'b' : [ '$USER'],
+"        \'c' : [ promptline#slices#cwd() ],
+"        \'y' : [ promptline#slices#vcs_branch() ],
+"        \'warn' : [ promptline#slices#last_exit_code() ]}
 " }}}
 
 " Tmuxline {{{
