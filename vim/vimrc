@@ -145,7 +145,6 @@ Plug 'mattn/emmet-vim', {
 Plug 'rust-lang/rust.vim', {
             \ 'for': ['rust'],
             \ }
-}
 "}}}
 
 " Clojure {{{
@@ -285,7 +284,7 @@ hi SpellBad cterm=underline gui=underline
 set colorcolumn=100
 
 " Pretty line wrap
-set showbreak=¿
+set showbreak=â†©
 
 " Highlight search matches
 set hlsearch
@@ -329,8 +328,11 @@ endif
 " 10 GUI
 " =============================================================================
 if ( has("gui_running") )
-    " set guifont=Anonymice\ Powerline:h14
-    set guifont=Anonymice\ Powerline\ 12
+    if (system('uname') =~? "Darwin")
+        set guifont=Anonymice\ Powerline:h14
+    else
+        set guifont=Anonymice\ Powerline\ 14
+    endif
     "set guifont=Anonymous\ Pro\ 12
 
     " Dialogs show up in the console
@@ -386,6 +388,8 @@ set smartindent
 " less annoying defaults for codefolding
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 set foldmethod=indent
+" Don't automatically fold
+set foldenable
 
 " =============================================================================
 " 17 diff mode
@@ -529,6 +533,7 @@ set wildmode=list:longest
 " =============================================================================
 " 25 multi-byte characters
 " =============================================================================
+set encoding=utf-8
 
 " =============================================================================
 " 26 various
@@ -700,6 +705,7 @@ let delimitMate_expand_cr = 1
 " Save buffers on lost focus
 au FocusLost * silent! wa
 autocmd FileType html,css EmmetInstall
+autocmd FileType startify,help set nofoldenable
 
 " From http://vim.wikia.com/wiki/Modeline_magic
 "
