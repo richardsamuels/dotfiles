@@ -725,10 +725,7 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " 31 Environment Specific Configurations
 " =============================================================================
 
-" Factset stuff
-if filereadable("/var/cfengine/classes/nextgen")
-    source ~/dotfiles/vim/fds.vimrc
-endif
+source ~/dotfiles/vim/local/*/*.vimrc
 
 " Modeline, nothing after this line:
 " vim: set foldmethod=marker ts=8 sw=4 tw=78 et :
