@@ -724,8 +724,9 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " =============================================================================
 " 31 Environment Specific Configurations
 " =============================================================================
-
-source ~/dotfiles/vim/local/*/*.vimrc
+if (!empty(glob("~/dotfiles/vim/local/*/*.vimrc"))) 
+    source ~/dotfiles/vim/local/*/*.vimrc
+endif
 
 " Modeline, nothing after this line:
 " vim: set foldmethod=marker ts=8 sw=4 tw=78 et :
