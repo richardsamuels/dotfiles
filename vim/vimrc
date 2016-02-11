@@ -39,7 +39,7 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
                     \ 'do' : './install.py --clang-completer --tern-completer --racer-completer --gocode-completer'
                     \ }
         " Syntastic code competion, replaced by YCM
-        Plug 'scrooloose/syntastic'
+        " Plug 'scrooloose/syntastic'
 
         " Enhanced colouring for C family of languages
         Plug 'jeaye/color_coded', {
