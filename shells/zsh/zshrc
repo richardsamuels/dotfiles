@@ -1,21 +1,16 @@
 # Enable Antigen
 source ~/.antigen-hs/antigen-hs/init.zsh
 
-# Tmuxifier Layouts
-export TMUXIFIER_LAYOUT_PATH=~/dotfiles/tmux/layouts
-
-autoload run-help
-HELPDIR=/usr/local/share/zsh/help
+#autoload run-help
+#HELPDIR=/usr/local/share/zsh/help
 
 # Enable Superior Key bindings
-set -o vi
+#set -o vi
 
 # Make the superior key bindings better
 # Reduce delay
-export KEYTIMEOUT=1
+#export KEYTIMEOUT=1
 
-# Enable some colours
-export CLICOLOR=1
 
 # genpass n
 # where n is the number of bytes, try and generate a password up to n bytes
@@ -38,65 +33,37 @@ gitcalc() {
 }
 
 
-
 # Set auto pushd
 setopt AUTO_PUSHD
 
 # Load the appropriate Prompt and LS COLORS
-if [[ -z $ITERM_PROFILE ]]; then
-    source ~/dotfiles/zsh/airline-dark
-    eval $(TERM=xterm-256color dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-dark)
-elif [[ $ITERM_PROFILE == "Solarized Dark" ]]; then
-    source ~/dotfiles/zsh/airline-dark
-    eval $(TERM=xterm-256color dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-dark)
-elif [[ $ITERM_PROFILE == "Solarized Light" ]]; then
-    source ~/dotfiles/zsh/airline-light
-    eval $(TERM=xterm-256color dircolors ~/dotfiles/zsh/dircolors-solarized/dircolors.ansi-light)
-fi;
 
 #ZSH Tab Completion Colors
-zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-zstyle ':completion:*' matcher-list 'r:[[:ascii:]]||[[:ascii:]]=** r:|=* m:{a-z\-}={A-Z\_}'
-autoload -Uz compinit
-compinit
-
-# LS Aliases
-if ls --color -d . >/dev/null 2>&1; then
-#GNU LS
-    LS_DEFAULT="ls --color=auto"
-elif ls -G -d . >/dev/null 2>&1; then
-#BSD LS
-    LS_DEFAULT="ls -G"
-fi;
-
-alias ls=$LS_DEFAULT
-alias ll="$LS_DEFAULT -l"
-alias la="$LS_DEFAULT -al"
-alias l=$LS_DEFAULT
+#zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+#zstyle ':completion:*' matcher-list 'r:[[:ascii:]]||[[:ascii:]]=** r:|=* m:{a-z\-}={A-Z\_}'
+#autoload -Uz compinit
+#compinit
 
 # History searching magic
 # bind P and N for EMACS mode
 # bindkey -M emacs '^P' history-substring-search-up
 # bindkey -M emacs '^N' history-substring-search-down
-# 
+#
 # # bind k and j for VI mode
 # bindkey -M vicmd 'k' history-substring-search-up
 # bindkey -M vicmd 'j' history-substring-search-down
-# 
+#
 # # bind UP and DOWN arrow keys
 # bindkey '^[[A' history-substring-search-up
 # bindkey '^[[B' history-substring-search-down
 
-which thefuck &>/dev/null
-if [ $? != 0 ]; then
-    alias fuck='sudo $(fc -ln -1)'
-fi
-
 setopt SHARE_HISTORY
 
 SAVEHIST=1000
+
 if (( ! EUID )); then
-  export HISTFILE=~/.history_root
+  HISTFILE=~/.history_root
 else
-  export HISTFILE=~/.history
+  HISTFILE=~/.history
 fi
+export HISTFILE

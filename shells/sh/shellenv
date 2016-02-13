@@ -1,0 +1,23 @@
+#!/bin/sh
+
+#Universal config, theoretically for all shells, but tested only on Bash and ZSH
+
+export EDITOR="vim"
+export VISUAL="vim"
+
+# Enable colours in BSD ls
+export CLICOLOR=1
+
+# Tmuxifier Layouts
+export TMUXIFIER_LAYOUT_PATH=~/dotfiles/tmux/layouts
+
+#export MANPAGER="export VIM_TINY=1; /bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -c 'nnoremap q <Nop>' -c 'nnoremap q :q!<Enter>' -\""
+
+# Language & Locale Settings, for crappy environments
+if [[ -z "${LANG}" ]]; then
+  export LANG='en_US.UTF-8'
+fi
+
+if [[ -z "${LC_ALL}" ]]; then
+  export LC_ALL='en_US.UTF-8'
+fi
