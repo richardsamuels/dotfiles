@@ -40,9 +40,8 @@ setopt AUTO_PUSHD
 # Load the appropriate Prompt and LS COLORS
 
 #ZSH Tab Completion Colors
-#zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 #zstyle ':completion:*' matcher-list 'r:[[:ascii:]]||[[:ascii:]]=** r:|=* m:{a-z\-}={A-Z\_}'
-#autoload -Uz compinit
 #compinit
 
 # History searching magic
@@ -55,8 +54,8 @@ setopt AUTO_PUSHD
 # bindkey -M vicmd 'j' history-substring-search-down
 #
 # # bind UP and DOWN arrow keys
-# bindkey '^[[A' history-substring-search-up
-# bindkey '^[[B' history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 setopt SHARE_HISTORY
 
@@ -68,3 +67,6 @@ else
   HISTFILE=~/.history
 fi
 export HISTFILE
+
+autoload -Uz compinit
+compinit

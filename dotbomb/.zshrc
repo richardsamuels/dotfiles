@@ -48,4 +48,4 @@
 
 
 
-source $HOME/dotfiles/shells/env.sh
+source $HOME/dotfiles/shells/rc.sh
