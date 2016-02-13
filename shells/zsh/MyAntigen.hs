@@ -4,7 +4,9 @@ module MyAntigen where
 
 import Antigen (
                 -- Rudimentary imports
-                AntigenConfiguration (..)
+                --
+                AntigenConfig (..)
+              , defaultConfig
               , bundle
               , antigen
                 -- If you want to source a bit trickier plugins
@@ -12,19 +14,14 @@ import Antigen (
               , antigenSourcingStrategy
               , filePathsSourcingStrategy
               )
-import Shelly (shelly)
 
 bundles =
-  [ 
+  [
   --bundle "Tarrasch/zsh-functional"
     bundle "Tarrasch/zsh-bd"
- -- , bundle "zsh-users/zsh-history-substring-search"
   , bundle "zsh-users/zsh-syntax-highlighting"
+  , bundle "zsh-users/zsh-history-substring-search"
   , (bundle "jimeh/tmuxifier") { sourcingStrategy = antigenSourcingStrategy }
-  , (bundle "robbyrussell/oh-my-zsh")
-     { sourcingLocations = [ "plugins/osx"
-                           ] }
-
 
   -- If you use a plugin that doesn't have a *.plugin.zsh file. You can set a
   -- more liberal sourcing strategy.
@@ -51,12 +48,9 @@ bundles =
   --                          ] }
 
   -- vvv    Add your plugins here    vvv
-  
   ]
 
-
-
-config = AntigenConfiguration bundles
+config = defaultConfig { plugins = bundles }
 
 main :: IO ()
-main = shelly $ antigen config
+main = antigen config

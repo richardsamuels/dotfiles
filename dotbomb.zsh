@@ -4,12 +4,12 @@ cp -f ./dotbomb/.* ~/
 cp -f hooks/* ./.git/hooks
 
 git clone git@github.com:Tarrasch/antigen-hs.git ~/.antigen-hs/antigen-hs
-mkdir -p ~/.vim/bundle
-git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+mkdir -p ~/.vim/plugged
 mkdir -p ~/.vim/undodir
-git clone git://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#git clone git://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized
 
-ln -s ~/dotfiles/zsh/MyAntigen.hs ~/.antigen-hs/MyAntigen.hs
+ln -s ~/dotfiles/shells/zsh/MyAntigen.hs ~/.antigen-hs/MyAntigen.hs
 ln -s ~/dotfiles/ssh/config ~/.ssh/config
 
 vim +PluginInstall +qall
