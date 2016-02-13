@@ -68,13 +68,9 @@ Plug 'Raimondi/delimitMate'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 
-"Plug 'edkolev/promptline.vim', {
-"            \ 'on': 'PromptlineSnapshot'
-"            \ }
+"Plug 'edkolev/promptline.vim'
 "
-"Plug 'edkolev/tmuxline.vim', {
-"            \ 'on': 'TmuxlineSnapshot'
-"            \ }
+"Plug 'edkolev/tmuxline.vim'
 " }}}
 
 " Language Specific Plugins {{{
@@ -599,7 +595,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Promptline {{{
 let g:promptline_theme = 'airline'
 "let g:promptline_preset = {
-"        \'a' : [ '$(if [ -z "$TMUX" ] && [ -n "$SSH_CLIENT" ] || [ -z "$TMUX" ] && [ -n "$SSH_TTY" ]; then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
+"        \'a' : [ '$(if [ -z "${TMUX}" ] && ( [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ] ); then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
 "        \'b' : [ '$USER'],
 "        \'c' : [ promptline#slices#cwd() ],
 "        \'y' : [ promptline#slices#vcs_branch() ],
