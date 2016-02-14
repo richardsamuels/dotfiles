@@ -1,26 +1,19 @@
 #!/bin/sh
 
-LOCKFILE="/tmp/dotfiles-commit"
+MOD=false
+shopt -s dotglob
+cd $GIT_DIR/../dotbomb/
 
-if [ ! -f $LOCKFILE ]; then
-	MOD=false
-        shopt -s dotglob
-        cd $GIT_DIR/../dotbomb/
+for f in *; do
+    if [ "$(cat "$f" | openssl md5)" != "$(cat "$HOME/$f" | openssl md5)" ]; then
+        MOD=true
+        echo -e "$f modified \n"
+    fi
+done
 
-        for f in *; do
-            if [ "$(cat "$f" | openssl md5)" != "$(cat "$HOME/$f" | openssl md5)" ]; then
-                MOD=true
-                echo -e "$f modified \n"
-            fi
-        done
-
-	if [ "$MOD" = true ]; then
-		echo -e "\nWARNING!! The dotbombed configuration files have been modified."
-		echo -e "Confirm that you do not wish to commit these changes."
-		echo -e "Then rerun the commit operation"
-		touch /tmp/dotfiles-commit
-		exit 1;	
-	fi
+if [ "$MOD" = true ]; then
+    echo -e "\nWARNING!! The dotbombed configuration files have been modified."
+    echo -e "Synchronise the changes between dotbomb, and the shellrcs"
+    echo -e "then rerun the hook"
+    exit 1;
 fi
-
-rm -f $LOCKFILE
