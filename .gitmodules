@@ -13,3 +13,6 @@
 [submodule "shells/plugins/zsh-bd"]
 	path = shells/plugins/zsh-bd
 	url = https://github.com/Tarrasch/zsh-bd.git
+[submodule "shells/plugins/bash-bd"]
+	path = shells/plugins/bash-bd
+	url = https://github.com/vigneshwaranr/bd.git
