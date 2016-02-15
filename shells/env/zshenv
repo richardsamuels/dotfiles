@@ -9,15 +9,15 @@ then
 elif [ `uname` = "Darwin" ]; then
     # /etc/profile
     ## system-wide environment settings for zsh(1)
-    if [ -x /usr/libexec/path_helper ]; then
-            PATH=""
-            MANPATH=""
-            eval `/usr/libexec/path_helper -s`
-    fi
+    #if [ -x /usr/libexec/path_helper ]; then
+    #        PATH=""
+    #        MANPATH=""
+    #        eval `/usr/libexec/path_helper -s`
+    #fi
 
     if  [ -d "/usr/local/opt/coreutils/libexec/gnubin" ]; then
         PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-        export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+        MANPATH="/usr/local/opt/coreutils/libexec/gnuman"
     fi
 
     if [ -d "~/.cabal/bin" ]; then
@@ -26,15 +26,6 @@ elif [ `uname` = "Darwin" ]; then
 
     export PATH
 
-    #if [ -x "$(which pyenv)" ]; then
-    #    export PYENV_ROOT=/usr/local/opt/python
-    #    eval "$(pyenv init -)"
-    #fi
-
-    #if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
 fi
 
-#if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-#  source "${ZDOTDIR:-$HOME}/.zprofile"
-#fi
+# vim: set ft=zsh :

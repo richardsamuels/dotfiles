@@ -1,12 +1,15 @@
-[submodule "shells/zsh/plugins/zsh-bd"]
-	path = shells/zsh/plugins/zsh-bd
-	url = https://github.com/Tarrasch/zsh-bd.git
-[submodule "shells/zsh/plugins/zsh-history-substring-search"]
-	path = shells/zsh/plugins/zsh-history-substring-search
-	url = https://github.com/zsh-users/zsh-history-substring-search.git
-[submodule "shells/zsh/plugins/zsh-syntax-highlighting"]
-	path = shells/zsh/plugins/zsh-syntax-highlighting
+[submodule "shells/plugins/tmuxifier"]
+	path = shells/plugins/tmuxifier
+	url = https://github.com/jimeh/tmuxifier.git
+[submodule "shells/plugins/zsh-syntax-highlighting"]
+	path = shells/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "shells/zsh/plugins/zsh-completions"]
-	path = shells/zsh/plugins/zsh-completions
+[submodule "shells/plugins/zsh-completions"]
+	path = shells/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "shells/plugins/zsh-history-substring-search"]
+	path = shells/plugins/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search.git
+[submodule "shells/plugins/zsh-bd"]
+	path = shells/plugins/zsh-bd
+	url = https://github.com/Tarrasch/zsh-bd.git

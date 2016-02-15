@@ -1,19 +1,19 @@
 #!/bin/sh
 
-source ~/dotfiles/shells/sh/shellenv
-
+source ~/dotfiles/shells/env/uenv
 
 if [ ! -z "$ZSH_VERSION" ]; then
-    source ~/dotfiles/shells/zsh/zshenv
+    source ~/dotfiles/shells/env/zshenv
 
     if [ -f "~/dotfiles/shells/local/zshenv" ]; then
         source ~/dotfiles/shells/local/zshenv
     fi
 elif [ ! -z "$BASH_VERSION" ]; then
-    source ~/dotfiles/shells/bash/env.sh
 
-    if [ -f "~/dotfiles/shells/local/env.sh" ]; then
-        source ~/dotfiles/shells/local/env.sh
+    if [ -f "~/dotfiles/shells/local/bashenv" ]; then
+        source ~/dotfiles/shells/local/bashenv
     fi
 
 fi
+
+# vim: set ft=sh :

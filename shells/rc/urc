@@ -2,6 +2,9 @@
 
 #Universal config, theoretically for all shells, but tested only on Bash and ZSH
 
+# Enable colours in BSD ls
+export CLICOLOR=1
+
 # Load colours
 if [[ $TERM == *"256color"* ]]; then
     if [[ $ITERM_PROFILE == "Solarized Light" ]]; then
@@ -26,6 +29,8 @@ if ls --color -d . >/dev/null 2>&1; then
 elif ls -G -d . >/dev/null 2>&1; then
     # BSD LS
     LS_DEFAULT="ls -G"
+else
+    LS_DEFAULT="ls"
 fi;
 
 alias ls=${LS_DEFAULT}
@@ -33,4 +38,22 @@ alias ll="{$LS_DEFAULT} -l"
 alias la="${LS_DEFAULT} -al"
 alias l=${LS_DEFAULT}
 
-# vim: set ft=sh
+genpass() {
+    if [ -n "$1" ]; then
+        TEMP=`LC_ALL=C tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' < /dev/random | head -c "$1"`
+        echo $TEMP
+    else
+        echo "need number of bytes"
+    fi
+}
+
+# Given author name, calculate contributions
+gitcalc() {
+    if [ -n "$1" ]; then
+        git log --shortstat --author "$1" | grep "files\? changed" | awk '{files+=$1; inserted+=$4; deleted+=$6} END {print "files changed", files, "lines inserted:", inserted, "lines deleted:", deleted}'
+    else
+        echo "need author name"
+    fi
+}
+
+# vim: set ft=sh :

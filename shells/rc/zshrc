@@ -1,7 +1,4 @@
 
-# Enable Antigen
-source ~/.antigen-hs/antigen-hs/init.zsh
-
 #autoload run-help
 #HELPDIR=/usr/local/share/zsh/help
 
@@ -15,23 +12,6 @@ source ~/.antigen-hs/antigen-hs/init.zsh
 
 # genpass n
 # where n is the number of bytes, try and generate a password up to n bytes
-genpass() {
-    if [ -n "$1" ]; then
-        TEMP=`LC_ALL=C tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' < /dev/random | head -c "$1"`
-        echo $TEMP
-    else
-        echo "need number of bytes"
-    fi
-}
-
-# Given author name, calculate contributions
-gitcalc() {
-    if [ -n "$1" ]; then
-        git log --shortstat --author "$1" | grep "files\? changed" | awk '{files+=$1; inserted+=$4; deleted+=$6} END {print "files changed", files, "lines inserted:", inserted, "lines deleted:", deleted}'
-    else
-        echo "need author name"
-    fi
-}
 
 
 # Set auto pushd
@@ -39,10 +19,6 @@ setopt AUTO_PUSHD
 
 # Load the appropriate Prompt and LS COLORS
 
-#ZSH Tab Completion Colors
-zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-#zstyle ':completion:*' matcher-list 'r:[[:ascii:]]||[[:ascii:]]=** r:|=* m:{a-z\-}={A-Z\_}'
-#compinit
 
 # History searching magic
 # bind P and N for EMACS mode
@@ -68,5 +44,25 @@ else
 fi
 export HISTFILE
 
-autoload -Uz compinit
+
+#ZSH Tab Completion Colors
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+# zstyle ':completion:*' matcher-list 'r:[[:ascii:]]||[[:ascii:]]=** r:|=* m:{a-z\-}={A-Z\_}'
+
+# Completions
+fpath+=(~/dotfiles/shells/zsh/plugins/zsh-completions/src $fpath)
+
+autoload -U compinit
 compinit
+zmodload -i zsh/complist
+
+# bd command
+source ~/dotfiles/shells/plugins/zsh-bd/bd.zsh
+
+# history-substring-search-{up,down} macros
+source ~/dotfiles/shells/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# ZSH syntax highlighting
+source ~/dotfiles/shells/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# vim: set ft=zsh :
