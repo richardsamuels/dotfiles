@@ -56,4 +56,6 @@ gitcalc() {
     fi
 }
 
+alias bc='popd'
+
 # vim: set ft=sh :
