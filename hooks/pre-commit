@@ -7,13 +7,13 @@ cd $GIT_DIR/../dotbomb/
 for f in *; do
     if [ "$(cat "$f" | openssl md5)" != "$(cat "$HOME/$f" | openssl md5)" ]; then
         MOD=true
-        echo -e "$f modified \n"
+        echo "$f modified \n"
     fi
 done
 
 if [ "$MOD" = true ]; then
-    echo -e "\nWARNING!! The dotbombed configuration files have been modified."
-    echo -e "Synchronise the changes between dotbomb, and the shellrcs"
-    echo -e "then rerun the hook"
+    echo "\nWARNING!! The dotbombed configuration files have been modified."
+    echo "Synchronise the changes between dotbomb, and the shellrcs"
+    echo "then rerun the hook"
     exit 1;
 fi
