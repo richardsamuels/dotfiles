@@ -20,6 +20,3 @@ A lot. Some of them:
 * ZSH
 
 
-## License
-
-GPLv3.
