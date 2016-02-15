@@ -9,12 +9,15 @@ Run dotbomb.zsh to copy contents of dotbomb folder to the home folder.
 
 A lot. Some of them:
 
-* Haskell
-    - Shelly (from cabal)
 * Git
 * Vim 7.4+
 * Ruby
 * Python
+* cmake
+
+### Recommended
+
+* ZSH
 
 
 ## License
