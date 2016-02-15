@@ -5,7 +5,7 @@
 # Enable colours in BSD ls
 export CLICOLOR=1
 
-# Load colours
+# Load the appropriate Prompt and LS COLORS
 if [[ $TERM == *"256color"* ]]; then
     if [[ $ITERM_PROFILE == "Solarized Light" ]]; then
         if [[ -z "${RS_SKIP_AIRLINE}" ]]; then
@@ -38,6 +38,8 @@ alias ll="{$LS_DEFAULT} -l"
 alias la="${LS_DEFAULT} -al"
 alias l=${LS_DEFAULT}
 
+# genpass n
+# where n is the number of bytes, try and generate a password up to n bytes
 genpass() {
     if [ -n "$1" ]; then
         TEMP=`LC_ALL=C tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' < /dev/random | head -c "$1"`

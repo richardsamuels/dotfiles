@@ -2,9 +2,9 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <C-Space> 
-imap <Nul> <C-Space>
 inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
+imap <Nul> <C-Space>
+inoremap <C-Space> 
 inoremap <D-BS> 
 inoremap <M-BS> 
 inoremap <M-Down> }
@@ -22,8 +22,8 @@ inoremap <Left> <Nop>
 inoremap <expr> <Down> pumvisible() ? "\" : "\<Down>"
 inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
 imap <F5> <Plug>ToggleBackground
-vnoremap <silent>  :call RangeCommentLine()
 nnoremap <silent>  :call CommentLine()
+vnoremap <silent>  :call RangeCommentLine()
 onoremap <silent>  :call CommentLine()
 nnoremap  
 nnoremap <NL> <NL>
@@ -32,8 +32,8 @@ nnoremap  
 noremap <expr>  getline('.') =~ '^\s*//' ? 'S' : '<ente    r>'
 nmap <silent>  <Plug>GoldenViewNext
 nmap <silent>  <Plug>GoldenViewPrevious
-vnoremap <silent>  :call RangeUnCommentLine()
 nnoremap <silent>  :call UnCommentLine()
+vnoremap <silent>  :call RangeUnCommentLine()
 onoremap <silent>  :call UnCommentLine()
 nmap <silent> L <Plug>GoldenViewSplit
 nnoremap <expr> O getline('.') =~ '^\s*//' ? 'OS' : 'O'
@@ -156,7 +156,6 @@ set undofile
 set updatetime=2000
 set wildmenu
 set wildmode=list:longest
-set window=70
 set winheight=4
 set winminheight=4
 set winminwidth=23
@@ -170,11 +169,11 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 set shortmess=aoO
 badd +1 urc
-badd +31 rc/urc
+badd +1 rc/urc
 badd +1 rc/bashrc
-badd +0 rc/zshrc
+badd +1 rc/zshrc
 badd +4 env/uenv
-badd +0 env/zshenv
+badd +1 env/zshenv
 argglobal
 silent! argdel *
 edit rc/urc
@@ -198,15 +197,15 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 19 + 35) / 71)
+exe '1resize ' . ((&lines * 14 + 29) / 58)
 exe 'vert 1resize ' . ((&columns * 106 + 91) / 182)
-exe '2resize ' . ((&lines * 43 + 35) / 71)
+exe '2resize ' . ((&lines * 4 + 29) / 58)
 exe 'vert 2resize ' . ((&columns * 106 + 91) / 182)
-exe '3resize ' . ((&lines * 4 + 35) / 71)
+exe '3resize ' . ((&lines * 35 + 29) / 58)
 exe 'vert 3resize ' . ((&columns * 106 + 91) / 182)
-exe '4resize ' . ((&lines * 34 + 35) / 71)
+exe '4resize ' . ((&lines * 27 + 29) / 58)
 exe 'vert 4resize ' . ((&columns * 75 + 91) / 182)
-exe '5resize ' . ((&lines * 33 + 35) / 71)
+exe '5resize ' . ((&lines * 27 + 29) / 58)
 exe 'vert 5resize ' . ((&columns * 75 + 91) / 182)
 argglobal
 let s:cpo_save=&cpo
@@ -341,7 +340,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 29 - ((3 * winheight(0) + 9) / 19)
+let s:l = 29 - ((2 * winheight(0) + 7) / 14)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -482,7 +481,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 2 - ((1 * winheight(0) + 21) / 43)
+let s:l = 2 - ((1 * winheight(0) + 2) / 4)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -623,7 +622,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 2) / 4)
+let s:l = 1 - ((0 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -764,7 +763,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 7 - ((5 * winheight(0) + 17) / 34)
+let s:l = 7 - ((3 * winheight(0) + 13) / 27)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -905,23 +904,23 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 29 - ((22 * winheight(0) + 16) / 33)
+let s:l = 29 - ((18 * winheight(0) + 13) / 27)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 29
 normal! 0
 wincmd w
-2wincmd w
-exe '1resize ' . ((&lines * 19 + 35) / 71)
+3wincmd w
+exe '1resize ' . ((&lines * 14 + 29) / 58)
 exe 'vert 1resize ' . ((&columns * 106 + 91) / 182)
-exe '2resize ' . ((&lines * 43 + 35) / 71)
+exe '2resize ' . ((&lines * 4 + 29) / 58)
 exe 'vert 2resize ' . ((&columns * 106 + 91) / 182)
-exe '3resize ' . ((&lines * 4 + 35) / 71)
+exe '3resize ' . ((&lines * 35 + 29) / 58)
 exe 'vert 3resize ' . ((&columns * 106 + 91) / 182)
-exe '4resize ' . ((&lines * 34 + 35) / 71)
+exe '4resize ' . ((&lines * 27 + 29) / 58)
 exe 'vert 4resize ' . ((&columns * 75 + 91) / 182)
-exe '5resize ' . ((&lines * 33 + 35) / 71)
+exe '5resize ' . ((&lines * 27 + 29) / 58)
 exe 'vert 5resize ' . ((&columns * 75 + 91) / 182)
 tabnext 1
 if exists('s:wipebuf')

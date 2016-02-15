@@ -9,16 +9,8 @@
 # Reduce delay
 #export KEYTIMEOUT=1
 
-
-# genpass n
-# where n is the number of bytes, try and generate a password up to n bytes
-
-
 # Set auto pushd
 setopt AUTO_PUSHD
-
-# Load the appropriate Prompt and LS COLORS
-
 
 # History searching magic
 # bind P and N for EMACS mode
@@ -50,7 +42,7 @@ zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 # zstyle ':completion:*' matcher-list 'r:[[:ascii:]]||[[:ascii:]]=** r:|=* m:{a-z\-}={A-Z\_}'
 
 # Completions
-fpath+=(~/dotfiles/shells/zsh/plugins/zsh-completions/src $fpath)
+fpath+=(~/dotfiles/shells/plugins/zsh-completions/src $fpath)
 
 autoload -U compinit
 compinit
