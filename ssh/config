@@ -12,9 +12,3 @@ Host    appledore
     HostName    appledore.aselia.me
     User        rsamuels
     SendEnv     ITERM_PROFILE
-Host    pdc
-    HostName    pdc-amd01.poly.edu
-    User        rms521
-Host    prog
-    HostName    kimota.net
-    User        rms521
