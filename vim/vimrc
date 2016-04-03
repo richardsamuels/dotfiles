@@ -249,6 +249,11 @@ set number
 " =============================================================================
 " {{{
 colorscheme solarized
+
+highlight SignColumn guibg=#002b36
+highlight YcmErrorSign guibg=red
+highlight YcmWarningSign guibg=yellow
+
 call togglebg#map("<F5>")
 
 " File-type highlighting and configuration.
