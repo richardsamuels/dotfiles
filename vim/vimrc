@@ -21,6 +21,8 @@ Plug 'altercation/vim-colors-solarized'
 
 " Makes vim respond well as a pager Test
 Plug 'rkitover/vimpager'
+
+Plug 'AndrewRadev/linediff.vim'
 " }}}
 
 " Commenting Plugins {{{
@@ -31,15 +33,31 @@ Plug 'vim-scripts/comments.vim'
 " Development Specific Plugins (Darwin or when $RS_DEV==true) {{{
 if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
     if ( $WORK_MODE == "true")
-        Plug 'Shougo/neocomplete.vim'
+
+        " Personal fork has some highlighting stuff for the unamed perforced
+        " buffers
+        Plug 'richardsamuels/vim-perforce', {
+                    \ 'do' : 'build.sh'
+                    \ }
+
+        if !&diff
+            " Build it manually ugh
+            Plug 'Valloric/YouCompleteMe', {
+                        \ 'do' : 'build.sh'
+                        \ }
+
+            Plug 'jeaye/color_coded', {
+                        \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
+                        \ 'do' : 'build.sh'
+                        \ }
+
+        endif
 
     else
         " YCM for Code Completion
         Plug 'Valloric/YouCompleteMe', {
                     \ 'do' : './install.py --clang-completer --tern-completer --racer-completer --gocode-completer'
                     \ }
-        " Syntastic code competion, replaced by YCM
-        " Plug 'scrooloose/syntastic'
 
         " Enhanced colouring for C family of languages
         Plug 'jeaye/color_coded', {
@@ -254,6 +272,9 @@ colorscheme solarized
 
 call togglebg#map("<F5>")
 
+" YCM will wipe these colors, thus the autocmds
+autocmd ColorScheme * highlight clear SignColumn
+
 " File-type highlighting and configuration.
 " Run :filetype (without args) to see what you may have
 " to turn on yourself, or just set them all to be sure.
@@ -283,7 +304,7 @@ hi SpellBad cterm=underline gui=underline
 set colorcolumn=80
 
 " Pretty line wrap
-set showbreak=↩
+set showbreak=⏎
 
 " Highlight search matches
 set hlsearch
@@ -330,6 +351,8 @@ endif
 " 10 GUI
 " =============================================================================
 if ( has("gui_running") )
+    " Turns out difference gui libraries have different expectations
+    " for the font name. Lovely
     if (system('uname') =~? "Darwin")
         set guifont=Anonymice\ Powerline:h14
     else
@@ -458,6 +481,8 @@ if &diff
     " cnoremap q :qall
 endif
 
+let mapleader = ","
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
 " GoldenView {{{
 let g:goldenview__enable_default_mapping = 0
@@ -618,17 +643,16 @@ let g:tmuxline_theme = 'airline'
 " 28. YouCompleteMe
 " -----------------------------------------------------------------------------
 
-let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/ycm_cpp11.py'
-let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
-" let g:ycm_register_as_syntastic_checker = 1
-" let g:Show_diagnostics_ui = 1 "default 1
-let g:ycm_confirm_extra_conf = 0
-"let g:ycm_server_keep_logfiles = 1
-"let g:ycm_server_log_level = 'debug'
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_always_populate_location_list = 1
+
 let g:ycm_warning_symbol = '◆'
 let g:ycm_error_symbol = '⌦'
-"let g:ycm_server_use_vim_stdout = 1
+
+let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/ycm_cpp11.py'
+let g:ycm_confirm_extra_conf=1
 
 " -----------------------------------------------------------------------------
 " 28.3 mhinz/vim-startify
@@ -677,6 +701,12 @@ let g:less.enabled = 0
 " -----------------------------------------------------------------------------
 let delimitMate_expand_cr = 1
 
+" -----------------------------------------------------------------------------
+" 28.8 mhinz/vim-signify
+" -----------------------------------------------------------------------------
+let g:signify_disable_by_default = 1
+let g:signify_vcs_list = ['perforce', 'git']
+
 " =============================================================================
 " 29 Language Specific Fun-ness
 " =============================================================================
@@ -707,7 +737,7 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " =============================================================================
 " 31 Environment Specific Configurations
 " =============================================================================
-if (!empty(glob("~/dotfiles/vim/local/*/*.vimrc"))) 
+if (!empty(glob("~/dotfiles/vim/local/*/*.vimrc")))
     source ~/dotfiles/vim/local/*/*.vimrc
 endif
 
