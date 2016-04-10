@@ -216,6 +216,8 @@ filetype plugin indent on    " required
 " =============================================================================
 " 1 important
 " =============================================================================
+" Don't indent access visibility modifiers
+set cinoptions+=g0
 
 " =============================================================================
 " 2 moving around, searching and patterns
@@ -250,10 +252,6 @@ set number
 " {{{
 colorscheme solarized
 
-highlight SignColumn guibg=#002b36
-highlight YcmErrorSign guibg=red
-highlight YcmWarningSign guibg=yellow
-
 call togglebg#map("<F5>")
 
 " File-type highlighting and configuration.
@@ -281,14 +279,17 @@ set spellfile=~/dotfiles/vim/vimspellfile.utf-8.add
 hi clear SpellBad
 hi SpellBad cterm=underline gui=underline
 
-" Line at 100 chars
-set colorcolumn=100
+" Line at 80 chars
+set colorcolumn=80
 
 " Pretty line wrap
 set showbreak=↩
 
 " Highlight search matches
 set hlsearch
+
+" Doxygen
+let g:load_doxygen_syntax=1
 "}}}
 
 " =============================================================================
@@ -614,40 +615,20 @@ let g:tmuxline_theme = 'airline'
 " }}}
 
 " -----------------------------------------------------------------------------
-" 28.2 Syntastic, YouCompleteMe, and NeoComplete
+" 28. YouCompleteMe
 " -----------------------------------------------------------------------------
 
-" Left over Syntastic stuff
-" Enable C++11 Support for Syntastic
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '-Wall -std=c++11 -stdlib=libc++'
-
-" YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/ycm_cpp11.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_register_as_syntastic_checker = 1
+" let g:ycm_register_as_syntastic_checker = 1
 " let g:Show_diagnostics_ui = 1 "default 1
 let g:ycm_confirm_extra_conf = 0
 "let g:ycm_server_keep_logfiles = 1
 "let g:ycm_server_log_level = 'debug'
-"let g:ycm_warning_symbol = '.'
-"let g:ycm_error_symbol = '..'
+let g:ycm_warning_symbol = '◆'
+let g:ycm_error_symbol = '⌦'
 "let g:ycm_server_use_vim_stdout = 1
-
-
-" NeoComplete
-let g:acp_enableAtStartup = 1
-
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " -----------------------------------------------------------------------------
 " 28.3 mhinz/vim-startify
