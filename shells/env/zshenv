@@ -1,0 +1,31 @@
+#Editor
+#export MANPAGER="export VIM_TINY=1; /bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -c 'nnoremap q <Nop>' -c 'nnoremap q :q!<Enter>' -\""
+
+# Arch linux
+if [ -f "/etc/arch-release" ];
+then
+    true
+# Mac OS X
+elif [ `uname` = "Darwin" ]; then
+    # /etc/profile
+    ## system-wide environment settings for zsh(1)
+    #if [ -x /usr/libexec/path_helper ]; then
+    #        PATH=""
+    #        MANPATH=""
+    #        eval `/usr/libexec/path_helper -s`
+    #fi
+
+    if  [ -d "/usr/local/opt/coreutils/libexec/gnubin" ]; then
+        PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+        MANPATH="/usr/local/opt/coreutils/libexec/gnuman"
+    fi
+
+    if [ -d "~/.cabal/bin" ]; then
+        PATH=~/.cabal/bin:$PATH
+    fi
+
+    export PATH
+
+fi
+
+# vim: set ft=zsh :

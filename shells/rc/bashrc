@@ -1,0 +1,40 @@
+
+# Stolen from https://unix.stackexchange.com/questions/4290/aliasing-cd-to-pushd-is-it-a-good-idea
+# with some slight modifications
+pushd()
+{
+  if [ $# -eq 0 ]; then
+    DIR="${HOME}"
+  else
+    DIR="$1"
+  fi
+
+  builtin pushd "${DIR}" > /dev/null
+}
+
+pushd_builtin()
+{
+  builtin pushd > /dev/null
+}
+
+popd()
+{
+  builtin popd > /dev/null
+}
+
+alias cd='pushd'
+alias bc='popd'
+alias flip='pushd_builtin'
+
+case "$-" in
+  *i*)
+    bind '"\e[A": history-search-backward'
+    bind '"\e[B": history-search-forward'
+    ;;
+esac
+
+alias bd=". ~/dotfiles/shells/plugins/bash-bd/bd"
+source ~/dotfiles/shells/plugins/bash-bd/bash_completion.d/bd
+
+
+# vim: set ft=sh :

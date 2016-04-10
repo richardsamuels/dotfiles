@@ -48,4 +48,4 @@
 
 
 
-source $HOME/dotfiles/zsh/zshenv
+source $HOME/dotfiles/shells/env.sh

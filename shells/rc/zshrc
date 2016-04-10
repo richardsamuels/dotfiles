@@ -1,0 +1,60 @@
+
+#autoload run-help
+#HELPDIR=/usr/local/share/zsh/help
+
+# Enable Superior Key bindings
+#set -o vi
+
+# Make the superior key bindings better
+# Reduce delay
+#export KEYTIMEOUT=1
+
+# Set auto pushd
+setopt AUTO_PUSHD
+
+# History searching magic
+# bind P and N for EMACS mode
+# bindkey -M emacs '^P' history-substring-search-up
+# bindkey -M emacs '^N' history-substring-search-down
+#
+# # bind k and j for VI mode
+# bindkey -M vicmd 'k' history-substring-search-up
+# bindkey -M vicmd 'j' history-substring-search-down
+#
+# # bind UP and DOWN arrow keys
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+setopt SHARE_HISTORY
+
+SAVEHIST=1000
+
+if (( ! EUID )); then
+  HISTFILE=~/.history_root
+else
+  HISTFILE=~/.history
+fi
+export HISTFILE
+
+
+#ZSH Tab Completion Colors
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+# zstyle ':completion:*' matcher-list 'r:[[:ascii:]]||[[:ascii:]]=** r:|=* m:{a-z\-}={A-Z\_}'
+
+# Completions
+fpath+=(~/dotfiles/shells/plugins/zsh-completions/src $fpath)
+
+autoload -U compinit
+compinit
+zmodload -i zsh/complist
+
+# bd command
+source ~/dotfiles/shells/plugins/zsh-bd/bd.zsh
+
+# history-substring-search-{up,down} macros
+source ~/dotfiles/shells/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# ZSH syntax highlighting
+source ~/dotfiles/shells/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# vim: set ft=zsh :

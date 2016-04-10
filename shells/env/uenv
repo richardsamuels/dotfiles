@@ -1,0 +1,36 @@
+#!/bin/sh
+
+#Universal config, theoretically for all shells, but tested only on Bash and ZSH
+
+export EDITOR="vim"
+export VISUAL="vim"
+
+# Tmuxifier Layouts
+export TMUXIFIER_LAYOUT_PATH=~/dotfiles/tmux/layouts
+
+# Tmux path
+PATH+=":$HOME/dotfiles/shells/plugins/tmuxifier/bin"
+eval "$(tmuxifier init -)"
+
+#export MANPAGER="export VIM_TINY=1; /bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -c 'nnoremap q <Nop>' -c 'nnoremap q :q!<Enter>' -\""
+
+# Language & Locale Settings, for crappy environments
+if [[ -z "${LANG}" ]]; then
+  if [ -f /etc/redhat-release ]; then
+    # Thanks Redhat!
+    export LANG='en_US.utf8'
+  else
+    export LANG='en_US.UTF-8'
+  fi
+fi
+
+if [[ -z "${LC_ALL}" ]]; then
+  if [ -f /etc/redhat-release ]; then
+    # Thanks Redhat!
+    export LC_ALL='en_US.utf8'
+  else
+    export LC_ALL='en_US.UTF-8'
+  fi
+fi
+
+# vim: set ft=sh :
