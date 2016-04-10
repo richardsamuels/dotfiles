@@ -13,6 +13,8 @@ call plug#begin('~/.vim/plugged')
 " Git Plugin
 Plug 'tpope/vim-fugitive'
 
+Plug 'rhysd/vim-clang-format'
+
 " Startup Page
 Plug 'mhinz/vim-startify'
 
@@ -702,10 +704,8 @@ let g:less.enabled = 0
 let delimitMate_expand_cr = 1
 
 " -----------------------------------------------------------------------------
-" 28.8 mhinz/vim-signify
+" 28.8 rhysd/vim-clang-format
 " -----------------------------------------------------------------------------
-let g:signify_disable_by_default = 1
-let g:signify_vcs_list = ['perforce', 'git']
 
 " =============================================================================
 " 29 Language Specific Fun-ness
