@@ -367,7 +367,7 @@ endif
 " 10 GUI
 " =============================================================================
 if ( has("gui_running") )
-    " Turns out difference gui libraries have different expectations
+    " Turns out different gui libraries have different expectations
     " for the font name. Lovely
     if (system('uname') =~? "Darwin")
         set guifont=Anonymice\ Powerline:h14
@@ -428,7 +428,6 @@ set smartindent
 " less annoying defaults for codefolding
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 set foldmethod=indent
-" Don't automatically fold
 set foldenable
 
 " =============================================================================
@@ -475,7 +474,7 @@ command! -bang Qa qa<bang>
 cnoremap <expr> X (getcmdtype() is# ':' && empty(getcmdline())) ? 'x' : 'X'
 
 " Disable auto-comment
-noremap <expr> <enter> getline('.') =~ '^\s*//' ? '<enter><esc>S' : '<ente    r>'
+noremap <expr> <enter> getline('.') =~ '^\s*//' ? '<enter><esc>S' : '<enter>'
 
 " Fixes auto comment with O keys {{{
 nnoremap <expr> O getline('.') =~ '^\s*//' ? 'O<esc>S' : 'O'
@@ -702,8 +701,6 @@ let g:vim_json_syntax_conceal = 0
 " -----------------------------------------------------------------------------
 let g:rainbow_active = 1
 
-let g:typescript_indent_disable = 1
-
 " -----------------------------------------------------------------------------
 " 28.6 rkitover/vimpager
 " -----------------------------------------------------------------------------
@@ -721,6 +718,15 @@ let g:AutoPairsMultilineClose = 0
 " -----------------------------------------------------------------------------
 " 28.8 rhysd/vim-clang-format
 " -----------------------------------------------------------------------------
+
+" -----------------------------------------------------------------------------
+" 28.9 chrisbra/vim-diff-enhanced
+" -----------------------------------------------------------------------------
+if executable("git")
+    if &diff
+        let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience --no-index")'
+    endif
+endif
 
 " =============================================================================
 " 29 Language Specific Fun-ness
@@ -752,14 +758,8 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " =============================================================================
 " 31 Environment Specific Configurations
 " =============================================================================
-if (!empty(glob("~/dotfiles/vim/local/*/*.vimrc")))
-    source ~/dotfiles/vim/local/*/*.vimrc
-endif
-
-if executable("git")
-    if &diff
-        let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience --no-index")'
-    endif
+if (!empty(glob("${HOME}/dotfiles/local/vimrc")))
+    source ${HOME}/dotfiles/local/vimrc
 endif
 
 " Modeline, nothing after this line:
