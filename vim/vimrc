@@ -7,7 +7,15 @@ scriptencoding utf-8
 " 0 Vim-Plug Setup
 " =============================================================================
 " {{{
-call plug#begin('~/.vim/plugged')
+
+
+if has('nvim')
+    let s:vim_plugged_path = '~/.config/nvim/plugged'
+else
+    let s:vim_plugged_path = '~/.vim/plugged'
+endif
+
+call plug#begin(s:vim_plugged_path)
 
 " Misc Plugins {{{
 " Git Plugin
@@ -29,6 +37,8 @@ Plug 'AndrewRadev/linediff.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 Plug 'chrisbra/vim-diff-enhanced'
+
+Plug 'slurps-mad-rips/cmake.vim'
 " }}}
 
 " Commenting Plugins {{{
@@ -61,7 +71,7 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
     else
         " YCM for Code Completion
         Plug 'Valloric/YouCompleteMe', {
-                    \ 'do' : './install.py --clang-completer --tern-completer --racer-completer --gocode-completer'
+                    \ 'do' : './install.py --clang-completer --racer-completer'
                     \ }
 
         " Enhanced colouring for C family of languages

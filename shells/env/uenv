@@ -9,8 +9,8 @@ export VISUAL="vim"
 export TMUXIFIER_LAYOUT_PATH=~/dotfiles/tmux/layouts
 
 # Tmux path
-PATH+=":$HOME/dotfiles/shells/plugins/tmuxifier/bin"
-eval "$(tmuxifier init -)"
+#PATH+=":$HOME/dotfiles/shells/plugins/tmuxifier/bin"
+#eval "$(tmuxifier init -)"
 
 #export MANPAGER="export VIM_TINY=1; /bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -c 'nnoremap q <Nop>' -c 'nnoremap q :q!<Enter>' -\""
 
