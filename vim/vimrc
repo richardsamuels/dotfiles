@@ -7,22 +7,38 @@ scriptencoding utf-8
 " 0 Vim-Plug Setup
 " =============================================================================
 " {{{
-call plug#begin('~/.vim/plugged')
+
+
+if has('nvim')
+    let s:vim_plugged_path = '~/.config/nvim/plugged'
+else
+    let s:vim_plugged_path = '~/.vim/plugged'
+endif
+
+call plug#begin(s:vim_plugged_path)
 
 " Misc Plugins {{{
 " Git Plugin
 Plug 'tpope/vim-fugitive'
 
+Plug 'rhysd/vim-clang-format'
+
 " Startup Page
 Plug 'mhinz/vim-startify'
 
-" Solarised Color Scheme
-Plug 'altercation/vim-colors-solarized'
+" Solarised Color Scheme remixed for color_coded
+Plug 'richardsamuels/vim-colors-solarized'
 
 " Makes vim respond well as a pager Test
 Plug 'rkitover/vimpager'
 
 Plug 'AndrewRadev/linediff.vim'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+Plug 'chrisbra/vim-diff-enhanced'
+
+Plug 'slurps-mad-rips/cmake.vim'
 " }}}
 
 " Commenting Plugins {{{
@@ -32,16 +48,15 @@ Plug 'vim-scripts/comments.vim'
 
 " Development Specific Plugins (Darwin or when $RS_DEV==true) {{{
 if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
+    Plug 'rhysd/vim-clang-format'
+
     if ( $WORK_MODE == "true")
 
         " Personal fork has some highlighting stuff for the unamed perforced
         " buffers
-        Plug 'richardsamuels/vim-perforce', {
-                    \ 'do' : 'build.sh'
-                    \ }
+        Plug 'richardsamuels/vim-perforce'
 
         if !&diff
-            " Build it manually ugh
             Plug 'Valloric/YouCompleteMe', {
                         \ 'do' : 'build.sh'
                         \ }
@@ -56,7 +71,7 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
     else
         " YCM for Code Completion
         Plug 'Valloric/YouCompleteMe', {
-                    \ 'do' : './install.py --clang-completer --tern-completer --racer-completer --gocode-completer'
+                    \ 'do' : './install.py --clang-completer --racer-completer'
                     \ }
 
         " Enhanced colouring for C family of languages
@@ -78,7 +93,8 @@ Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
 
 " Automatic sublime-style delimiters
-Plug 'Raimondi/delimitMate'
+"Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 " }}}
 
 " Airline {{{
@@ -697,15 +713,14 @@ let g:less = {}
 let g:less.enabled = 0
 
 " -----------------------------------------------------------------------------
-" 28.7 Raimondi/delimitMate
+" 28.7 jiangmiao/auto-pairs
 " -----------------------------------------------------------------------------
-let delimitMate_expand_cr = 1
+let g:AutoPairsCenterLine = 0
+let g:AutoPairsMultilineClose = 0
 
 " -----------------------------------------------------------------------------
-" 28.8 mhinz/vim-signify
+" 28.8 rhysd/vim-clang-format
 " -----------------------------------------------------------------------------
-let g:signify_disable_by_default = 1
-let g:signify_vcs_list = ['perforce', 'git']
 
 " =============================================================================
 " 29 Language Specific Fun-ness
@@ -739,6 +754,12 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " =============================================================================
 if (!empty(glob("~/dotfiles/vim/local/*/*.vimrc")))
     source ~/dotfiles/vim/local/*/*.vimrc
+endif
+
+if executable("git")
+    if &diff
+        let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience --no-index")'
+    endif
 endif
 
 " Modeline, nothing after this line:
