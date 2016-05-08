@@ -18,8 +18,8 @@ Plug 'rhysd/vim-clang-format'
 " Startup Page
 Plug 'mhinz/vim-startify'
 
-" Solarised Color Scheme
-Plug 'altercation/vim-colors-solarized'
+" Solarised Color Scheme remixed for color_coded
+Plug 'richardsamuels/vim-colors-solarized'
 
 " Makes vim respond well as a pager Test
 Plug 'rkitover/vimpager'
