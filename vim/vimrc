@@ -25,6 +25,10 @@ Plug 'richardsamuels/vim-colors-solarized'
 Plug 'rkitover/vimpager'
 
 Plug 'AndrewRadev/linediff.vim'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+Plug 'chrisbra/vim-diff-enhanced'
 " }}}
 
 " Commenting Plugins {{{
@@ -739,6 +743,12 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " =============================================================================
 if (!empty(glob("~/dotfiles/vim/local/*/*.vimrc")))
     source ~/dotfiles/vim/local/*/*.vimrc
+endif
+
+if executable("git")
+    if &diff
+        let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience --no-index")'
+    endif
 endif
 
 " Modeline, nothing after this line:
