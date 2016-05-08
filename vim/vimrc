@@ -666,7 +666,7 @@ let g:ycm_always_populate_location_list = 1
 let g:ycm_warning_symbol = '◆'
 let g:ycm_error_symbol = '⌦'
 
-let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/ycm_cpp11.py'
+let g:ycm_global_ycm_extra_conf = '${HOME}/dotfiles/vim/ycm_cpp11.py'
 let g:ycm_confirm_extra_conf=1
 
 " -----------------------------------------------------------------------------
