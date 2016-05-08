@@ -38,16 +38,15 @@ Plug 'vim-scripts/comments.vim'
 
 " Development Specific Plugins (Darwin or when $RS_DEV==true) {{{
 if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
+    Plug 'rhysd/vim-clang-format'
+
     if ( $WORK_MODE == "true")
 
         " Personal fork has some highlighting stuff for the unamed perforced
         " buffers
-        Plug 'richardsamuels/vim-perforce', {
-                    \ 'do' : 'build.sh'
-                    \ }
+        Plug 'richardsamuels/vim-perforce'
 
         if !&diff
-            " Build it manually ugh
             Plug 'Valloric/YouCompleteMe', {
                         \ 'do' : 'build.sh'
                         \ }
