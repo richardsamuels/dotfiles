@@ -48,4 +48,4 @@
 
 
 
-source $HOME/dotfiles/shells/profile/zprofile
+source ${HOME}/dotfiles/shells/zprofile
