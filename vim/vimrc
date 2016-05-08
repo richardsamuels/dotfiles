@@ -83,7 +83,8 @@ Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
 
 " Automatic sublime-style delimiters
-Plug 'Raimondi/delimitMate'
+"Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 " }}}
 
 " Airline {{{
@@ -702,9 +703,10 @@ let g:less = {}
 let g:less.enabled = 0
 
 " -----------------------------------------------------------------------------
-" 28.7 Raimondi/delimitMate
+" 28.7 jiangmiao/auto-pairs
 " -----------------------------------------------------------------------------
-let delimitMate_expand_cr = 1
+let g:AutoPairsCenterLine = 0
+let g:AutoPairsMultilineClose = 0
 
 " -----------------------------------------------------------------------------
 " 28.8 rhysd/vim-clang-format
