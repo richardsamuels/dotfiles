@@ -23,12 +23,14 @@ else
 fi
 
 # alias ls to use colors
+# GNU LS
 if ls --color -d . >/dev/null 2>&1; then
-    # GNU LS
     LS_DEFAULT="ls --color=auto"
+
+# BSD LS
 elif ls -G -d . >/dev/null 2>&1; then
-    # BSD LS
     LS_DEFAULT="ls -G"
+
 else
     LS_DEFAULT="ls"
 fi;
@@ -49,7 +51,7 @@ genpass() {
     fi
 }
 
-# Given author name, calculate contributions
+# Given author name, calculate contributions in terms of line of change
 gitcalc() {
     if [ -n "$1" ]; then
         git log --shortstat --author "$1" | grep "files\? changed" | awk '{files+=$1; inserted+=$4; deleted+=$6} END {print "files changed", files, "lines inserted:", inserted, "lines deleted:", deleted}'
