@@ -758,8 +758,8 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " =============================================================================
 " 31 Environment Specific Configurations
 " =============================================================================
-if (!empty(glob("${HOME}/dotfiles/local/vim/vimrc")))
-    source ${HOME}/dotfiles/local/vim/vimrc
+if (filereadable($HOME . "/dotfiles/local/vim/vimrc"))
+    execute("source " . $HOME . "/dotfiles/local/vim/vimrc")
 endif
 
 " Modeline, nothing after this line:
