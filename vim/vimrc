@@ -27,7 +27,14 @@ Plug 'rhysd/vim-clang-format'
 Plug 'mhinz/vim-startify'
 
 " Solarised Color Scheme remixed for color_coded
-Plug 'richardsamuels/vim-colors-solarized'
+if has("nvim")
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    Plug 'richardsamuels/vim-colors-solarized', {
+                \'branch': 'neovim'
+                \}
+else
+    Plug 'richardsamuels/vim-colors-solarized'
+endif
 
 " Makes vim respond well as a pager Test
 Plug 'rkitover/vimpager'
@@ -58,13 +65,21 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
 
         if !&diff
             Plug 'Valloric/YouCompleteMe', {
-                        \ 'do' : 'build.sh'
+                        \ 'do' : 'fds_build.sh'
                         \ }
 
-            Plug 'jeaye/color_coded', {
-                        \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
-                        \ 'do' : 'build.sh'
-                        \ }
+            if has("nvim")
+                Plug 'richardsamuels/neocc', {
+                            \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
+                            \ 'do' : 'build.sh'
+                            \ }
+
+            else
+                Plug 'jeaye/color_coded', {
+                            \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
+                            \ 'do' : 'build.sh'
+                            \ }
+            endif
 
         endif
 
@@ -74,11 +89,21 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
                     \ 'do' : './install.py --clang-completer --racer-completer'
                     \ }
 
-        " Enhanced colouring for C family of languages
-        Plug 'jeaye/color_coded', {
-                    \ 'do' : 'cmake . && make && make install',
-                    \ 'for' : ['c', 'cpp', 'objc', 'objcpp']
-                    \ }
+
+        if has("nvim")
+            Plug 'richardsamuels/neocc', {
+                        \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
+                        \ 'do' : 'build.sh'
+                        \ }
+
+        else
+
+            " Enhanced colouring for C family of languages
+            Plug 'jeaye/color_coded', {
+                        \ 'do' : 'cmake -G "Ninja" . && make && make install',
+                        \ 'for' : ['c', 'cpp', 'objc', 'objcpp']
+                        \ }
+        endif
 
         "Plug 'Quramy/tsuquyomi'
     endif
@@ -226,7 +251,8 @@ Plug 'vim-perl/vim-perl', {
 Plug 'zhaocai/GoldenView.Vim'
 
 " Indentation Guidelines
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Reveals trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
@@ -668,6 +694,7 @@ let g:ycm_error_symbol = '⌦'
 
 let g:ycm_global_ycm_extra_conf = '${HOME}/dotfiles/vim/ycm_cpp11.py'
 let g:ycm_confirm_extra_conf=1
+let g:ycm_collect_identifiers_from_tags_files = 0
 
 " -----------------------------------------------------------------------------
 " 28.3 mhinz/vim-startify
@@ -727,6 +754,14 @@ if executable("git")
         let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience --no-index")'
     endif
 endif
+
+" -----------------------------------------------------------------------------
+" 28.10 nathanaelkane/vim-indent-guides
+" -----------------------------------------------------------------------------
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'startify']
+"let g:indent_guides_guide_size = 1
+let g:indent_guides_color_change_percent = 2
 
 " =============================================================================
 " 29 Language Specific Fun-ness
