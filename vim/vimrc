@@ -89,7 +89,6 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
                     \ 'do' : './install.py --clang-completer --racer-completer'
                     \ }
 
-
         if has("nvim")
             Plug 'richardsamuels/neocc', {
                         \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
