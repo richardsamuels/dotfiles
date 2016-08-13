@@ -99,7 +99,7 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
 
             " Enhanced colouring for C family of languages
             Plug 'jeaye/color_coded', {
-                        \ 'do' : 'cmake -G "Ninja" . && make && make install',
+                        \ 'do' : 'cmake -G Ninja . && make && make install',
                         \ 'for' : ['c', 'cpp', 'objc', 'objcpp']
                         \ }
         endif
