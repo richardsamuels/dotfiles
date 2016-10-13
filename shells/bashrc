@@ -36,5 +36,20 @@ esac
 alias bd=". ~/dotfiles/shells/plugins/bash-bd/bd"
 source ~/dotfiles/shells/plugins/bash-bd/bash_completion.d/bd
 
+defuckify() {
+  ag fuck
+  ag shit
+  ag dick
+  ag cock
+  ag crap
+  ag piss
+  ag screwed
+  ag "cry "
+  ag cries
+  ag TODO
+  ag XXX
+  ag FIXME
+}
+alias deswearify="defuckify;"
 
 # vim: set ft=sh :

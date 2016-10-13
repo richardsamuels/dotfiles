@@ -33,4 +33,24 @@ if [[ -z "${LC_ALL}" ]]; then
   fi
 fi
 
+if [ -n "$TMUX" ]; then
+  refresh_tmux() {
+    local ssh_sock="$(tmux show-environment | grep "^SSH_AUTH_SOCK")"
+    if [ ! -z "${ssh_sock}" ]; then
+      export "${ssh_sock}"
+    fi
+
+    local display="$(tmux show-environment | grep "^DISPLAY")"
+    if [ ! -z "${display}" ]; then
+      export "${display}"
+    fi
+  }
+
+else
+  refresh_tmux() {
+    return
+  }
+fi
+
+
 # vim: set ft=sh :
