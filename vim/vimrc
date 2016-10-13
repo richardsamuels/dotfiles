@@ -58,54 +58,45 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
     Plug 'rhysd/vim-clang-format'
 
     if ( $WORK_MODE == "true")
+        let s:do_youcompleteme = 'fds_build.sh'
+        let s:do_color_coded = 'build.sh'
 
-        " Personal fork has some highlighting stuff for the unamed perforced
+        " Personal fork has some highlighting stuff for the unnamed perforced
         " buffers
         Plug 'richardsamuels/vim-perforce'
 
-        if !&diff
-            Plug 'Valloric/YouCompleteMe', {
-                        \ 'do' : 'fds_build.sh'
-                        \ }
-
-            if has("nvim")
-                Plug 'richardsamuels/neocc', {
-                            \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
-                            \ 'do' : 'build.sh'
-                            \ }
-
-            else
-                Plug 'jeaye/color_coded', {
-                            \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
-                            \ 'do' : 'build.sh'
-                            \ }
-            endif
-
-        endif
-
     else
+        let s:do_youcompleteme = './install.py --clang-completer --racer-completer'
+        let s:do_colorcoded = 'cmake -G "Ninja" . && make && make install'
+    endif
+
+
+    if !&diff
         " YCM for Code Completion
         Plug 'Valloric/YouCompleteMe', {
-                    \ 'do' : './install.py --clang-completer --racer-completer'
+                    \ 'do' : $s:do_youcompleteme
                     \ }
 
+        Plug 'scrooloose/syntastic', {
+                    \ 'for': ['python']
+                    \ }
 
         if has("nvim")
             Plug 'richardsamuels/neocc', {
                         \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
-                        \ 'do' : 'build.sh'
+                        \ 'do' : $s:do_colorcoded
                         \ }
 
         else
-
-            " Enhanced colouring for C family of languages
             Plug 'jeaye/color_coded', {
-                        \ 'do' : 'cmake -G "Ninja" . && make && make install',
-                        \ 'for' : ['c', 'cpp', 'objc', 'objcpp']
+                        \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
+                        \ 'do' : $s:do_colorcoded
                         \ }
         endif
 
-        "Plug 'Quramy/tsuquyomi'
+        "Plug 'Quramy/tsuquyomi', {
+        "      \ 'for': ['typescript']
+        "      \ }
     endif
 endif
 " }}}
@@ -129,7 +120,7 @@ Plug 'vim-airline/vim-airline'
 
 "Plug 'edkolev/promptline.vim'
 "
-"Plug 'edkolev/tmuxline.vim'
+Plug 'edkolev/tmuxline.vim'
 " }}}
 
 " Language Specific Plugins {{{
@@ -151,78 +142,78 @@ endif
 
 if ( $WORK_MODE != "true" )
 
-" Typescript {{{
-Plug 'leafgarland/typescript-vim'
-Plug 'clausreinke/typescript-tools.vim'
-" }}}
+  " Typescript {{{
+  Plug 'leafgarland/typescript-vim'
+  Plug 'clausreinke/typescript-tools.vim'
+  " }}}
 
-" toml {{{
-Plug 'cespare/vim-toml', {
-            \ 'for' : ['toml']
-            \ }
-" }}}
+  " toml {{{
+  Plug 'cespare/vim-toml', {
+              \ 'for' : ['toml']
+              \ }
+  " }}}
 
-" Markdown Plugins {{{
-Plug 'plasticboy/vim-markdown'
-Plug 'jtratner/vim-flavored-markdown'
-" }}}
+  " Markdown Plugins {{{
+  Plug 'plasticboy/vim-markdown'
+  Plug 'jtratner/vim-flavored-markdown'
+  " }}}
 
-" Haskell {{{
-if ( executable("hdevtools") )
-    " Haskell
-    Plug 'bitc/vim-hdevtools', {
-                \ 'for': ['haskell', 'lhaskell', 'chaskell'],
-                \ }
+  " Haskell {{{
+  if ( executable("hdevtools") )
+      " Haskell
+      Plug 'bitc/vim-hdevtools', {
+                  \ 'for': ['haskell', 'lhaskell', 'chaskell'],
+                  \ }
 
-    Plug 'dag/vim2hs', {
-                \ 'for': ['haskell', 'lhaskell', 'chaskell'],
-                \ }
-endif
-" }}}
+      Plug 'dag/vim2hs', {
+                  \ 'for': ['haskell', 'lhaskell', 'chaskell'],
+                  \ }
+  endif
+  " }}}
 
-" HTML/CSS {{{
-Plug 'mattn/emmet-vim', {
-            \ 'for': ['html', 'css'],
-            \ }
-" }}}
+  " HTML/CSS {{{
+  Plug 'mattn/emmet-vim', {
+              \ 'for': ['html', 'css'],
+              \ }
+  " }}}
 
-" Rust {{{
-" NeoBundleLazy 'phildawes/racer', {
-"             \ 'build': {
-"             \   'mac': 'cargo build --release',
-"             \   'unix': 'cargo build --release',
-"             \  },
-"             \ 'autoload' : {
-"             \   'filetypes' : ['rust'],
-"             \  }
-"             \  }
+  " Rust {{{
+  " NeoBundleLazy 'phildawes/racer', {
+  "             \ 'build': {
+  "             \   'mac': 'cargo build --release',
+  "             \   'unix': 'cargo build --release',
+  "             \  },
+  "             \ 'autoload' : {
+  "             \   'filetypes' : ['rust'],
+  "             \  }
+  "             \  }
 
-Plug 'rust-lang/rust.vim', {
-            \ 'for': ['rust'],
-            \ }
-"}}}
+  Plug 'rust-lang/rust.vim', {
+              \ 'for': ['rust'],
+              \ }
+  "}}}
 
-" Clojure {{{
-" Syntax highlighting and indentation
-Plug 'guns/vim-clojure-static', {
-            \ 'for' : 'clojure',
-            \ }
+  " Clojure {{{
+  " Syntax highlighting and indentation
+  Plug 'guns/vim-clojure-static', {
+              \ 'for' : 'clojure',
+              \ }
 
-" Leiningen
-Plug 'tpope/vim-salve', {
-            \ 'for' : 'clojure',
-            \ }
+  " Leiningen
+  Plug 'tpope/vim-salve', {
+              \ 'for' : 'clojure',
+              \ }
 
-" REPL in vim
-Plug 'tpope/vim-fireplace', {
-            \ 'for' : 'clojure',
-            \ }
+  " REPL in vim
+  Plug 'tpope/vim-fireplace', {
+              \ 'for' : 'clojure',
+              \ }
 
-" Better Clojure highlighting
-Plug 'guns/vim-clojure-highlight', {
-            \ 'for' : 'clojure',
-            \ }
-" }}}
+  " Better Clojure highlighting
+  Plug 'guns/vim-clojure-highlight', {
+              \ 'for' : 'clojure',
+              \ }
+  " }}}
 
 endif
 
@@ -276,7 +267,7 @@ filetype plugin indent on    " required
 " =============================================================================
 " 1 important
 " =============================================================================
-" Don't indent access visibility modifiers
+" Don't indent access visibility modifiers (like public:, private:, etc.)
 set cinoptions+=g0
 
 " =============================================================================
@@ -398,7 +389,7 @@ if ( has("gui_running") )
     if (system('uname') =~? "Darwin")
         set guifont=Anonymice\ Powerline:h14
     else
-        set guifont=Anonymice\ Powerline\ 14
+        set guifont=TamzenForPowerline\ 12
     endif
     "set guifont=Anonymous\ Pro\ 12
 
@@ -441,8 +432,8 @@ set backspace=indent,eol,start
 " =============================================================================
 set tabstop=8                   "A tab is 8 spaces
 set expandtab                   "Always uses spaces instead of tabs
-set softtabstop=2               "Insert 2 spaces when tab is pressed
-set shiftwidth=2                "An indent is 2 spaces
+set softtabstop=4               "Insert 4 spaces when tab is pressed
+set shiftwidth=4                "An indent is 4 spaces
 set shiftround                  "Round indent to nearest shiftwidth multiple
 
 set smartindent
@@ -522,8 +513,9 @@ if &diff
     " cnoremap q :qall
 endif
 
-let mapleader = ","
+" let mapleader = ","
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
+nnoremap <leader>jf :YcmCompleter FixIt<CR>
 
 " GoldenView {{{
 let g:goldenview__enable_default_mapping = 0
@@ -689,8 +681,13 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_always_populate_location_list = 1
 
-let g:ycm_warning_symbol = '◆'
-let g:ycm_error_symbol = '⌦'
+if $LC_ALL =~ "utf-8" || $LC_ALL =~ "utf8"
+    let g:ycm_warning_symbol = '◆'
+    let g:ycm_error_symbol = '⌦'
+else
+    let g:ycm_warning_symbol = '~'
+    let g:ycm_error_symbol = 'x'
+endif
 
 let g:ycm_global_ycm_extra_conf = '${HOME}/dotfiles/vim/ycm_cpp11.py'
 let g:ycm_confirm_extra_conf=1
@@ -749,10 +746,8 @@ let g:AutoPairsMultilineClose = 0
 " -----------------------------------------------------------------------------
 " 28.9 chrisbra/vim-diff-enhanced
 " -----------------------------------------------------------------------------
-if executable("git")
-    if &diff
-        let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience --no-index")'
-    endif
+if &diff && executable("git")
+    let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience --no-index")'
 endif
 
 " -----------------------------------------------------------------------------
@@ -760,8 +755,15 @@ endif
 " -----------------------------------------------------------------------------
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'startify']
-"let g:indent_guides_guide_size = 1
-let g:indent_guides_color_change_percent = 2
+let g:indent_guides_guide_size = 1
+if has("gui_running")
+    let g:indent_guides_color_change_percent = 2
+endif
+
+" -----------------------------------------------------------------------------
+" 28.11 scrooloose/syntastic
+" -----------------------------------------------------------------------------
+let g:syntastic_python_checkers = ['flake8']
 
 " =============================================================================
 " 29 Language Specific Fun-ness
