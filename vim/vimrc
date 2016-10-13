@@ -57,41 +57,39 @@ Plug 'vim-scripts/comments.vim'
 if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
     Plug 'rhysd/vim-clang-format'
 
+    let g:settings_youcompleteme = {}
+    let g:settings_colorcoded = {
+                \ 'for' : ['c', 'cpp', 'objc', 'objcpp']
+                \ }
+
+
     if ( $WORK_MODE == "true")
-        let s:do_youcompleteme = 'fds_build.sh'
-        let s:do_color_coded = 'build.sh'
+        let g:settings_youcompleteme.do = 'fds_build.sh'
+        let g:settings_colorcoded.do = 'build.sh'
 
         " Personal fork has some highlighting stuff for the unnamed perforced
         " buffers
         Plug 'richardsamuels/vim-perforce'
 
     else
-        let s:do_youcompleteme = './install.py --clang-completer --racer-completer'
-        let s:do_colorcoded = 'cmake -G "Ninja" . && make && make install'
+        let g:settings_youcompleteme.do = './install.py --clang-completer --racer-completer'
+        let g:settings_colorcoded.do = 'cmake -G "Ninja" . && make && make install'
     endif
 
 
     if !&diff
         " YCM for Code Completion
-        Plug 'Valloric/YouCompleteMe', {
-                    \ 'do' : $s:do_youcompleteme
-                    \ }
+        Plug 'Valloric/YouCompleteMe', g:settings_youcompleteme
 
         Plug 'scrooloose/syntastic', {
                     \ 'for': ['python']
                     \ }
 
         if has("nvim")
-            Plug 'richardsamuels/neocc', {
-                        \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
-                        \ 'do' : $s:do_colorcoded
-                        \ }
+            Plug 'richardsamuels/neocc', g:settings_colorcoded
 
         else
-            Plug 'jeaye/color_coded', {
-                        \ 'for' : ['c', 'cpp', 'objc', 'objcpp'],
-                        \ 'do' : $s:do_colorcoded
-                        \ }
+            Plug 'jeaye/color_coded', g:settings_colorcoded
         endif
 
         "Plug 'Quramy/tsuquyomi', {
