@@ -807,7 +807,7 @@ endfunction
 
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
-# python PEP-8 compliance
+" python PEP-8 compliance
 autocmd BufRead *.py setlocal colorcolumn=79
 
 " =============================================================================
