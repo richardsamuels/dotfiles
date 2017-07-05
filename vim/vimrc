@@ -81,9 +81,13 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
         " YCM for Code Completion
         Plug 'Valloric/YouCompleteMe', g:settings_youcompleteme
 
-        Plug 'scrooloose/syntastic', {
+        Plug 'w0rp/ale', {
                     \ 'for': ['python']
                     \ }
+
+        "Plug 'python-mode/python-mode', {
+        "            \ 'for': ['python']
+        "            \ }
 
         if has("nvim")
             Plug 'richardsamuels/neocc', g:settings_colorcoded
@@ -265,8 +269,10 @@ filetype plugin indent on    " required
 " =============================================================================
 " 1 important
 " =============================================================================
-" Don't indent access visibility modifiers (like public:, private:, etc.)
-set cinoptions+=g0
+" g1: indent access visibility modifiers by 1 (like public:, private:, etc.)
+" N-s: namespace indentation (none)
+" (0: google style guide-like indentation?
+set cinoptions+=g1N-s(0
 
 " =============================================================================
 " 2 moving around, searching and patterns
@@ -335,7 +341,11 @@ hi SpellBad cterm=underline gui=underline
 set colorcolumn=80
 
 " Pretty line wrap
-set showbreak=⏎
+if $LC_ALL =~ "utf\(-\)?8"
+    set showbreak=⏎
+else
+    set showbreak=$
+endif
 
 " Highlight search matches
 set hlsearch
@@ -679,7 +689,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_always_populate_location_list = 1
 
-if $LC_ALL =~ "utf-8" || $LC_ALL =~ "utf8"
+if $LC_ALL =~ "utf\(-\)?8"
     let g:ycm_warning_symbol = '◆'
     let g:ycm_error_symbol = '⌦'
 else
@@ -688,6 +698,7 @@ else
 endif
 
 let g:ycm_global_ycm_extra_conf = '${HOME}/dotfiles/vim/ycm_cpp11.py'
+let g:ycm_server_python_interpreter = "python3"
 let g:ycm_confirm_extra_conf=1
 let g:ycm_collect_identifiers_from_tags_files = 0
 
@@ -763,6 +774,12 @@ endif
 " -----------------------------------------------------------------------------
 let g:syntastic_python_checkers = ['flake8']
 
+" -----------------------------------------------------------------------------
+" 28.12 w0rp/ale
+" -----------------------------------------------------------------------------
+let g:ale_python_flake8_executable = 'python3'
+let g:ale_python_pylint_executable = 'python3'
+
 " =============================================================================
 " 29 Language Specific Fun-ness
 " =============================================================================
@@ -789,6 +806,9 @@ function! AppendModeline()
 endfunction
 
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+# python PEP-8 compliance
+autocmd BufRead *.py setlocal colorcolumn=79
 
 " =============================================================================
 " 31 Environment Specific Configurations

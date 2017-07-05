@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # source pre-environment if needed
-if [ -f "${HOME}/dotfiles/local/zsh/pre.uenv" ]; then
+if [ -f "${HOME}/dotfiles/local/shells/pre.uenv" ]; then
   source ${HOME}/dotfiles/local/shells/pre.uenv
 fi
 
