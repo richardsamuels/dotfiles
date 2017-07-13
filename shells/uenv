@@ -52,5 +52,6 @@ else
   }
 fi
 
+export PATH="${HOME}/.cabal/bin:${PATH}"
 
 # vim: set ft=sh :

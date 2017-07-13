@@ -45,7 +45,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 Plug 'chrisbra/vim-diff-enhanced'
 
-Plug 'slurps-mad-rips/cmake.vim'
+"Plug 'slurps-mad-rips/cmake.vim'
+Plug 'pboettch/vim-cmake-syntax'
 " }}}
 
 " Commenting Plugins {{{
@@ -96,12 +97,15 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
             Plug 'jeaye/color_coded', g:settings_colorcoded
         endif
 
-        "Plug 'Quramy/tsuquyomi', {
-        "      \ 'for': ['typescript']
-        "      \ }
+        "Plug 'Quramy/tsuquyomi'
     endif
+
+    Plug 'itchyny/vim-haskell-indent'
+
 endif
 " }}}
+
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Helpful Commands {{{
 " Magical tabularisation
@@ -167,7 +171,11 @@ if ( $WORK_MODE != "true" )
                   \ 'for': ['haskell', 'lhaskell', 'chaskell'],
                   \ }
 
-      Plug 'dag/vim2hs', {
+      "Plug 'dag/vim2hs', {
+      "            \ 'for': ['haskell', 'lhaskell', 'chaskell'],
+      "            \ }
+
+      Plug 'lukerandall/haskellmode-vim', {
                   \ 'for': ['haskell', 'lhaskell', 'chaskell'],
                   \ }
   endif
@@ -624,6 +632,13 @@ if (system('uname') =~? "Darwin")
     " Enables double-width characters (this is an iTerm Compatibility thing
     " for when double-width characters are enabled)
     " set ambiwidth=double
+    "
+    set noerrorbells visualbell t_vb=
+    if has('autocmd')
+      autocmd GUIEnter * set visualbell t_vb= noerrorbells
+    endif
+
+    let g:haddock_browser="open"
 endif
 
 " ----------------------------------------------------------------------------
@@ -783,6 +798,10 @@ let g:ale_python_pylint_executable = 'python3'
 " =============================================================================
 " 29 Language Specific Fun-ness
 " =============================================================================
+let g:haskellmode_completion_ghc = 0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 " =============================================================================
 " 30 Autocmds
