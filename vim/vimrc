@@ -146,86 +146,60 @@ if ( executable("tern") )
 endif
 " }}}
 
-if ( $WORK_MODE != "true" )
+" Typescript {{{
+Plug 'leafgarland/typescript-vim'
+Plug 'clausreinke/typescript-tools.vim'
+" }}}
 
-  " Typescript {{{
-  Plug 'leafgarland/typescript-vim'
-  Plug 'clausreinke/typescript-tools.vim'
-  " }}}
+" toml {{{
+Plug 'cespare/vim-toml', {
+            \ 'for' : ['toml']
+            \ }
+" }}}
 
-  " toml {{{
-  Plug 'cespare/vim-toml', {
-              \ 'for' : ['toml']
-              \ }
-  " }}}
+" Markdown Plugins {{{
+Plug 'plasticboy/vim-markdown'
+Plug 'jtratner/vim-flavored-markdown'
+" }}}
 
-  " Markdown Plugins {{{
-  Plug 'plasticboy/vim-markdown'
-  Plug 'jtratner/vim-flavored-markdown'
-  " }}}
+" Haskell {{{
+if ( executable("hdevtools") )
+    " Haskell
+    Plug 'bitc/vim-hdevtools', {
+                \ 'for': ['haskell', 'lhaskell', 'chaskell'],
+                \ }
 
-  " Haskell {{{
-  if ( executable("hdevtools") )
-      " Haskell
-      Plug 'bitc/vim-hdevtools', {
-                  \ 'for': ['haskell', 'lhaskell', 'chaskell'],
-                  \ }
+    "Plug 'dag/vim2hs', {
+    "            \ 'for': ['haskell', 'lhaskell', 'chaskell'],
+    "            \ }
 
-      "Plug 'dag/vim2hs', {
-      "            \ 'for': ['haskell', 'lhaskell', 'chaskell'],
-      "            \ }
-
-      Plug 'lukerandall/haskellmode-vim', {
-                  \ 'for': ['haskell', 'lhaskell', 'chaskell'],
-                  \ }
-  endif
-  " }}}
-
-  " HTML/CSS {{{
-  Plug 'mattn/emmet-vim', {
-              \ 'for': ['html', 'css'],
-              \ }
-  " }}}
-
-  " Rust {{{
-  " NeoBundleLazy 'phildawes/racer', {
-  "             \ 'build': {
-  "             \   'mac': 'cargo build --release',
-  "             \   'unix': 'cargo build --release',
-  "             \  },
-  "             \ 'autoload' : {
-  "             \   'filetypes' : ['rust'],
-  "             \  }
-  "             \  }
-
-  Plug 'rust-lang/rust.vim', {
-              \ 'for': ['rust'],
-              \ }
-  "}}}
-
-  " Clojure {{{
-  " Syntax highlighting and indentation
-  Plug 'guns/vim-clojure-static', {
-              \ 'for' : 'clojure',
-              \ }
-
-  " Leiningen
-  Plug 'tpope/vim-salve', {
-              \ 'for' : 'clojure',
-              \ }
-
-  " REPL in vim
-  Plug 'tpope/vim-fireplace', {
-              \ 'for' : 'clojure',
-              \ }
-
-  " Better Clojure highlighting
-  Plug 'guns/vim-clojure-highlight', {
-              \ 'for' : 'clojure',
-              \ }
-  " }}}
-
+    Plug 'lukerandall/haskellmode-vim', {
+                \ 'for': ['haskell', 'lhaskell', 'chaskell'],
+                \ }
 endif
+" }}}
+
+" HTML/CSS {{{
+Plug 'mattn/emmet-vim', {
+            \ 'for': ['html', 'css'],
+            \ }
+" }}}
+
+" Rust {{{
+" NeoBundleLazy 'phildawes/racer', {
+"             \ 'build': {
+"             \   'mac': 'cargo build --release',
+"             \   'unix': 'cargo build --release',
+"             \  },
+"             \ 'autoload' : {
+"             \   'filetypes' : ['rust'],
+"             \  }
+"             \  }
+
+Plug 'rust-lang/rust.vim', {
+            \ 'for': ['rust'],
+            \ }
+"}}}
 
 " YAML {{{
 Plug 'avakhov/vim-yaml', {
