@@ -21,8 +21,6 @@ call plug#begin(s:vim_plugged_path)
 " Git Plugin
 Plug 'tpope/vim-fugitive'
 
-Plug 'rhysd/vim-clang-format'
-
 " Startup Page
 Plug 'mhinz/vim-startify'
 
@@ -46,18 +44,21 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'chrisbra/vim-diff-enhanced'
 
 "Plug 'slurps-mad-rips/cmake.vim'
-Plug 'pboettch/vim-cmake-syntax'
+Plug 'pboettch/vim-cmake-syntax', {
+            \ 'for' : ['cmake']
+            \ }
 " }}}
 
 " Commenting Plugins {{{
 Plug 'tpope/vim-commentary'
-Plug 'vim-scripts/comments.vim'
 " }}}
+
+let g:settings_haskell = {
+            \ 'for': ['haskell', 'lhaskell', 'chaskell'],
+            \ }
 
 " Development Specific Plugins (Darwin or when $RS_DEV==true) {{{
 if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
-    Plug 'rhysd/vim-clang-format'
-
     let g:settings_youcompleteme = {}
     let g:settings_colorcoded = {
                 \ 'for' : ['c', 'cpp', 'objc', 'objcpp']
@@ -100,7 +101,7 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
         "Plug 'Quramy/tsuquyomi'
     endif
 
-    Plug 'itchyny/vim-haskell-indent'
+    Plug 'itchyny/vim-haskell-indent', g:settings_haskell
 
 endif
 " }}}
@@ -138,6 +139,10 @@ Plug 'pangloss/vim-javascript'
 " JSON highlighting support
 Plug 'jakar/vim-json'
 
+Plug 'vim-scripts/google.vim', {
+            \ 'for': ['c', 'cpp']
+            \ }
+
 " Tern (auto-completion for JS)
 if ( executable("tern") )
     Plug 'marijnh/tern_for_vim', {
@@ -147,8 +152,11 @@ endif
 " }}}
 
 " Typescript {{{
-Plug 'leafgarland/typescript-vim'
-Plug 'clausreinke/typescript-tools.vim'
+let g:settings_typescript = {
+            \ 'for' : ['typescript']
+            \ }
+Plug 'leafgarland/typescript-vim', g:settings_typescript
+Plug 'clausreinke/typescript-tools.vim', g:settings_typescript
 " }}}
 
 " toml {{{
@@ -162,21 +170,23 @@ Plug 'plasticboy/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
 " }}}
 
+" Restructured Shit {{{
+"Plug 'vim-scripts/rest.vim', {
+"            \ 'for' : ['rst']
+"            \ }
+" }}}
+
 " Haskell {{{
 if ( executable("hdevtools") )
     " Haskell
-    Plug 'bitc/vim-hdevtools', {
-                \ 'for': ['haskell', 'lhaskell', 'chaskell'],
-                \ }
+    Plug 'bitc/vim-hdevtools', g:settings_haskell
+endif
 
     "Plug 'dag/vim2hs', {
     "            \ 'for': ['haskell', 'lhaskell', 'chaskell'],
     "            \ }
 
-    Plug 'lukerandall/haskellmode-vim', {
-                \ 'for': ['haskell', 'lhaskell', 'chaskell'],
-                \ }
-endif
+    Plug 'lukerandall/haskellmode-vim', g:settings_haskell
 " }}}
 
 " HTML/CSS {{{
@@ -253,8 +263,7 @@ filetype plugin indent on    " required
 " =============================================================================
 " g1: indent access visibility modifiers by 1 (like public:, private:, etc.)
 " N-s: namespace indentation (none)
-" (0: google style guide-like indentation?
-set cinoptions+=g1N-s(0
+set cinoptions+=g1N-s
 
 " =============================================================================
 " 2 moving around, searching and patterns
@@ -323,7 +332,7 @@ hi SpellBad cterm=underline gui=underline
 set colorcolumn=80
 
 " Pretty line wrap
-if $LC_ALL =~ "utf\(-\)?8"
+if $LC_ALL =~ "utf\(-\)\?8"
     set showbreak=⏎
 else
     set showbreak=$
