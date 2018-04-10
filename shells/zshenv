@@ -29,4 +29,8 @@ elif [ `uname` = "Darwin" ]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+gopkgimports() {
+    go list -f '{{ join .Imports "\n" }}' ${@}
+}
 # vim: set ft=zsh :

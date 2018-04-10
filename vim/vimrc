@@ -10,14 +10,17 @@ scriptencoding utf-8
 
 
 if has('nvim')
-    let s:vim_plugged_path = '~/.config/nvim/plugged'
+    let s:vim_plugged_path = '~/.local/share/nvim/plugged'
 else
     let s:vim_plugged_path = '~/.vim/plugged'
 endif
 
-call plug#begin(s:vim_plugged_path)
+call plug#begin('~/.vim/plugged')
 
 " Misc Plugins {{{
+Plug 'Chiel92/vim-autoformat'
+Plug 'vim-scripts/Improved-AnsiEsc'
+
 " Git Plugin
 Plug 'tpope/vim-fugitive'
 
@@ -74,8 +77,8 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
         Plug 'richardsamuels/vim-perforce'
 
     else
-        let g:settings_youcompleteme.do = './install.py --clang-completer --racer-completer'
-        let g:settings_colorcoded.do = 'cmake -G "Ninja" . && make && make install'
+        let g:settings_youcompleteme.do = './install.py --go-completer --clang-completer --racer-completer'
+        let g:settings_colorcoded.do = 'cmake -G "Ninja" . && ninja && ninja install'
     endif
 
 
@@ -96,6 +99,10 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
 
         else
             Plug 'jeaye/color_coded', g:settings_colorcoded
+            Plug 'richardsamuels/color_goded', {
+                        \ 'for': ['go'],
+                        \ 'do': 'mkdir -p build && cd build && cmake -GNinja . .. && cmake --build . --target install --config Release',
+                        \ }
         endif
 
         "Plug 'Quramy/tsuquyomi'
@@ -131,6 +138,10 @@ Plug 'edkolev/tmuxline.vim'
 " }}}
 
 " Language Specific Plugins {{{
+
+Plug 'fatih/vim-go', {
+            \ 'for': ['go']
+            \ }
 
 " Javascript {{{
 " Indentation and Syntax support
@@ -332,7 +343,7 @@ hi SpellBad cterm=underline gui=underline
 set colorcolumn=80
 
 " Pretty line wrap
-if $LC_ALL =~ "utf\(-\)\?8"
+if tolower($LC_ALL) =~ "utf-8|utf8"
     set showbreak=⏎
 else
     set showbreak=$
@@ -696,8 +707,7 @@ else
 endif
 
 let g:ycm_global_ycm_extra_conf = '${HOME}/dotfiles/vim/ycm_cpp11.py'
-let g:ycm_server_python_interpreter = "python3"
-let g:ycm_confirm_extra_conf=1
+let g:ycm_confirm_extra_conf=0
 let g:ycm_collect_identifiers_from_tags_files = 0
 
 " -----------------------------------------------------------------------------
@@ -771,6 +781,7 @@ endif
 " 28.11 scrooloose/syntastic
 " -----------------------------------------------------------------------------
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_go_checkers = ['go', 'golint', 'govet']
 
 " -----------------------------------------------------------------------------
 " 28.12 w0rp/ale
@@ -778,13 +789,28 @@ let g:syntastic_python_checkers = ['flake8']
 let g:ale_python_flake8_executable = 'python3'
 let g:ale_python_pylint_executable = 'python3'
 
+" -----------------------------------------------------------------------------
+" 28.11 fatih/vim-go
+" -----------------------------------------------------------------------------
+let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_experimental = 1
+
 " =============================================================================
 " 29 Language Specific Fun-ness
 " =============================================================================
 let g:haskellmode_completion_ghc = 0
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
+let g:ycm_semantic_triggers = {
+            \ 'haskell,cs,java,javascript,d,vim,ruby,python,perl6,scala,vb,elixir,go' : ['.'],
+            \ }
+
 
 " =============================================================================
 " 30 Autocmds
@@ -794,6 +820,7 @@ let g:ycm_semantic_triggers = {'haskell' : ['.']}
 au FocusLost * silent! wa
 autocmd FileType html,css EmmetInstall
 autocmd FileType startify,help set nofoldenable
+" au BufWrite *.go :Autoformat
 
 " From http://vim.wikia.com/wiki/Modeline_magic
 "
@@ -811,6 +838,9 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 " python PEP-8 compliance
 autocmd BufRead *.py setlocal colorcolumn=79
+
+autocmd BufRead /home/rsamuels/go/src/github.com/evergreen-ci/evergreen/*.go
+      \ :GoGuruScope github.com/evergreen-ci/evergreen
 
 " =============================================================================
 " 31 Environment Specific Configurations

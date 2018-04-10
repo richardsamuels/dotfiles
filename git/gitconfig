@@ -1,6 +1,6 @@
 [core]
 	excludesfile = ~/dotfiles/git/gitignore
-	editor = vim 
+	editor = vim
 [user]
 	name = Richard Samuels
 	email = richard.l.samuels@gmail.com
@@ -12,7 +12,22 @@
 	tool = vimdiff
 [difftool]
         prompt = false
-[pull]
-	ff = only
-[url "git@github.com:"]
-    insteadOf = "https://github.com/"
+[include]
+    path = ~/dotfiles/local/git/gitconfig
+[diff]
+	tool = gvimdiff
+	algorithm = patience
+[merge]
+	tool = gvimdiff
+        conflictstyle = diff3
+[difftool]
+	prompt = false
+[mergetool]
+	keepBackup = false
+[alias]
+	d = difftool
+        co = checkout
+        m = mergetool
+        s = status
+        c = commit
+        a = add
