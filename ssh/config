@@ -12,3 +12,5 @@ Host    appledore
     HostName    appledore.aselia.me
     User        rsamuels
     SendEnv     ITERM_PROFILE
+
+Include ${HOME}/dotfiles/local/ssh/config
