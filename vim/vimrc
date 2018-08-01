@@ -150,7 +150,7 @@ Plug 'fatih/vim-go', {
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx', {
             \ 'for': ['javascript', 'jsx', 'javascript.jsx'],
-            \} 
+            \ }
 
 " JSON highlighting support
 Plug 'jakar/vim-json'
@@ -858,6 +858,10 @@ autocmd BufRead /home/rsamuels/go/src/github.com/evergreen-ci/evergreen/*.go
 " =============================================================================
 if (filereadable($HOME . "/dotfiles/local/vim/vimrc"))
     execute("source " . $HOME . "/dotfiles/local/vim/vimrc")
+endif
+
+if has('python3') && !has('patch-8.1.201')
+  silent! python3 1
 endif
 
 " Modeline, nothing after this line:
