@@ -17,7 +17,7 @@ elif [ `uname` = "Darwin" ]; then
 
     if  [ -d "/usr/local/opt/coreutils/libexec/gnubin" ]; then
         PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-        MANPATH="/usr/local/opt/coreutils/libexec/gnuman"
+        MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
     fi
 
     if [ -d "~/.cabal/bin" ]; then
@@ -33,4 +33,8 @@ fi
 gopkgimports() {
     go list -f '{{ join .Imports "\n" }}' ${@}
 }
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
 # vim: set ft=zsh :

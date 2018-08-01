@@ -53,5 +53,8 @@ else
 fi
 
 export PATH="${HOME}/.cabal/bin:${PATH}"
+export MANPATH="${HOME}/dotfiles/shells/plugins/z/man:${MANPATH}"
+
+source ${HOME}/dotfiles/shells/plugins/z/z.sh
 
 # vim: set ft=sh :

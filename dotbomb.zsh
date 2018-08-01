@@ -16,5 +16,5 @@ vim +PlugInstall
 
 git submodule init
 git submodule update
+mkdir ~/.z
 echo "Dotbombed! Restart your shell"
-

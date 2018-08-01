@@ -57,4 +57,10 @@ source ~/dotfiles/shells/plugins/zsh-history-substring-search/zsh-history-substr
 # ZSH syntax highlighting
 source ~/dotfiles/shells/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+subl() {
+  /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl
+}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # vim: set ft=zsh :

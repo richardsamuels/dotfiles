@@ -87,7 +87,7 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
         Plug 'Valloric/YouCompleteMe', g:settings_youcompleteme
 
         Plug 'w0rp/ale', {
-                    \ 'for': ['python']
+                    \ 'for': ['python', 'javascript']
                     \ }
 
         "Plug 'python-mode/python-mode', {
@@ -116,6 +116,8 @@ endif
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Helpful Commands {{{
+Plug 'editorconfig/editorconfig-vim'
+
 " Magical tabularisation
 Plug 'godlygeek/tabular'
 
@@ -146,6 +148,9 @@ Plug 'fatih/vim-go', {
 " Javascript {{{
 " Indentation and Syntax support
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx', {
+            \ 'for': ['javascript', 'jsx', 'javascript.jsx'],
+            \} 
 
 " JSON highlighting support
 Plug 'jakar/vim-json'
@@ -788,6 +793,8 @@ let g:syntastic_go_checkers = ['go', 'golint', 'govet']
 " -----------------------------------------------------------------------------
 let g:ale_python_flake8_executable = 'python3'
 let g:ale_python_pylint_executable = 'python3'
+let b:ale_fixers = {'javascript': ['eslint']}
+let g:ale_fix_on_save = 1
 
 " -----------------------------------------------------------------------------
 " 28.11 fatih/vim-go
@@ -800,6 +807,10 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_experimental = 1
+let g:go_metalinter_command = "gometalinter --tests --vendored-linters --sort=line --disable=megacheck --disable=gotype --disable=gas --disable=gocyclo --disable=maligned --disable=golint --disable=goconst --disable=dupl --disable=varcheck --disable=structcheck --disable=aligncheck --enable=misspell --exclude='.*([mM]ock.*ator|modadvapi32|osSUSE) is unused (deadcode|unused|megacheck))$' --exclude='error return value not checked (defer .* (errcheck)$' --exclude='.* (SA5001) (megacheck)$' --exclude='declaration of \"assert\" shadows declaration at .*_test.go:' --exclude='declaration of \"require\" shadows declaration at .*_test.go:' --"
+"let g:go_metalinter_path = "./..."
+"
+let g:jsx_ext_required = 0
 
 " =============================================================================
 " 29 Language Specific Fun-ness
