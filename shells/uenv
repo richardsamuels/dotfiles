@@ -52,11 +52,9 @@ else
   }
 fi
 
-export PATH="${HOME}/.cabal/bin:${PATH}"
-export MANPATH="${HOME}/dotfiles/shells/plugins/z/man:${MANPATH}"
-
 source ${HOME}/dotfiles/shells/plugins/z/z.sh
 
-export PATH="$HOME/.cargo/bin:$PATH"
+
+[ -f "/usr/local/opt/nvm/nvm.sh" ] && . /usr/local/opt/nvm/nvm.sh
 
 # vim: set ft=sh :

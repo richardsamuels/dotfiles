@@ -24,17 +24,24 @@ elif [ `uname` = "Darwin" ]; then
         PATH=~/.cabal/bin:$PATH
     fi
 
-    export PATH
+    if [ -d "~/.cargo/bin" ]; then
+        PATH=~/.cargo/bin:$PATH
+    fi
 
+    if [ -d "~/.bin" ]; then
+        PATH=~/.bin:$PATH
+    fi
+
+    subl() {
+        /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl
+    }
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export MANPATH="${HOME}/dotfiles/shells/plugins/z/man:${MANPATH}"
+export PATH
 
 gopkgimports() {
     go list -f '{{ join .Imports "\n" }}' ${@}
 }
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # vim: set ft=zsh :

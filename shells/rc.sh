@@ -30,7 +30,7 @@ elif [ ! -z "$BASH_VERSION" ]; then
   # inferior shells don't separate environment and rc
   # LANG is set in uenv, so source that if it hasn't been set
   if [ -z "${LANG}" ]; then
-    source ${HOME}/dotfiles/shells/env.sh 
+    source ${HOME}/dotfiles/shells/env.sh
   fi
   source ${HOME}/dotfiles/shells/bashrc
 

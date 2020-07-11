@@ -2,7 +2,7 @@
 
 MOD=false
 shopt -s dotglob
-cd $GIT_DIR/../dotbomb/
+cd $HOME/dotfiles/dotbomb/
 
 for f in *; do
     if [ "$(cat "$f" | openssl md5)" != "$(cat "$HOME/$f" | openssl md5)" ]; then

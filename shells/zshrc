@@ -9,7 +9,7 @@
 # Reduce delay
 #export KEYTIMEOUT=1
 
-# Set auto pushd
+# cd rebound to pushd
 setopt AUTO_PUSHD
 
 # History searching magic
@@ -57,10 +57,17 @@ source ~/dotfiles/shells/plugins/zsh-history-substring-search/zsh-history-substr
 # ZSH syntax highlighting
 source ~/dotfiles/shells/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-subl() {
-  /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl
+review() {
+  branch="$1"
+  if [[ -n "$branch" ]]; then
+    shift
+  fi
+  ~/mongodb/kernel-tools/codereview/upload.py --rev ${branch:-origin/master...} --git_similarity 90 --check-clang-format --check-eslint --check-pylinters ${@}
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias sc="shellcheck --exclude=SC2164 --exclude=SC2119 --exclude=SC1090 --exclude=SC1091"
+alias dc="cd .."
 
 # vim: set ft=zsh :
