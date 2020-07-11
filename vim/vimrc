@@ -77,7 +77,7 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
         Plug 'richardsamuels/vim-perforce'
 
     else
-        let g:settings_youcompleteme.do = './install.py --go-completer --clang-completer --racer-completer'
+        let g:settings_youcompleteme.do = './install.py --clang-completer --racer-completer --ts-completer'
         let g:settings_colorcoded.do = 'cmake -G "Ninja" . && ninja && ninja install'
     endif
 
@@ -98,11 +98,11 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
             Plug 'richardsamuels/neocc', g:settings_colorcoded
 
         else
-            Plug 'jeaye/color_coded', g:settings_colorcoded
-            Plug 'richardsamuels/color_goded', {
-                        \ 'for': ['go'],
-                        \ 'do': 'mkdir -p build && cd build && cmake -GNinja . .. && cmake --build . --target install --config Release',
-                        \ }
+            "Plug 'jeaye/color_coded', g:settings_colorcoded
+            "Plug 'richardsamuels/color_goded', {
+            "            \ 'for': ['go'],
+            "            \ 'do': 'mkdir -p build && cd build && cmake -GNinja . .. && cmake --build . --target install --config Release',
+            "            \ }
         endif
 
         "Plug 'Quramy/tsuquyomi'
@@ -682,10 +682,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Promptline {{{
 let g:promptline_theme = 'airline'
 "let g:promptline_preset = {
-"        \'a' : [ '$(if [ -z "${TMUX}" ] && ( [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ] ); then if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi; fi )' ],
 "        \'b' : [ '$USER'],
 "        \'c' : [ promptline#slices#cwd() ],
-"        \'y' : [ promptline#slices#vcs_branch() ],
+"        \'y' : [ promptline#slices#python_virtualenv(),  promptline#slices#vcs_branch() ],
 "        \'warn' : [ promptline#slices#last_exit_code() ]}
 " }}}
 
