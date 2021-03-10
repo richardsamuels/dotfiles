@@ -77,7 +77,7 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
         Plug 'richardsamuels/vim-perforce'
 
     else
-        let g:settings_youcompleteme.do = './install.py --clang-completer --racer-completer --ts-completer'
+        let g:settings_youcompleteme.do = './install.py --clang-completer --racer-completer --ts-completer --go-completer'
         let g:settings_colorcoded.do = 'cmake -G "Ninja" . && ninja && ninja install'
     endif
 
@@ -203,6 +203,15 @@ endif
     "            \ }
 
     Plug 'lukerandall/haskellmode-vim', g:settings_haskell
+" }}}
+
+" Clojure {{{
+let g:settings_clojure = {
+            \ 'for' : ['clojure']
+            \ }
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-sexp'
 " }}}
 
 " HTML/CSS {{{
@@ -402,7 +411,7 @@ if ( has("gui_running") )
     " Turns out different gui libraries have different expectations
     " for the font name. Lovely
     if (system('uname') =~? "Darwin")
-        set guifont=Anonymice\ Powerline:h14
+        set guifont=Anonymous\ Pro\ for\ Powerline:h14
     else
         set guifont=TamzenForPowerline\ 12
     endif
@@ -820,7 +829,7 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 let g:ycm_semantic_triggers = {
             \ 'haskell,cs,java,javascript,d,vim,ruby,python,perl6,scala,vb,elixir,go' : ['.'],
             \ }
-
+let g:go_gopls_enabled = 0
 
 " =============================================================================
 " 30 Autocmds

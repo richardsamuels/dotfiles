@@ -54,6 +54,7 @@ fi
 
 source ${HOME}/dotfiles/shells/plugins/z/z.sh
 
+export GOPATH="$HOME/go"
 
 [ -f "/usr/local/opt/nvm/nvm.sh" ] && . /usr/local/opt/nvm/nvm.sh
 

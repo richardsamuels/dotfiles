@@ -20,16 +20,16 @@ elif [ `uname` = "Darwin" ]; then
         MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
     fi
 
-    if [ -d "~/.cabal/bin" ]; then
-        PATH=~/.cabal/bin:$PATH
+    if [ -d "$HOME/.cabal/bin" ]; then
+        PATH=$HOME/.cabal/bin:$PATH
     fi
 
-    if [ -d "~/.cargo/bin" ]; then
-        PATH=~/.cargo/bin:$PATH
+    if [ -d "$HOME/.cargo/bin" ]; then
+        PATH=$HOME/.cargo/bin:$PATH
     fi
 
-    if [ -d "~/.bin" ]; then
-        PATH=~/.bin:$PATH
+    if [ -d "$HOME/.bin" ]; then
+        PATH=$HOME/.bin:$PATH
     fi
 
     subl() {

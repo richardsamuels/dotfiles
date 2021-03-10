@@ -61,5 +61,6 @@ gitcalc() {
 }
 
 alias bc='popd'
+PATH="~/.bin:${PATH}"
 
 # vim: set ft=sh :
