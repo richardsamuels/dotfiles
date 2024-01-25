@@ -16,5 +16,9 @@ vim +PlugInstall
 
 git submodule init
 git submodule update
-mkdir ~/.z
+touch ~/.z
+if [[ `uname` == "Darwin" ]]; then
+    defaults write com.apple.Dock appswitcher-all-displays -bool true
+    killall Dock
+fi
 echo "Dotbombed! Restart your shell"
