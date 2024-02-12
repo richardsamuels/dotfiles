@@ -67,20 +67,8 @@ if (v:version > 702 && ($RS_DEV == "true" || system('uname') =~? "Darwin"))
                 \ 'for' : ['c', 'cpp', 'objc', 'objcpp']
                 \ }
 
-
-    if ( $WORK_MODE == "true")
-        let g:settings_youcompleteme.do = 'fds_build.sh'
-        let g:settings_colorcoded.do = 'build.sh'
-
-        " Personal fork has some highlighting stuff for the unnamed perforced
-        " buffers
-        Plug 'richardsamuels/vim-perforce'
-
-    else
-        let g:settings_youcompleteme.do = './install.py --clang-completer --racer-completer --ts-completer --go-completer'
-        let g:settings_colorcoded.do = 'cmake -G "Ninja" . && ninja && ninja install'
-    endif
-
+    let g:settings_youcompleteme.do = './install.py --clang-completer --racer-completer --ts-completer --go-completer'
+    let g:settings_colorcoded.do = 'cmake -G "Ninja" . && ninja && ninja install'
 
     if !&diff
         " YCM for Code Completion

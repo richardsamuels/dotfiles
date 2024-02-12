@@ -20,5 +20,6 @@ touch ~/.z
 if [[ `uname` == "Darwin" ]]; then
     defaults write com.apple.Dock appswitcher-all-displays -bool true
     killall Dock
+    softwareupdate –-background --install-rosetta --agree-to-license
 fi
 echo "Dotbombed! Restart your shell"

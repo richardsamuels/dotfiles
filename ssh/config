@@ -1,9 +1,9 @@
 Host	raia
     HostName    raia
-    User        raia
+    User        rsamuels
 Host    raia.local
     HostName        raia.local
-    User            raia
+    User            rsamuels
 Host    appledore.aselia.me
     HostName    appledore.aselia.me
     User        rsamuels

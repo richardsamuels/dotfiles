@@ -69,5 +69,8 @@ review() {
 
 alias sc="shellcheck --exclude=SC2164 --exclude=SC2119 --exclude=SC1090 --exclude=SC1091"
 alias dc="cd .."
+PATH=/opt/homebrew/bin:$PATH
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # vim: set ft=zsh :
