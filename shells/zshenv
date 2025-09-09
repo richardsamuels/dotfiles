@@ -45,4 +45,22 @@ gopkgimports() {
     go list -f '{{ join .Imports "\n" }}' ${@}
 }
 
+phonescreen() {
+    scrcpy --video-codec=h265 --max-size=1920 --max-fps=60 --no-audio --keyboard=uhid
+}
+
+
+if [ -d "$HOME/.rustup/toolchains/esp/xtensa-esp-elf" ]; then
+    export LIBCLANG_PATH="$HOME/.rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-16.0.4-20231113/esp-clang/lib"
+    export PATH="$HOME/.rustup/toolchains/esp/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin:$PATH"
+fi
+if [ -d "$HOME/Library/Android/sdk" ]; then
+    export ANDROID_HOME=$HOME/Library/Android/sdk
+    export PATH="$ANDROID_HOME/platform-tools:$PATH"
+    export PATH="$ANDROID_HOME/emulator:$PATH"
+fi
+export PATH="/Users/rsamuels/.platformio/penv/bin:$PATH"
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+
 # vim: set ft=zsh :

@@ -40,4 +40,5 @@ elif [ ! -z "$BASH_VERSION" ]; then
 
 fi
 
+. "$HOME/.local/bin/env"
 # vim: set ft=sh :

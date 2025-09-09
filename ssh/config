@@ -1,3 +1,5 @@
+Include /Users/rsamuels/.colima/ssh_config
+
 Host	raia
     HostName    raia
     User        rsamuels

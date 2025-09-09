@@ -2,8 +2,11 @@
 
 #Universal config, theoretically for all shells, but tested only on Bash and ZSH
 
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
+function vim() {
+    nvim "$@"
+}
 
 # Tmuxifier Layouts
 export TMUXIFIER_LAYOUT_PATH=~/dotfiles/tmux/layouts

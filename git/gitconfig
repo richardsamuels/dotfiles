@@ -1,27 +1,27 @@
 [core]
 	excludesfile = ~/dotfiles/git/gitignore
-	editor = vim
+	editor = nvim
 [user]
 	name = Richard Samuels
 	email = richard.l.samuels@gmail.com
 [push]
 	default = simple
 [merge]
-	tool = vimdiff
+	tool = nvimdiff
 [diff]
-	tool = vimdiff
+	tool = nvimdiff
+
+[difftool "nvimdiff"]
+cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
 [difftool]
         prompt = false
 [include]
     path = ~/dotfiles/local/git/gitconfig
 [diff]
-	tool = gvimdiff
 	algorithm = patience
 [merge]
-	tool = gvimdiff
         conflictstyle = diff3
-[difftool]
-	prompt = false
 [mergetool]
 	keepBackup = false
 [alias]
@@ -31,3 +31,11 @@
         s = status
         c = commit
         a = add
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+
